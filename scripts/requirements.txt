@@ -1,0 +1,26 @@
+# Core
+nltk
+lxml
+xmlschema
+graphviz
+pillow
+python-docx
+pypdf
+fastapi>=0.110,<0.116
+starlette>=0.36,<0.47
+pydantic>=2.6,<2.11
+uvicorn>=0.23,<0.31
+
+
+# Chroma + LangChain
+chromadb
+langchain-core
+langchain-community
+langchain-text-splitters
+langchain-chroma
+langchain-ollama
+
+# Optional but used by many loaders/pipelines
+unstructured
+python-magic
+
