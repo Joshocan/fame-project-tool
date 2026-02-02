@@ -13,3 +13,4 @@ fi
 
 echo "Using Python: $PY ($($PY --version))"
 $PY -m fame.services.chroma_service
+.

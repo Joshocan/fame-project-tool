@@ -1,0 +1,114 @@
+[
+  {
+    "Tier": "T1",
+    "File": "Article_5.pdf",
+    "Title": "Addressing Modularity for Heterogeneous Multi-model Systems using Model Federation",
+    "Year": 2016,
+    "CoreContribution": "Introduces Model Federation as an alternative to model transformations for modularity across heterogeneous technical spaces",
+    "RelationToModelFederation": "Canonical definition of Model Federation; federation is the primary architectural paradigm"
+  },
+  {
+    "Tier": "T1",
+    "File": "Article_6.pdf",
+    "Title": "Continuous Requirements Engineering using Model Federation",
+    "Year": 2016,
+    "CoreContribution": "Applies Model Federation to continuous requirements evolution and cross-artifact consistency",
+    "RelationToModelFederation": "Demonstrates process-level applicability of federation"
+  },
+  {
+    "Tier": "T1",
+    "File": "Article_4.pdf",
+    "Title": "Model Federation and Probabilistic Analysis for Advanced OSS and BSS",
+    "Year": 2013,
+    "CoreContribution": "Combines model federation with probabilistic analysis across telecom systems",
+    "RelationToModelFederation": "Early industrial-scale federation use case"
+  },
+  {
+    "Tier": "T1",
+    "File": "Article_3.pdf",
+    "Title": "Bridging the Gap Between Informal Requirements and Formal Specifications Using Model Federation",
+    "Year": 2018,
+    "CoreContribution": "Aligns informal and formal models without unification",
+    "RelationToModelFederation": "Federation used as a semantic bridge across abstraction levels"
+  },
+  {
+    "Tier": "T1",
+    "File": "Article_9.pdf",
+    "Title": "Towards Evolving Secured Multi-model Systems with Model Federation",
+    "Year": 2023,
+    "CoreContribution": "Extends federation to system evolution and security constraints",
+    "RelationToModelFederation": "Modern extension of federation to evolution and security"
+  },
+  {
+    "Tier": "T1",
+    "File": "Article_14.pdf",
+    "Title": "Conceptual Interoperability through Models Federation",
+    "Year": 2012,
+    "CoreContribution": "Defines conceptual space and technological connectors for federating heterogeneous models",
+    "RelationToModelFederation": "Foundational conceptual framework for federation"
+  },
+  {
+    "Tier": "T2",
+    "File": "Article_7.pdf",
+    "Title": "A Model-driven Approach for Ensuring Change Traceability and Multi-Model Consistency",
+    "Year": 2013,
+    "CoreContribution": "Uses correspondence metamodels to manage change across heterogeneous models",
+    "RelationToModelFederation": "Federation-adjacent; relational layer but transformation-centric"
+  },
+  {
+    "Tier": "T2",
+    "File": "Article_11.pdf",
+    "Title": "Consistency Checking of Multi-Models Without Data Exchange",
+    "Year": 2014,
+    "CoreContribution": "Checks consistency across linked models without merging",
+    "RelationToModelFederation": "Conceptually aligned with federation\u2019s no-unification principle"
+  },
+  {
+    "Tier": "T2",
+    "File": "Article_12.pdf",
+    "Title": "Coordinating Heterogeneous DSLs Using Megamodeling",
+    "Year": 2015,
+    "CoreContribution": "Coordinates DSLs via megamodels",
+    "RelationToModelFederation": "Same coordination problem, different abstraction level"
+  },
+  {
+    "Tier": "T2",
+    "File": "Article_10.pdf",
+    "Title": "A Megamodel-based Digital Twin Platform for Heterogeneous Systems",
+    "Year": 2022,
+    "CoreContribution": "Digital Twin platform coordinating heterogeneous models",
+    "RelationToModelFederation": "Federation-adjacent at system scale"
+  },
+  {
+    "Tier": "T2",
+    "File": "Article_13.pdf",
+    "Title": "Understanding MDE Projects: Megamodels to the Rescue for Architecture Recovery",
+    "Year": 2019,
+    "CoreContribution": "Megamodels as global relational views over MDE artifacts",
+    "RelationToModelFederation": "Structural cousin of federation"
+  },
+  {
+    "Tier": "T2",
+    "File": "Article_1.pdf",
+    "Title": "Dynamic Hierarchical Megamodels for Traceability Management",
+    "Year": 2012,
+    "CoreContribution": "Dynamic linking and traceability across heterogeneous models",
+    "RelationToModelFederation": "Precursor to federation-style thinking"
+  },
+  {
+    "Tier": "T2",
+    "File": "Article_2.pdf",
+    "Title": "NAOMI: A Platform for Multi-Model Integration",
+    "Year": 2014,
+    "CoreContribution": "Tool platform for integrating and propagating changes across models",
+    "RelationToModelFederation": "Overlapping goals but lacks federation semantics"
+  },
+  {
+    "Tier": "T2",
+    "File": "Article_8.pdf",
+    "Title": "Multi-model Consistency Preservation via Model Transformations",
+    "Year": 2011,
+    "CoreContribution": "Transformation-based preservation of multi-model consistency",
+    "RelationToModelFederation": "Baseline contrast case for federation"
+  }
+]
