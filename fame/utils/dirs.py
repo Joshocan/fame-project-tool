@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import unicodedata
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, Iterable, Optional
@@ -59,12 +60,8 @@ def resolve_base_dir() -> Path:
     1) FAME_BASE_DIR env var (recommended)
     2) Repository root (auto-detected)
     """
-    env = os.getenv("FAME_BASE_DIR")
-    if env and env.strip():
-        return Path(env).expanduser().resolve()
-
-    # fame/utils/dirs.py -> fame/utils -> fame -> repo root
-    return Path(__file__).resolve().parents[3]
+    # Always use repository root (fame/utils/dirs.py -> fame/utils -> fame -> repo root)
+    return Path(__file__).resolve().parents[2]
 
 
 # ---------------------------------------------------------

@@ -1,14 +1,22 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-python3 -m pip install --upgrade pip
-python3 -m pip install -r requirements.txt
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+VENV_DIR="${ROOT_DIR}/.venv"
 
-python3 - <<'PY'
+if [[ ! -d "${VENV_DIR}" ]]; then
+  python3 -m venv "${VENV_DIR}"
+fi
+
+source "${VENV_DIR}/bin/activate"
+
+python -m pip install --upgrade pip
+python -m pip install -r "${ROOT_DIR}/scripts/requirements.txt"
+
+python - <<'PY'
 import nltk
 nltk.download("punkt", quiet=True)
 PY
 
-echo "✅ Requirements installed and NLTK punkt downloaded."
-
+echo "✅ Requirements installed into ${VENV_DIR} and NLTK punkt downloaded."
 

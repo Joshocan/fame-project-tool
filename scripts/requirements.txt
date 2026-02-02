@@ -6,11 +6,12 @@ graphviz
 pillow
 python-docx
 pypdf
+pytest
 fastapi>=0.110,<0.116
 starlette>=0.36,<0.47
 pydantic>=2.6,<2.11
 uvicorn>=0.23,<0.31
-
+# python-docx
 
 # Chroma + LangChain
 chromadb
@@ -23,4 +24,3 @@ langchain-ollama
 # Optional but used by many loaders/pipelines
 unstructured
 python-magic
-
