@@ -1,54 +1,30 @@
 # Feature Arguementation Modelling Environment  (FAME) Project
 
-## Setup (Recommended: Virtual Environment)
+## Setup (Automated)
 
-Using a project-local virtual environment avoids system Python conflicts and ensures consistent dependencies across machines.
-
-### Create the venv
+Use the setup script to create the virtual environment and install all requirements.
 
 macOS/Linux:
 ```bash
-python3 -m venv .venv
+./scripts/initial_setup.sh
 ```
 
 Windows (PowerShell):
 ```powershell
-python -m venv .venv
+.\scripts\bootstrap.ps1
 ```
 
-### Install requirements
+### Running scripts and tests
 
 macOS/Linux:
 ```bash
-.venv/bin/python -m pip install --upgrade pip
-.venv/bin/python -m pip install -r scripts/requirements.txt
-```
-
-Windows (PowerShell):
-```powershell
-.venv\Scripts\python -m pip install --upgrade pip
-.venv\Scripts\python -m pip install -r scripts\requirements.txt
-```
-
-### Run scripts and tests (always using the venv Python)
-
-macOS/Linux:
-```bash
-.venv/bin/python scripts/preprocessing_for_rag.py
-.venv/bin/python -m pytest tests/test_ingestion.py -v
-```
-
-Windows (PowerShell):
-```powershell
-.venv\Scripts\python scripts\preprocessing_for_rag.py
-.venv\Scripts\python -m pytest tests\test_ingestion.py -v
-```
-
-### Optional helper scripts
-
-macOS/Linux:
-```bash
-./scripts/install_requirements.sh
 ./scripts/run_ingestion.sh
 ./scripts/run_tests.sh tests/test_ingestion.py -v
+```
+
+Windows (PowerShell):
+```powershell
+.\scripts\bootstrap.ps1
+.venv\Scripts\python scripts\preprocessing_for_rag.py
+.venv\Scripts\python -m pytest tests\test_ingestion.py -v
 ```
