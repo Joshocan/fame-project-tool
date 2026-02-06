@@ -10,43 +10,7 @@ from fame.judge import create_judge_client
 from fame.config.load import load_config
 
 from fame.nonrag.ss_pipeline import SSNonRagConfig, run_ss_nonrag
-
-
-def _prompt_choice(title: str, options: Tuple[str, ...]) -> str:
-    print(f"\n{title}")
-    for i, opt in enumerate(options, start=1):
-        print(f"  {i}) {opt}")
-    while True:
-        choice = input("Select option: ").strip()
-        if choice.isdigit() and 1 <= int(choice) <= len(options):
-            return options[int(choice) - 1]
-        print("Invalid choice. Try again.")
-
-
-def _load_key_file(path: Path) -> Optional[str]:
-    try:
-        if path.exists():
-            return path.read_text(encoding="utf-8").strip()
-    except Exception:
-        return None
-    return None
-
-
-def _default_high_level_features() -> Dict[str, str]:
-    return {
-        "Structural": (
-            "Covers the artefacts, links, and structural features of Model Federation, "
-            "including model composition, graph structure, formalism, domain, and technological context."
-        ),
-        "Operational": (
-            "Includes the processes, operations, and triggers in Model Federation, focusing on querying, "
-            "synchronisation, validation, and management of federated models and links."
-        ),
-        "Intentional": (
-            "Addresses the objectives and goals of Model Federation, such as traceability, consistency assurance, "
-            "transformation management, composition, and conceptual elicitation."
-        ),
-    }
+from fame.nonrag.cli_utils import prompt_choice, load_key_file, default_high_level_features
 
 
 def main() -> None:
@@ -67,17 +31,17 @@ def main() -> None:
 
     llm_client = None
     if interactive:
-        mode = _prompt_choice("1) Open Source LLM  OR Judge LLM", ("Open Source LLM", "Judge LLM"))
+        mode = prompt_choice("1) Open Source LLM  OR Judge LLM", ("Open Source LLM", "Judge LLM"))
 
         if mode == "Open Source LLM":
-            model = _prompt_choice(
+            model = prompt_choice(
                 "Select Open Source LLM model",
                 ("gpt-oss:120b-cloud", "glm-4.7:cloud", "deepseek-v3.2:cloud"),
             )
             os.environ["OLLAMA_LLM_MODEL"] = model
 
             key_path = Path("api_keys/ollama_key.txt")
-            key = _load_key_file(key_path)
+            key = load_key_file(key_path)
             if key:
                 os.environ["OLLAMA_API_KEY_FILE"] = str(key_path)
                 os.environ.setdefault("OLLAMA_LLM_HOST", "https://ollama.com")
@@ -88,7 +52,7 @@ def main() -> None:
             os.environ.setdefault("OLLAMA_EMBED_HOST", "http://127.0.0.1:11434")
 
         else:
-            model = _prompt_choice(
+            model = prompt_choice(
                 "Select Judge LLM model",
                 ("gpt-5", "claude-opus", "gemini-3"),
             )
@@ -98,7 +62,7 @@ def main() -> None:
                 "gemini-3": ("gemini", "GEMINI_API_KEY", Path("api_keys/gemini_key.txt")),
             }
             provider, env_var, key_file = provider_map[model]
-            key = _load_key_file(key_file)
+            key = load_key_file(key_file)
             if not key:
                 raise RuntimeError(f"Missing API key file: {key_file}")
             os.environ[env_var] = key
@@ -120,7 +84,7 @@ def main() -> None:
         high_level = input("Include high-level features? (y/N): ").strip().lower()
         high_level_features = None
         if high_level in ("y", "yes"):
-            features = _default_high_level_features()
+            features = default_high_level_features()
             print("\nHigh-level features:")
             for k, v in features.items():
                 print(f"- {k}: {v}")
