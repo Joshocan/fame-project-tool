@@ -69,3 +69,7 @@ export OLLAMA_API_KEY_FILE=api_keys/ollama_key.txt
 ```
 
 If no API key is provided, the LLM defaults to local Ollama.
+
+Notes:
+- LLM generation uses `OLLAMA_LLM_HOST` (see `fame/nonrag/llm_ollama_http.py`).
+- Embeddings use `OLLAMA_EMBED_HOST` (see `fame/vectorization/embeddings.py`).
