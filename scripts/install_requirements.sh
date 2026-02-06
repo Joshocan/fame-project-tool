@@ -11,7 +11,7 @@ fi
 source "${VENV_DIR}/bin/activate"
 
 python -m pip install --upgrade pip
-python -m pip install -r "${ROOT_DIR}/scripts/requirements.txt"
+python -m pip install -r "${ROOT_DIR}/config/requirements.txt"
 
 python - <<'PY'
 import nltk
@@ -19,4 +19,3 @@ nltk.download("punkt", quiet=True)
 PY
 
 echo "✅ Requirements installed into ${VENV_DIR} and NLTK punkt downloaded."
-

@@ -9,7 +9,7 @@ if [[ ! -d "${VENV_DIR}" ]]; then
 fi
 
 "${VENV_DIR}/bin/python" -m pip install --upgrade pip
-"${VENV_DIR}/bin/python" -m pip install -r "${REPO_ROOT}/scripts/requirements.txt"
+"${VENV_DIR}/bin/python" -m pip install -r "${REPO_ROOT}/config/requirements.txt"
 
 "${VENV_DIR}/bin/python" - <<'PY'
 import nltk

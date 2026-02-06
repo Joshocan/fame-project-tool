@@ -8,7 +8,7 @@ if [[ ! -d "${VENV_DIR}" ]]; then
   python3 -m venv "${VENV_DIR}"
 fi
 
-"${VENV_DIR}/bin/python" -m pip install -r "${REPO_ROOT}/scripts/requirements.txt"
+"${VENV_DIR}/bin/python" -m pip install -r "${REPO_ROOT}/config/requirements.txt"
 
 cd "${REPO_ROOT}"
 PYTHONPATH="${REPO_ROOT}" "${VENV_DIR}/bin/python" -m pytest "$@"

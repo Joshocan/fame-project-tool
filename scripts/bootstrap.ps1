@@ -11,7 +11,7 @@ if (-Not (Test-Path $venvDir)) {
 $python = Join-Path $venvDir "Scripts/python.exe"
 
 & $python -m pip install --upgrade pip
-& $python -m pip install -r (Join-Path $repoRoot "scripts/requirements.txt")
+& $python -m pip install -r (Join-Path $repoRoot "config/requirements.txt")
 
 & $python - <<'PY'
 import nltk

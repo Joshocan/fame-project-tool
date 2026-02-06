@@ -31,6 +31,19 @@ fi
 export OLLAMA_EMBED_MODEL="${OLLAMA_EMBED_MODEL:-nomic-embed-text}"
 export OLLAMA_LLM_MODEL="${OLLAMA_LLM_MODEL:-llama3.1:8b}"
 
+# Optional API key support
+if [[ -f "$PROJECT_ROOT/api_keys/ollama_key.txt" ]]; then
+  export OLLAMA_API_KEY_FILE="$PROJECT_ROOT/api_keys/ollama_key.txt"
+fi
+
+# Use local Ollama for embeddings; LLM can use cloud if API key is provided
+export OLLAMA_EMBED_HOST="http://127.0.0.1:11434"
+if [[ -n "${OLLAMA_API_KEY_FILE:-}" ]]; then
+  export OLLAMA_LLM_HOST="${OLLAMA_LLM_HOST:-https://ollama.com}"
+else
+  export OLLAMA_LLM_HOST="${OLLAMA_LLM_HOST:-http://127.0.0.1:11434}"
+fi
+
 # IMPORTANT: since you use brew services, server is already running
 export OLLAMA_MODE=remote
 export OLLAMA_HOST="http://127.0.0.1:11434"
