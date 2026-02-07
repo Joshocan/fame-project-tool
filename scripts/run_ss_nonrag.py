@@ -138,7 +138,7 @@ if __name__ == "__main__":
     try:
         main()
     except UserMessageError as e:
-        print(f"❌ {format_error(e)}")
+        print(f"❌ {format_error(e)} (see results/logs/fame.log for details)")
         log_exception(logger, e)
     except Exception as e:
         log_exception(logger, e)
