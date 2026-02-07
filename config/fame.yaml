@@ -135,3 +135,6 @@ logging:
   # If set, logs can also be written to a file under results/
   to_file: true
   json: true
+  console: true
+  console_level: "WARNING"
+  console_include_exc: false

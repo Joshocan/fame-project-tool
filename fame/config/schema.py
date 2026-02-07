@@ -136,6 +136,9 @@ class LoggingCfg:
     level: str
     to_file: bool
     json: bool
+    console: bool
+    console_level: str
+    console_include_exc: bool
 
 
 @dataclass(frozen=True)
@@ -311,6 +314,9 @@ def parse_config(doc: Dict[str, Any], repo_root: Path) -> FameConfig:
         level=str(log.get("level", "INFO")).upper(),
         to_file=bool(log.get("to_file", False)),
         json=bool(log.get("json", True)),
+        console=bool(log.get("console", True)),
+        console_level=str(log.get("console_level", log.get("level", "INFO"))).upper(),
+        console_include_exc=bool(log.get("console_include_exc", False)),
     )
 
     return FameConfig(
