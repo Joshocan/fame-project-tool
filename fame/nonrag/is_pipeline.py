@@ -12,6 +12,8 @@ from fame.ingestion.pipeline import ingest_and_prepare
 from fame.utils.dirs import build_paths, ensure_for_stage, ensure_dir
 from fame.nonrag.prompting import render_prompt_template, serialize_high_level_features
 from fame.evaluation import start_timer, elapsed_seconds
+from fame.utils.placeholder_check import assert_no_placeholders, UnresolvedPlaceholdersError
+from fame.exceptions import PlaceholderError, MissingChunksError
 
 from .llm_ollama_http import OllamaHTTP, assert_ollama_running
 
@@ -129,6 +131,11 @@ refined. No retrieval or vector DB is used.
     paths = build_paths()
     ensure_for_stage("is-nonrag", paths)
     ensure_for_stage("preprocess", paths)
+    spec_dir = paths.specifications
+    xsd_path = spec_dir / "feature_model_schema.xsd"
+    metamodel_path = spec_dir / "feature_metamodel_specification.txt"
+    xsd_text = xsd_path.read_text(encoding="utf-8") if xsd_path.exists() else ""
+    metamodel_text = metamodel_path.read_text(encoding="utf-8") if metamodel_path.exists() else ""
 
     # LLM
     if llm is None:
@@ -145,7 +152,7 @@ refined. No retrieval or vector DB is used.
         files = _list_chunks_files(chunks_dir)
 
     if not files:
-        raise RuntimeError(f"No chunks.json found in {chunks_dir}. Add PDFs to data/raw and run ingestion.")
+        raise MissingChunksError(str(chunks_dir))
 
     cm = ContextManager()
     delta_cfg = ContextBuildConfig(
@@ -176,7 +183,7 @@ refined. No retrieval or vector DB is used.
             delta_context = cm.add_delta_context(chunks, delta_cfg, title=title)
 
         print(f"⏳ Iteration {i}/{len(files)} — source: {f.name}")
-        # Choose template: initial vs iterative
+        # Choose template: initial vs iterative (from config or defaults)
         if i == 1:
             tmpl_text = _load_template(cfg.initial_prompt_path, DEFAULT_IS_NONRAG_PROMPT)
         else:
@@ -194,9 +201,18 @@ refined. No retrieval or vector DB is used.
             "DELTA_CONTEXT": delta_context,
             "HIGH_LEVEL_FEATURES": high_level_xml,
             "MAX_DEPTH": str(cfg.max_depth) if cfg.max_depth is not None else "",
+            "XSD_METAMODEL": xsd_text,
+            "FEATURE_METAMODEL": metamodel_text,
+            "INPUT_TEXT": delta_context,
+            "inputfile": "",
+            "mmdir": "",
         }
 
         prompt = render_prompt_template(tmpl_text, values=values, strict=False)
+        try:
+            assert_no_placeholders(prompt)
+        except UnresolvedPlaceholdersError as e:
+            raise PlaceholderError(e.placeholders) from e
 
         print("   → Calling LLM...")
         t_llm = start_timer()

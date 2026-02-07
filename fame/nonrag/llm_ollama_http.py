@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from typing import Any, Dict, Optional
 
 import requests
+from fame.exceptions import LLMTimeoutError
 
 
 @dataclass
@@ -63,7 +64,10 @@ class OllamaHTTP:
             else:
                 headers[self.auth_header] = self.api_key
 
-        r = requests.post(url, json=payload, headers=headers, timeout=self.timeout_s)
+        try:
+            r = requests.post(url, json=payload, headers=headers, timeout=self.timeout_s)
+        except requests.exceptions.ReadTimeout:
+            raise LLMTimeoutError(self.host, self.model, self.timeout_s)
         r.raise_for_status()
         data = r.json()
         out = data.get("response", "")
