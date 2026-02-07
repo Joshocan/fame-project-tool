@@ -113,6 +113,9 @@ pipelines:
   is_nonrag:
     enabled: true
     prompt_path: ""            # optional; otherwise uses default internal template
+    prompt_paths:
+      initial: "prompts/fm_extraction_prompt.txt"
+      iter: "prompts/fm_iterated_prompt.txt"
     delta_budget:
       max_delta_chars: 50000
       max_delta_chunks: 50

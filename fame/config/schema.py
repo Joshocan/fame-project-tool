@@ -106,6 +106,8 @@ class NonRagSSCfg:
 class NonRagISCfg:
     enabled: bool
     prompt_path: Optional[Path]
+    initial_prompt_path: Optional[Path]
+    iter_prompt_path: Optional[Path]
     max_delta_chars: int
     max_delta_chunks: int
     max_delta_chunk_chars: int
@@ -273,9 +275,12 @@ def parse_config(doc: Dict[str, Any], repo_root: Path) -> FameConfig:
 
     isnr = pips.get("is_nonrag", {})
     isnr_budget = isnr.get("delta_budget", {})
+    isnr_prompts = isnr.get("prompt_paths", {})
     is_nonrag_cfg = NonRagISCfg(
         enabled=bool(isnr.get("enabled", True)),
         prompt_path=_as_path(base, isnr.get("prompt_path", "")) if str(isnr.get("prompt_path", "")).strip() else None,
+        initial_prompt_path=_as_path(base, isnr_prompts.get("initial", "")) if str(isnr_prompts.get("initial", "")).strip() else None,
+        iter_prompt_path=_as_path(base, isnr_prompts.get("iter", "")) if str(isnr_prompts.get("iter", "")).strip() else None,
         max_delta_chars=int(isnr_budget.get("max_delta_chars", 50000)),
         max_delta_chunks=int(isnr_budget.get("max_delta_chunks", 50)),
         max_delta_chunk_chars=int(isnr_budget.get("max_delta_chunk_chars", 6000)),

@@ -44,6 +44,7 @@ OUTPUT REQUIREMENTS (STRICT)
 15) The XML MUST be well-formed and MUST validate against: XSD METAMODEL below
 16) Every feature/group node MUST include exactly one <description> element with at least one full sentence explaining its role.
 17) Use mandatory="true" ONLY when the text clearly indicates “must/required/mandatory”; otherwise omit it.
+18) Feature name convention (FeatureIDE-compatible): feature names must be identifiers (start with a letter/underscore; then letters/digits/underscore/hyphen only). NO spaces or other punctuation. Replace spaces with underscores or hyphens.
 
 REFERENCE SPECIFICATION (USE AS SPECIFICATION; DO NOT ECHO VERBATIM):
 ---
