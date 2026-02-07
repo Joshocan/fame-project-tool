@@ -12,6 +12,8 @@ from fame.ingestion.pipeline import ingest_and_prepare
 from fame.utils.dirs import build_paths, ensure_for_stage, ensure_dir
 from fame.utils.context_budget import compute_max_total_chars, compute_max_chunks
 from fame.evaluation import start_timer, elapsed_seconds
+from fame.utils.placeholder_check import assert_no_placeholders, UnresolvedPlaceholdersError
+from fame.exceptions import PlaceholderError, MissingChunksError
 
 from .llm_ollama_http import OllamaHTTP, assert_ollama_running
 from .prompt_utils import build_ss_nonrag_prompt, save_modified_prompt
@@ -93,7 +95,7 @@ No vector database or retrieval step is used.
         files = _list_chunks_files(chunks_dir)
 
     if not files:
-        raise RuntimeError(f"No chunks.json found in {chunks_dir}. Add PDFs to data/raw and run ingestion.")
+        raise MissingChunksError(str(chunks_dir))
 
     # Estimate context budget based on model context window (when known)
     model_name_hint = getattr(llm_client, "model", None) or os.getenv("OLLAMA_LLM_MODEL", "")
@@ -138,6 +140,10 @@ No vector database or retrieval step is used.
 
     # Build prompt
     prompt = build_ss_nonrag_prompt(cfg, context=context, paths=paths)
+    try:
+        assert_no_placeholders(prompt)
+    except UnresolvedPlaceholdersError as e:
+        raise PlaceholderError(e.placeholders) from e
 
     # Run LLM once
     if llm_client is None:

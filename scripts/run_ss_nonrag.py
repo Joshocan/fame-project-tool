@@ -8,7 +8,7 @@ from typing import Dict, Optional, Tuple
 
 from fame.judge import create_judge_client
 from fame.config.load import load_config
-
+from fame.exceptions import MissingKeyError, UserMessageError, format_error
 from fame.nonrag.ss_pipeline import SSNonRagConfig, run_ss_nonrag
 from fame.nonrag.cli_utils import prompt_choice, load_key_file, default_high_level_features
 
@@ -64,7 +64,7 @@ def main() -> None:
             provider, env_var, key_file = provider_map[model]
             key = load_key_file(key_file)
             if not key:
-                raise RuntimeError(f"Missing API key file: {key_file}")
+                raise MissingKeyError(env_var, str(key_file))
             os.environ[env_var] = key
 
             cfg = load_config().llm_judge
@@ -133,4 +133,9 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except UserMessageError as e:
+        print(f"❌ {format_error(e)}")
+    except Exception as e:
+        raise

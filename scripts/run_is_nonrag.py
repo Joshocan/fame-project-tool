@@ -9,6 +9,7 @@ from fame.config.load import load_config
 from fame.judge import create_judge_client
 from fame.nonrag.is_pipeline import ISNonRagConfig, run_is_nonrag
 from fame.nonrag.cli_utils import prompt_choice, load_key_file, default_high_level_features
+from fame.exceptions import MissingKeyError, UserMessageError, format_error
 
 
 def main() -> None:
@@ -59,7 +60,7 @@ def main() -> None:
             provider, env_var, key_file = provider_map[model]
             key = load_key_file(key_file)
             if not key:
-                raise RuntimeError(f"Missing API key file: {key_file}")
+                raise MissingKeyError(env_var, str(key_file))
             os.environ[env_var] = key
 
             cfg_judge = load_config().llm_judge
@@ -93,6 +94,8 @@ def main() -> None:
 
     chunks_dir = Path(args.chunks_dir).expanduser().resolve() if args.chunks_dir else None
 
+    cfg_default = load_config().pipelines.is_nonrag
+
     cfg = ISNonRagConfig(
         root_feature=args.root_feature,
         domain=args.domain,
@@ -101,6 +104,8 @@ def main() -> None:
         max_delta_chunks=args.max_delta_chunks,
         temperature=args.temperature,
         high_level_features=getattr(args, "high_level_features", None),
+        initial_prompt_path=cfg_default.initial_prompt_path,
+        iter_prompt_path=cfg_default.iter_prompt_path,
     )
 
     out = run_is_nonrag(cfg, llm=llm_client)
@@ -109,4 +114,9 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except UserMessageError as e:
+        print(f"❌ {format_error(e)}")
+    except Exception as e:
+        raise
