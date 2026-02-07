@@ -100,10 +100,12 @@ def main() -> None:
     chunks_dir = Path(args.chunks_dir).expanduser().resolve() if args.chunks_dir else None
     prompt_path = Path(args.prompt_path).expanduser().resolve() if args.prompt_path else None
 
+    model_name = getattr(llm_client, "model", None) or os.getenv("OLLAMA_LLM_MODEL", "ollama-default")
     if args.verbose:
         print("\n==================== SS-NONRAG ====================")
         print(f"Root feature   : {args.root_feature}")
         print(f"Domain         : {args.domain}")
+        print(f"Model          : {model_name}")
         print(f"Chunks dir     : {chunks_dir or '(default)'}")
         print(f"Max total chars: {args.max_total_chars}")
         print(f"Max chunks     : {args.max_chunks}")
@@ -126,7 +128,7 @@ def main() -> None:
     )
 
     if args.verbose:
-        print("Stage 2: Execute SS-NonRAG pipeline")
+        print("Stage 2: Execute SS-NonRAG pipeline (may take a while)...")
 
     out = run_ss_nonrag(cfg, llm_client=llm_client)
     print("\n✅ SS-NonRAG completed")
