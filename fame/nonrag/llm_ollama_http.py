@@ -20,7 +20,7 @@ class OllamaHTTP:
     """
     model: str = "gpt-oss:120b-cloud"
     host: str = "http://127.0.0.1:11434"
-    timeout_s: int = 300
+    timeout_s: int = 500
     api_key: str = ""
     auth_header: str = "Authorization"
     auth_scheme: str = "Bearer"
