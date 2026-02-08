@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  FeatureIDE-compatible (Extended Feature Model) schema.
+  Keeps the original feature_model_schema.xsd intact; use this file for new runs.
+  Scope: feature structure, attributes, groups, and cross-tree constraints.
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+
+  <!-- Feature attributes (name/value/type optional) -->
+  <xs:complexType name="attributeType">
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="optional"/>
+    <xs:attribute name="type" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <!-- Feature node -->
+  <xs:complexType name="featureType">
+    <xs:sequence>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+      <xs:element name="properties" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="attributes" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="attribute" type="attributeType" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:group ref="groupNode" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="abstract" type="xs:boolean" use="optional"/>
+    <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+  </xs:complexType>
+
+  <!-- Group types -->
+  <xs:group name="groupNode">
+    <xs:choice>
+      <xs:element name="feature" type="featureType"/>
+      <xs:element name="and" type="groupType"/>
+      <xs:element name="or" type="groupType"/>
+      <xs:element name="alt" type="groupType"/>
+    </xs:choice>
+  </xs:group>
+
+  <xs:complexType name="groupType">
+    <xs:sequence>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+      <xs:group ref="groupNode" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="optional"/>
+    <xs:attribute name="abstract" type="xs:boolean" use="optional"/>
+    <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+    <!-- Cardinalities used by FeatureIDE for groups -->
+    <xs:attribute name="min" type="xs:nonNegativeInteger" use="optional"/>
+    <xs:attribute name="max" type="xs:nonNegativeInteger" use="optional"/>
+  </xs:complexType>
+
+  <!-- Constraints -->
+  <xs:group name="formula">
+    <xs:choice>
+      <xs:element name="conj" type="binaryFormulaType"/>
+      <xs:element name="disj" type="binaryFormulaType"/>
+      <xs:element name="not" type="unaryFormulaType"/>
+      <xs:element name="imp" type="binaryFormulaType"/>
+      <xs:element name="eq" type="binaryFormulaType"/>
+      <xs:element name="var" type="xs:string"/>
+    </xs:choice>
+  </xs:group>
+
+  <xs:complexType name="binaryFormulaType">
+    <xs:choice minOccurs="2" maxOccurs="2">
+      <xs:group ref="formula"/>
+    </xs:choice>
+  </xs:complexType>
+
+  <xs:complexType name="unaryFormulaType">
+    <xs:choice minOccurs="1" maxOccurs="1">
+      <xs:group ref="formula"/>
+    </xs:choice>
+  </xs:complexType>
+
+  <!-- Root element -->
+  <xs:element name="featureModel">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="properties" minOccurs="0"/>
+        <xs:element name="struct">
+          <xs:complexType>
+            <xs:group ref="groupNode"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="constraints">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="rule" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:group ref="formula"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="calculations" minOccurs="0"/>
+        <xs:element name="comments" minOccurs="0"/>
+        <xs:element name="featureOrder" minOccurs="0"/>
+      </xs:all>
+      <xs:anyAttribute processContents="skip"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
