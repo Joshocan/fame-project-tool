@@ -42,6 +42,8 @@ def build_ss_nonrag_prompt(
             "FEATURE_METAMODEL": metamodel_text,
             "HIGH_LEVEL_FEATURES": high_level_xml,
             "MAX_DEPTH": str(cfg.max_depth) if cfg.max_depth is not None else "",
+            "inputfile": "",
+            "mmdir": "",
             **(extra_placeholders or {}),
         },
         strict=strict,
