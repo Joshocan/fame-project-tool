@@ -5,6 +5,7 @@ import re
 import time
 from dataclasses import dataclass
 from pathlib import Path
+import os
 from typing import Dict, List, Optional, Sequence
 
 from fame.context import ContextBuildConfig, ContextManager, chunks_from_chunks_json
