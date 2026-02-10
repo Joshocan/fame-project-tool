@@ -40,11 +40,11 @@ services:
     # Optional: override API base URL (empty uses provider default)
     base_url: ""
     # Environment variable that holds your API key
-    api_key_env: "JUDGE_API_KEY"
-    api_key_dir: "api_keys"
-    temperature: 0.2
-    max_tokens: 8000
-    timeout_s: 120
+  api_key_env: "JUDGE_API_KEY"
+  api_key_dir: "api_keys"
+  temperature: 0.2
+  max_tokens: 16000
+  timeout_s: 120
 
 data:
   raw_dir: "data/raw"
