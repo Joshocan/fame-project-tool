@@ -30,8 +30,11 @@ class FamePaths:
     # results (generated)
     results: Path
     ss_fm: Path
+    ss_features: Path
     ms_fm: Path
+    ms_features: Path
     is_fm: Path
+    is_features: Path
     modified_prompts: Path
     logs: Path
 
@@ -129,8 +132,11 @@ def build_paths(base_dir: Optional[Path] = None) -> FamePaths:
         # results (generated)
         results=results,
         ss_fm=results / "rag" / "ss-rgfm" / "fm",
+        ss_features=results / "rag" / "ss-rgfm" / "features",
         ms_fm=results / "rag" / "ms-rgfm" / "fm",
+        ms_features=results / "rag" / "ms-rgfm" / "features",
         is_fm=results / "rag" / "is-rgfm" / "fm",
+        is_features=results / "rag" / "is-rgfm" / "features",
         modified_prompts=results / "modified_prompts",
         logs=results / "logs",
 
@@ -242,14 +248,17 @@ def ensure_for_stage(stage: str, p: FamePaths) -> Dict[str, Path]:
 
     elif stage in ("ss-rgfm", "extract_ss"):
         mk("SS_FM", p.ss_fm)
+        mk("SS_FEATURES", p.ss_features)
         mk("REPORTS", p.reports)
         mk("IMAGES", p.images)
 
     elif stage in ("ms-rgfm", "extract_ms"):
         mk("MS_FM", p.ms_fm)
+        mk("MS_FEATURES", p.ms_features)
 
     elif stage in ("is-rgfm", "is_rgfm", "iter-rgfm"):
         mk("IS_FM", p.is_fm)
+        mk("IS_FEATURES", p.is_features)
         mk("REPORTS", p.reports)
         mk("IMAGES", p.images)
 
