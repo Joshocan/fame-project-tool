@@ -30,7 +30,7 @@ def main() -> None:
 
     llm_client = None
     if interactive:
-        mode = prompt_choice("1) Open Source LLM  OR Judge LLM", ("Open Source LLM", "Judge LLM"))
+        mode = prompt_choice("1) Open Source LLM  OR Proprietary LLM", ("Open Source LLM", "Proprietary LLM"))
 
         if mode == "Open Source LLM":
             model = prompt_choice(
@@ -52,7 +52,7 @@ def main() -> None:
 
         else:
             model = prompt_choice(
-                "Select Judge LLM model",
+                "Select Proprietary LLM model",
                 ("gpt-4.1", "claude-opus-4-5", "gemini-3-pro-preview"),
             )
             provider_map = {
