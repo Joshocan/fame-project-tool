@@ -67,6 +67,8 @@ class FamePaths:
 
     # reports & validation (generated)
     reports: Path
+    ss_reports: Path
+    is_reports: Path
     validation: Path
     success: Path
     failed: Path
@@ -172,6 +174,8 @@ def build_paths(base_dir: Optional[Path] = None) -> FamePaths:
 
         # reports & validation (generated)
         reports=results / "rag" / "ss-rgfm" / "reports",
+        ss_reports=results / "rag" / "ss-rgfm" / "reports",
+        is_reports=results / "rag" / "is-rgfm" / "reports",
         validation=results / "rag" / "ss-rgfm" / "reports" / "validation",
         success=results / "rag" / "ss-rgfm" / "reports" / "validation" / "success",
         failed=results / "rag" / "ss-rgfm" / "reports" / "validation" / "failed",
@@ -256,7 +260,7 @@ def ensure_for_stage(stage: str, p: FamePaths) -> Dict[str, Path]:
         mk("SS_FM", p.ss_fm)
         mk("SS_CONSTRAINTS", p.ss_constraints)
         mk("SS_FEATURES", p.ss_features)
-        mk("REPORTS", p.reports)
+        mk("REPORTS", p.ss_reports)
         mk("IMAGES", p.images)
 
     elif stage in ("ms-rgfm", "extract_ms"):
@@ -268,7 +272,7 @@ def ensure_for_stage(stage: str, p: FamePaths) -> Dict[str, Path]:
         mk("IS_FM", p.is_fm)
         mk("IS_CONSTRAINTS", p.is_constraints)
         mk("IS_FEATURES", p.is_features)
-        mk("REPORTS", p.reports)
+        mk("REPORTS", p.is_reports)
         mk("IMAGES", p.images)
 
     # umbrella: create both non-rag variants + umbrella folders

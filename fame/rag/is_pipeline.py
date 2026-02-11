@@ -160,7 +160,7 @@ def run_is_rgfm(cfg: ISRgfmConfig, *, llm: Optional[object] = None, retriever: O
     ensure_dir(final_xml_file.parent)
     final_xml_file.write_text(previous_xml, encoding="utf-8")
 
-    meta_file = paths.reports / f"{run_id_base}.meta.json"
+    meta_file = paths.is_reports / f"{run_id_base}.meta.json"
     meta = {
         "run_id": run_id_base,
         "root_feature": cfg.root_feature,

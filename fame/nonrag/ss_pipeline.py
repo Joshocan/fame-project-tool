@@ -169,7 +169,7 @@ No vector database or retrieval step is used.
 
     context_file = paths.non_ss_context / f"{run_id}.context.txt"
     prompt_file = paths.non_ss_runs / f"{run_id}.prompt.txt"
-    meta_file = paths.non_ss_runs / f"{run_id}.meta.json"
+    meta_file = paths.non_ss_reports / f"{run_id}.meta.json"
     fm_file = paths.non_ss_fm / f"{run_id}.xml"
 
     context_file.write_text(context, encoding="utf-8")
