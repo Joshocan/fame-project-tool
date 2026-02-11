@@ -1,10 +1,7 @@
 from __future__ import annotations
 
-import json
 import os
 from typing import Optional
-
-import requests
 
 from .base import JudgeClient
 
@@ -37,8 +34,7 @@ class AnthropicJudgeClient(JudgeClient):
             "content-type": "application/json",
         }
 
-        r = requests.post(url, headers=headers, data=json.dumps(payload), timeout=self.timeout_s)
-        r.raise_for_status()
+        r = self._post_with_retries(url, headers=headers, json_payload=payload)
         data = r.json()
         content = data.get("content") or []
         if not content:

@@ -1,9 +1,6 @@
 from __future__ import annotations
 
-import json
 from typing import Optional
-
-import requests
 
 from .base import JudgeClient
 
@@ -38,8 +35,7 @@ class GeminiJudgeClient(JudgeClient):
             "content-type": "application/json",
         }
 
-        r = requests.post(url, headers=headers, data=json.dumps(payload), timeout=self.timeout_s)
-        r.raise_for_status()
+        r = self._post_with_retries(url, headers=headers, json_payload=payload)
         data = r.json()
         candidates = data.get("candidates") or []
         if not candidates:
