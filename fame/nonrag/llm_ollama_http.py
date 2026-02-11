@@ -24,6 +24,8 @@ class OllamaHTTP:
     api_key: str = ""
     auth_header: str = "Authorization"
     auth_scheme: str = "Bearer"
+    retries: int = 3
+    retry_delay_s: float = 5.0
 
     def __post_init__(self) -> None:
         # Prefer LLM-specific host; fallback to shared OLLAMA_HOST
@@ -39,6 +41,8 @@ class OllamaHTTP:
         self.api_key = key
         self.auth_header = os.getenv("OLLAMA_AUTH_HEADER", self.auth_header).strip() or "Authorization"
         self.auth_scheme = os.getenv("OLLAMA_AUTH_SCHEME", self.auth_scheme).strip()
+        self.retries = int(os.getenv("OLLAMA_RETRIES", self.retries))
+        self.retry_delay_s = float(os.getenv("OLLAMA_RETRY_DELAY", self.retry_delay_s))
 
     def generate(
         self,
@@ -63,25 +67,32 @@ class OllamaHTTP:
                 headers[self.auth_header] = f"{self.auth_scheme} {self.api_key}"
             else:
                 headers[self.auth_header] = self.api_key
-
-        try:
-            r = requests.post(url, json=payload, headers=headers, timeout=self.timeout_s)
-        except requests.exceptions.ReadTimeout:
-            raise LLMTimeoutError(self.host, self.model, self.timeout_s)
-        except requests.exceptions.RequestException as e:  # connection errors, etc.
-            raise LLMHTTPError(self.host, self.model, -1, detail=str(e))
-
-        if not r.ok:
-            detail = ""
+        last_exc = None
+        for attempt in range(1, self.retries + 1):
             try:
-                detail = r.json().get("error", "")
-            except Exception:
-                detail = r.text
-            raise LLMHTTPError(self.host, self.model, r.status_code, detail)
+                r = requests.post(url, json=payload, headers=headers, timeout=self.timeout_s)
+                if not r.ok:
+                    detail = ""
+                    try:
+                        detail = r.json().get("error", "")
+                    except Exception:
+                        detail = r.text
+                    raise LLMHTTPError(self.host, self.model, r.status_code, detail)
 
-        data = r.json()
-        out = data.get("response", "")
-        return (out or "").strip()
+                data = r.json()
+                out = data.get("response", "")
+                return (out or "").strip()
+            except requests.exceptions.ReadTimeout as e:
+                last_exc = LLMTimeoutError(self.host, self.model, self.timeout_s)
+            except requests.exceptions.RequestException as e:
+                last_exc = LLMHTTPError(self.host, self.model, -1, detail=str(e))
+            except LLMHTTPError as e:
+                last_exc = e
+
+            if attempt < self.retries:
+                time.sleep(self.retry_delay_s)
+                continue
+            raise last_exc
 
 
 def assert_ollama_running(host: Optional[str] = None) -> None:
