@@ -36,6 +36,7 @@ D) Variability modeling rules
 
 E) Naming and deduplication
 11) Deduplicate synonymous features; keep the most expressive, evidence-backed name.
+11b) All feature names must be unique across the model; deduplicate synonyms and keep the single, most expressive name.
 
 F) Evidence and fidelity
 12) Use terminology from the paper as feature names where possible.

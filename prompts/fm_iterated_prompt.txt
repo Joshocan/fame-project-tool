@@ -75,6 +75,7 @@ INCREMENTAL REFINEMENT RULES (CRITICAL):
    - Use group operators: <and> for co-existing decomposition, <or> for one-or-more choices, <alt> for exactly-one choices (only if explicitly indicated).
    - Mark OR vs XOR groups explicitly; do not mix them in a single group.
    - Deduplicate synonymous features; keep the most expressive name.
+   - All feature names must be unique across the model; deduplicate synonyms and keep a single, most expressive name.
 
 7) Constraints (only if explicit in NEW CONTEXT):
    - Requires(A,B): <rule><imp><var>A</var><var>B</var></imp></rule>
