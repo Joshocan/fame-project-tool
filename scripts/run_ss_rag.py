@@ -25,6 +25,12 @@ def main() -> None:
     ap.add_argument("--prompt-path", default="", help="Custom prompt template path")
     ap.add_argument("--n-results-per-collection", type=int, default=6)
     ap.add_argument("--max-total-results", type=int, default=12)
+    ap.add_argument(
+        "--k-strategy",
+        choices=["auto", "fixed"],
+        default="auto",
+        help="auto = half the chunks per source (current default). fixed = use --n-results-per-collection.",
+    )
     ap.add_argument("--max-total-chars", type=int, default=18_000)
     ap.add_argument("--max-chunk-chars", type=int, default=2_500)
     ap.add_argument("--collection-mode", default="per_source", choices=["per_source", "one_collection"])
@@ -124,6 +130,7 @@ def main() -> None:
         max_total_results=args.max_total_results,
         max_total_chars=args.max_total_chars,
         max_chunk_chars=args.max_chunk_chars,
+        k_strategy=args.k_strategy,
         prompt_path=prompt_path,
         temperature=args.temperature,
         xsd_path=Path(args.xsd_path).expanduser().resolve() if args.xsd_path else None,

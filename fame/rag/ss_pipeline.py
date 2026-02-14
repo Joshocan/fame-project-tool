@@ -40,6 +40,7 @@ class SSRGFMConfig:
     max_total_results: int = 12
     max_total_chars: int = 18_000
     max_chunk_chars: int = 2_500
+    k_strategy: str = "auto"  # auto | fixed
 
     # prompt + generation
     prompt_path: Optional[Path] = None
@@ -146,15 +147,20 @@ def run_ss_rgfm(
         collections = [_collection_name_for_file(f, prefix=cfg.collection_prefix) for f in files]
 
     retr = retriever or RetrievalService()
+
     total_chunks = _count_total_chunks(files)
-    auto_k = max(1, total_chunks // 2) if total_chunks else cfg.n_results_per_collection
-    max_total_results = max(1, min(cfg.max_total_results, auto_k * len(collections))) if total_chunks else cfg.max_total_results
+    if cfg.k_strategy == "fixed":
+        effective_k = max(1, cfg.n_results_per_collection)
+    else:
+        effective_k = max(1, total_chunks // 2) if total_chunks else max(1, cfg.n_results_per_collection)
+
+    max_total_results = max(1, min(cfg.max_total_results, effective_k * len(collections))) if total_chunks else cfg.max_total_results
 
     res = retr.retrieve(
         root_feature=cfg.root_feature,
         domain=cfg.domain,
         collections=collections,
-        n_results_per_collection=auto_k,
+        n_results_per_collection=effective_k,
         max_total_results=max_total_results,
     )
     evidence = retr.to_prompt_evidence(
@@ -219,6 +225,8 @@ def run_ss_rgfm(
         "vectorization": vec_out,
         "query_used": res.query,
         "num_evidence_chunks": len(res.chunks),
+        "k_strategy": cfg.k_strategy,
+        "n_results_per_collection_effective": effective_k,
         "llm_host": getattr(llm, "host", getattr(llm, "base_url", "unknown")),
         "llm_model": getattr(llm, "model", "unknown"),
         "llm_duration_seconds": llm_duration,
