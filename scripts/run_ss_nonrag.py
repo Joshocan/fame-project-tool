@@ -6,12 +6,15 @@ import os
 from pathlib import Path
 from typing import Dict, Optional, Tuple
 
+import requests
+
 from fame.judge import create_judge_client
 from fame.config.load import load_config
 from fame.exceptions import MissingKeyError, UserMessageError, format_error
 from fame.loggers import get_logger, log_exception
-from fame.nonrag.ss_pipeline import SSNonRagConfig, run_ss_nonrag
+from fame.nonrag.ss_pipeline import SSNonRagConfig, run_ss_nonrag, _default_chunks_dir
 from fame.nonrag.cli_utils import prompt_choice, load_key_file, default_high_level_features
+from fame.utils.dirs import build_paths
 
 
 def main() -> None:
@@ -28,7 +31,32 @@ def main() -> None:
     ap.add_argument("--run-tag", default=os.getenv("NONRAG_RUN_TAG", "ss-nonrag"))
     ap.add_argument("--verbose", action="store_true", help="Print stage-by-stage progress")
     ap.add_argument("--interactive", action="store_true", help="Run in interactive mode")
+    ap.add_argument("--preflight", action="store_true", help="Run fast checks (no prompts, no LLM) and exit.")
+    ap.add_argument("--repeats", type=int, default=1, help="How many runs to execute sequentially (default: 1).")
     args = ap.parse_args()
+
+    if args.preflight:
+        paths = build_paths()
+        chunks_dir = Path(args.chunks_dir).expanduser().resolve() if args.chunks_dir else _default_chunks_dir(paths)
+
+        print("=== SS-NonRAG Preflight ===")
+        print(f"Chunks dir   : {chunks_dir}")
+        files = sorted(chunks_dir.glob("*.chunks.json"))
+        if files:
+            print(f"Chunks files : {len(files)}")
+        else:
+            print("Chunks files : 0 (ingestion will run on first pipeline execution)")
+
+        ollama_host = os.getenv("OLLAMA_LLM_HOST", os.getenv("OLLAMA_HOST", "http://127.0.0.1:11434")).rstrip("/")
+        try:
+            r = requests.get(f"{ollama_host}/api/tags", timeout=3)
+            ok = 200 <= r.status_code < 400
+            print(f"Ollama host  : {ollama_host} ({'ok' if ok else f'status {r.status_code}'})")
+        except Exception as e:
+            print(f"Ollama host  : {ollama_host} (unreachable: {e})")
+
+        print("Preflight done. (No LLM call made.)")
+        return
 
     interactive = args.interactive or not (args.root_feature and args.domain)
 
@@ -138,9 +166,17 @@ def main() -> None:
     if args.verbose:
         print("Stage 2: Execute SS-NonRAG pipeline (may take a while)...")
 
-    out = run_ss_nonrag(cfg, llm_client=llm_client)
-    print("\nSUCCESS: SS-NonRAG completed")
-    print(out)
+    results = []
+    for i in range(max(1, args.repeats)):
+        if args.repeats > 1:
+            print(f"\n--- Run {i+1}/{args.repeats} ---")
+        out = run_ss_nonrag(cfg, llm_client=llm_client)
+        results.append(out)
+        print("\nSUCCESS: SS-NonRAG completed")
+        print(out)
+
+    if args.repeats > 1:
+        print(f"\nCompleted {args.repeats} runs.")
 
 
 if __name__ == "__main__":
