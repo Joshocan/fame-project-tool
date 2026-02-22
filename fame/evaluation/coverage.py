@@ -6,7 +6,14 @@ from pathlib import Path
 from typing import Iterable, List, Tuple, Optional, Union
 
 import numpy as np
-from sentence_transformers import SentenceTransformer, util
+
+try:
+    from sentence_transformers import SentenceTransformer, util  # type: ignore
+    _HAS_ST = True
+except Exception:
+    SentenceTransformer = None  # type: ignore
+    util = None  # type: ignore
+    _HAS_ST = False
 
 
 Node = Tuple[str, Optional[str]]  # (name, parent_name)
@@ -58,6 +65,8 @@ class CoverageEvaluator:
 
     def __init__(self, cfg: CoverageConfig):
         self.cfg = cfg
+        if not _HAS_ST:
+            raise ImportError("sentence_transformers is required for coverage scoring but is not installed.")
         self.model = SentenceTransformer(self.cfg.model_name)
 
     def _encode(self, texts: Iterable[str]):
