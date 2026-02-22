@@ -30,6 +30,7 @@ def main() -> None:
     ap.add_argument("--initial-prompt-path", default="", help="Override initial prompt path")
     ap.add_argument("--iter-prompt-path", default="", help="Override iterative prompt path")
     ap.add_argument("--interactive", action="store_true", help="Run with guided prompts")
+    ap.add_argument("--repeats", type=int, default=1, help="How many runs to execute sequentially (default: 1).")
     args = ap.parse_args()
 
     interactive = args.interactive or not (args.root_feature and args.domain)
@@ -133,10 +134,18 @@ def main() -> None:
     print("Stage 1: Build configuration")
     print("Stage 2: Run IS-RGFM pipeline (iterative retrieval)...")
 
-    out = run_is_rgfm(cfg, llm=llm_client)
-    print("\nSUCCESS: IS-RGFM completed")
-    for k, v in out.items():
-        print(f"{k}: {v}")
+    results = []
+    for i in range(max(1, args.repeats)):
+        if args.repeats > 1:
+            print(f"--- Run {i+1}/{args.repeats} ---")
+        out = run_is_rgfm(cfg, llm=llm_client)
+        results.append(out)
+        print("SUCCESS: IS-RGFM completed")
+        for k, v in out.items():
+            print(f"{k}: {v}")
+
+    if args.repeats > 1:
+        print(f"Completed {args.repeats} runs.")
 
 
 if __name__ == "__main__":
