@@ -40,6 +40,7 @@ def main() -> None:
     ap.add_argument("--interactive", action="store_true", help="Run with guided prompts")
     ap.add_argument("--xsd-path", default="", help="Override XSD path (default: feature_model_featureide.xsd)")
     ap.add_argument("--feature-metamodel-path", default="", help="Override feature metamodel path")
+    ap.add_argument("--repeats", type=int, default=1, help="How many runs to execute sequentially (default: 1).")
     args = ap.parse_args()
 
     interactive = args.interactive or not (args.root_feature and args.domain)
@@ -155,11 +156,18 @@ def main() -> None:
     print("Stage 1: Build configuration")
     print(f"Stage 2: Run SS-RGFM pipeline (may take a while)...")
 
-    out = run_ss_rgfm(cfg, llm=llm_client)
+    results = []
+    for i in range(max(1, args.repeats)):
+        if args.repeats > 1:
+            print(f"\n--- Run {i+1}/{args.repeats} ---")
+        out = run_ss_rgfm(cfg, llm=llm_client)
+        results.append(out)
+        print("SUCCESS: SS-RGFM completed")
+        for k, v in out.items():
+            print(f"{k}: {v}")
 
-    print("SUCCESS: SS-RGFM completed")
-    for k, v in out.items():
-        print(f"{k}: {v}")
+    if args.repeats > 1:
+        print(f"\nCompleted {args.repeats} runs.")
 
 
 if __name__ == "__main__":
