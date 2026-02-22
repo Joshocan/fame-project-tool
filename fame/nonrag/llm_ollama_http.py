@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import time
 from pathlib import Path
 from dataclasses import dataclass
 from typing import Any, Dict, Optional
@@ -98,7 +99,7 @@ class OllamaHTTP:
 def assert_ollama_running(host: Optional[str] = None) -> None:
     h = (host or os.getenv("OLLAMA_HOST", "http://127.0.0.1:11434")).rstrip("/")
     try:
-        r = requests.get(f"{h}/api/tags", timeout=2)
+        r = requests.get(f"{h}/api/tags", timeout=500)
         if not (200 <= r.status_code < 400):
             raise RuntimeError(f"Ollama not healthy: {r.status_code}")
     except Exception as e:
