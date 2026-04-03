@@ -40,11 +40,17 @@ services:
     # Optional: override API base URL (empty uses provider default)
     base_url: ""
     # Environment variable that holds your API key
-  api_key_env: "JUDGE_API_KEY"
-  api_key_dir: "api_keys"
-  temperature: 0.2
-  max_tokens: 16000
-  timeout_s: 120
+    api_key_env: "JUDGE_API_KEY"
+    api_key_dir: "api_keys"
+    temperature: 0.2
+    max_tokens: 16000
+    model_max_tokens:
+      gpt-4.1: 32000
+      o3: 32000
+      gemini-3.1-pro-preview: 65536
+      gemini-2.5-flash: 32000
+      claude-opus-4-5: 64000
+    timeout_s: 120
 
 data:
   raw_dir: "data/raw"
@@ -103,6 +109,9 @@ pipelines:
     enabled: true
     initial_prompt_path: "prompts/fm_extraction_prompt.txt"
     iter_prompt_path: "prompts/fm_iterated_prompt.txt"
+    retry_backoff_base_seconds: 2.0
+    retry_backoff_cap_seconds: 60.0
+    inter_iteration_sleep_seconds: 1.0
 
   # ---------- NON-RAG pipelines ----------
   ss_nonrag:
@@ -125,12 +134,16 @@ pipelines:
       max_delta_chunks: 50
       max_delta_chunk_chars: 6000
     temperature: 0.2
+    retry_backoff_base_seconds: 2.0
+    retry_backoff_cap_seconds: 60.0
+    inter_iteration_sleep_seconds: 1.0
 
 outputs:
   # All under results/ by default; dirs.py defines exact structure.
   save_prompts: true
   save_context: true
   save_meta: true
+  top_fm: 3
   # If true, store "latest" symlink-like pointer file (text file with last run id)
   write_latest_pointer: true
 
@@ -144,6 +157,7 @@ logging:
   console_include_exc: false
 
 evaluation:
+  ground_truth_xml: ""
   coverage:
     model_name: "all-mpnet-base-v2"
     similarity_threshold: 0.35
