@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Optional
+from typing import Any, Optional
 
 from .base import JudgeClient
 
@@ -29,6 +29,10 @@ class GeminiJudgeClient(JudgeClient):
                 "maxOutputTokens": self.max_tokens,
             },
         }
+        if (self.model or "").strip().lower() == "gemini-3.1-pro-preview":
+            payload["generationConfig"]["thinkingConfig"] = {
+                "thinkingBudget": 256,
+            }
 
         headers = {
             "x-goog-api-key": api_key,
@@ -37,10 +41,33 @@ class GeminiJudgeClient(JudgeClient):
 
         r = self._post_with_retries(url, headers=headers, json_payload=payload)
         data = r.json()
+        self.last_response_meta = {
+            "usageMetadata": data.get("usageMetadata"),
+            "promptFeedback": data.get("promptFeedback"),
+        }
         candidates = data.get("candidates") or []
         if not candidates:
+            prompt_feedback = data.get("promptFeedback") or {}
+            if prompt_feedback:
+                print(f"WARN: Gemini returned no candidates. promptFeedback={prompt_feedback}")
             return ""
-        content = (candidates[0].get("content") or {})
+        first = candidates[0]
+        finish_reason = first.get("finishReason")
+        safety_ratings = first.get("safetyRatings")
+        self.last_response_meta.update(
+            {
+                "finishReason": finish_reason,
+                "safetyRatings": safety_ratings,
+            }
+        )
+        if finish_reason and finish_reason != "STOP":
+            usage = data.get("usageMetadata") or {}
+            print(
+                "WARN: Gemini generation ended with "
+                f"finishReason={finish_reason}, usageMetadata={usage}"
+            )
+
+        content = (first.get("content") or {})
         parts = content.get("parts") or []
         texts = [p.get("text", "") for p in parts if isinstance(p, dict)]
         return "".join(texts).strip()
