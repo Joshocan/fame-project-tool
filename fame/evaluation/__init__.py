@@ -12,6 +12,9 @@ from .duration import start_timer, elapsed_seconds
 from .feature_list import extract_feature_list, FeatureRecord
 from .constraints import extract_constraints, ConstraintRecord
 from .run_metadata import RunMetadata, write_run_metadata, default_timestamp
+from .semantic import semantic_prf, feature_diff_stats
+from .structure import edge_jaccard_vs_gt, parent_match_rate
+from .quality_sat import analyze_sat_quality, SATQuality
 
 __all__ = [
     "CoverageEvaluator",
@@ -28,4 +31,10 @@ __all__ = [
     "RunMetadata",
     "write_run_metadata",
     "default_timestamp",
+    "semantic_prf",
+    "feature_diff_stats",
+    "edge_jaccard_vs_gt",
+    "parent_match_rate",
+    "analyze_sat_quality",
+    "SATQuality",
 ]
