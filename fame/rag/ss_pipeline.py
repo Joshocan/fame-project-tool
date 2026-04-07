@@ -48,6 +48,7 @@ class SSRGFMConfig:
     feature_metamodel_path: Optional[Path] = None
     high_level_features: Optional[Dict[str, str]] = None
     temperature: float = 0.2
+    max_retries: int = 1
 
     # output naming
     run_tag: str = "ss-rgfm"
@@ -191,9 +192,17 @@ def run_ss_rgfm(
         strict=True,
     )
 
-    t0 = start_timer()
-    fm_xml = llm.generate(prompt, temperature=cfg.temperature)
-    llm_duration = elapsed_seconds(t0)
+    for attempt in range(1, max(1, int(cfg.max_retries)) + 1):
+        try:
+            t0 = start_timer()
+            fm_xml = llm.generate(prompt, temperature=cfg.temperature)
+            llm_duration = elapsed_seconds(t0)
+            break
+        except Exception as e:
+            if attempt < max(1, int(cfg.max_retries)):
+                print(f"   -> attempt {attempt}/{cfg.max_retries} failed: {e}. Retrying...")
+            else:
+                raise
 
     # Persist artifacts
     ts = time.strftime("%Y-%m-%dT%H-%M-%S")
@@ -230,6 +239,7 @@ def run_ss_rgfm(
         "llm_host": getattr(llm, "host", getattr(llm, "base_url", "unknown")),
         "llm_model": getattr(llm, "model", "unknown"),
         "llm_duration_seconds": llm_duration,
+        "attempts_used": attempt,
         "chunks_dir": str(chunks_dir),
         "prompt_saved": str(prompt_saved),
     }

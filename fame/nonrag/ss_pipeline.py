@@ -40,6 +40,7 @@ class SSNonRagConfig:
     feature_metamodel_path: Optional[Path] = None
     high_level_features: Optional[Dict[str, str]] = None
     max_depth: Optional[int] = None
+    max_retries: int = 1
 
     # output naming
     run_tag: str = "ss-nonrag"
@@ -155,12 +156,20 @@ No vector database or retrieval step is used.
     model_name = getattr(llm, "model", "unknown")
     print(f"⏳ SS Non RAG: Running the LLM ({model_name})... this may take a while, please wait....")
 
-    t0 = start_timer()
-    if llm_client is None:
-        fm_xml = llm.generate(prompt, temperature=0.2)
-    else:
-        fm_xml = llm.generate(prompt)
-    llm_duration = elapsed_seconds(t0)
+    for attempt in range(1, max(1, int(cfg.max_retries)) + 1):
+        try:
+            t0 = start_timer()
+            if llm_client is None:
+                fm_xml = llm.generate(prompt, temperature=0.2)
+            else:
+                fm_xml = llm.generate(prompt)
+            llm_duration = elapsed_seconds(t0)
+            break
+        except Exception as e:
+            if attempt < max(1, int(cfg.max_retries)):
+                print(f"   -> attempt {attempt}/{cfg.max_retries} failed: {e}. Retrying...")
+            else:
+                raise
 
     # Save artifacts
     ts = time.strftime("%Y-%m-%dT%H-%M-%S")
@@ -189,6 +198,7 @@ No vector database or retrieval step is used.
         "llm_host": getattr(llm, "host", getattr(llm, "base_url", "")),
         "llm_model": model_name,
         "llm_duration_seconds": llm_duration,
+        "attempts_used": attempt,
         "chunks_files": [str(p) for p in files],
     }
     meta_file.write_text(json.dumps(meta, indent=2), encoding="utf-8")
