@@ -15,11 +15,12 @@ STRICT OUTPUT CONTRACT (NON-NEGOTIABLE):
 - Output ONLY the UPDATED XML (no markdown, no commentary, no diff).
 - The UPDATED XML MUST be well-formed AND MUST validate against: {{XSD_METAMODEL}}.
 - The UPDATED XML MUST keep the SAME OUTER STRUCTURE required by the XSD, i.e.:
-  <featureModel> ... <struct> ... </struct> ... </featureModel>
+  <featureModel> ... <struct> ... </struct> <constraints> ... </constraints> ... </featureModel>
   (Do NOT output <feature_model> or a bare <feature> root.)
 - Root feature name MUST be exactly: {{ROOT_FEATURE}}
 - Every feature/group node MUST include exactly one <description> with ≥ 1 full sentence.
   If PREVIOUS_FM_XML lacks descriptions, add them while refining (do not leave them empty).
+- Use ONLY these feature/group attributes when needed: `name`, `abstract="true"`, `mandatory="true"`. Do NOT use `optional`, `min`, `max`, or any other custom attributes on feature/group nodes.
 
 ANTI-“DUMP EVERYTHING” GUARDS:
 - Do NOT append large flat lists under one node.
@@ -63,7 +64,8 @@ INCREMENTAL REFINEMENT RULES (CRITICAL):
 
 6) Constraints (only if explicit in NEW INPUT_TEXT):
    - Requires(A,B): <rule><imp><var>A</var><var>B</var></imp></rule>
-   - Excludes(A,B): <rule><and><var>A</var><not><var>B</var></not></and></rule>
+   - Excludes(A,B): <rule><disj><not><var>A</var></not><not><var>B</var></not></disj></rule>
+   - Every <rule> must contain exactly one formula tree. Do NOT place text directly inside <rule>, and do NOT place two sibling formula roots inside one <rule>.
    - Only add constraints that are directly stated or unambiguous.
 
 7) Description policy:
@@ -76,7 +78,7 @@ Step A: Parse PREVIOUS_FM_XML and build an internal index of feature names → p
 Step B: Extract candidate new features/taxonomies/constraints from NEW INPUT_TEXT.
 Step C: Normalize names and compute delta (missing vs existing).
 Step D: Integrate delta via insertion + re-parenting + new abstract nodes as needed for depth.
-Step E: Ensure XSD structure is correct (<featureModel>/<struct>/...); ensure all nodes have <description>.
+Step E: Ensure XSD structure is correct (`<featureModel><struct>...</struct><constraints>...</constraints></featureModel>`); ensure all nodes have <description>, no forbidden feature attributes are used, and every `<rule>` contains exactly one valid formula tree.
 Step F: Output the full UPDATED XML only.
 
 REFERENCE SPECIFICATION (USE AS SPEC; DO NOT ECHO VERBATIM):

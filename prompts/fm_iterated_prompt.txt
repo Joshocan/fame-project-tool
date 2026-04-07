@@ -13,12 +13,20 @@ Given (1) the PREVIOUS FEATURE MODEL in FeatureIDE-like XML and (2) NEW CONTEXT,
 STRICT OUTPUT CONTRACT:
 - Output ONLY the XML (no markdown, no code fences, no commentary).
 - Use the root feature name EXACTLY as: {{ROOT_FEATURE}}
- - The UPDATED XML MUST be well-formed and MUST validate against: {{XSD_METAMODEL}}. There must be **no text before the opening `<?xml ...?>`** and **no text after the closing `</featureModel>`**.
+- The UPDATED XML MUST be well-formed and MUST validate against: {{XSD_METAMODEL}}. There must be **no text before the opening `<?xml ...?>`** and **no text after the closing `</featureModel>`**.
 - Maintain the  {{HIGH_LEVEL_FEATURES}} as the first level of abstract features after the {{ROOT_FEATURE}}
 - Include exactly one <description> element (at least one full sentence) for EVERY feature or group node.
 - Do NOT invent features or constraints; only use evidence from PREVIOUS_FM_XML and NEW CONTEXT.
 - deeper and better organized (when evidence supports it)
 - Feature name convention (FeatureIDE-compatible): feature names must be identifiers (start with a letter/underscore; then letters/digits/underscore/hyphen only). NO spaces or other punctuation. Replace spaces with underscores or hyphens.
+- Use ONLY these feature/group attributes when needed: `name`, `abstract="true"`, `mandatory="true"`. Do NOT use `optional`, `min`, `max`, or any other custom attributes on feature/group nodes.
+- The top-level XML skeleton MUST always be:
+  `<?xml version="1.0" encoding="UTF-8"?>`
+  `<featureModel>`
+  `  <struct> ... </struct>`
+  `  <constraints> ... </constraints>`
+  `</featureModel>`
+  If there are no constraints, output `<constraints/>`.
 
 TRACEABILITY & SEMANTIC VALIDATION RULES (CRITICAL):
 - Every feature MUST include exactly ONE <description> element (≥ 1 full sentence).
@@ -44,6 +52,9 @@ FINAL SELF-CHECK (SILENT, MUST PERFORM):
 - Every feature has exactly ONE <description>.
 - Every concrete feature description ends with "Trace: [ ... ]" and contains ≥ 1 reference.
 - All references used in Trace appear in the CONTEXT metadata (article IDs / headings).
+- The XML has exactly this top-level structure: `<featureModel>`, one `<struct>`, one `<constraints>`, then `</featureModel>`.
+- No feature/group node uses forbidden attributes like `optional`, `min`, or `max`.
+- Every `<rule>` contains exactly one valid formula subtree built only from XSD-supported tags.
 - XML validates against XSD METAMODEL.
 
 INCREMENTAL REFINEMENT RULES (CRITICAL):
@@ -79,7 +90,8 @@ INCREMENTAL REFINEMENT RULES (CRITICAL):
 
 7) Constraints (only if explicit in NEW CONTEXT):
    - Requires(A,B): <rule><imp><var>A</var><var>B</var></imp></rule>
-   - Excludes(A,B): <rule><and><var>A</var><not><var>B</var></not></and></rule>
+   - Excludes(A,B): <rule><disj><not><var>A</var></not><not><var>B</var></not></disj></rule>
+   - Every <rule> must contain exactly one formula tree. Do NOT place text directly inside <rule>, and do NOT place two sibling formula roots inside one <rule>.
    - Only add constraints that are directly stated or unambiguous.
 
 8) Description maintenance:
@@ -102,10 +114,13 @@ Step D: Integrate the delta by:
 Step E: Ensure the final model remains valid, deep, and non-duplicative.
 Step F: Output the full UPDATED FeatureIDE XML only.
 
-REFERENCE SPECIFICATION (USE AS SPEC; DO NOT ECHO VERBATIM):
----
-{{FEATURE_METAMODEL}}
----
+SEMANTIC WELL-FORMEDNESS RULES:
+- Exactly one root feature.
+- Every non-root feature has exactly one parent.
+- Feature names must be unique across the model.
+- The hierarchy must be acyclic.
+- Members of an OR/ALT group must be children of the same parent.
+- Every feature referenced in a constraint must exist in the model.
 
 XSD METAMODEL (VALIDATION CONTRACT):
 ---
