@@ -1,7 +1,7 @@
 # fame/config/schema.py
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -51,6 +51,7 @@ class LlmJudgeCfg:
     api_key_dir: Path = Path("api_keys")
     temperature: float = 0.2
     max_tokens: int = 2048
+    model_max_tokens: Dict[str, int] = field(default_factory=dict)
     timeout_s: int = 120
 
 
@@ -113,6 +114,9 @@ class NonRagISCfg:
     max_delta_chunks: int
     max_delta_chunk_chars: int
     temperature: float
+    retry_backoff_base_seconds: float
+    retry_backoff_cap_seconds: float
+    inter_iteration_sleep_seconds: float
 
 
 @dataclass(frozen=True)
@@ -123,6 +127,9 @@ class PipelinesCfg:
     ss_rgfm_prompt_path: Optional[Path]
     is_rgfm_initial_prompt_path: Optional[Path]
     is_rgfm_iter_prompt_path: Optional[Path]
+    is_rgfm_retry_backoff_base_seconds: float
+    is_rgfm_retry_backoff_cap_seconds: float
+    is_rgfm_inter_iteration_sleep_seconds: float
     ss_nonrag: NonRagSSCfg
     is_nonrag: NonRagISCfg
 
@@ -133,6 +140,7 @@ class OutputsCfg:
     save_context: bool
     save_meta: bool
     write_latest_pointer: bool
+    top_fm: int
 
 
 @dataclass(frozen=True)
@@ -157,6 +165,7 @@ class EvaluationCoverageCfg:
 @dataclass(frozen=True)
 class EvaluationCfg:
     coverage: EvaluationCoverageCfg
+    ground_truth_xml: Optional[Path]
 
 
 @dataclass(frozen=True)
@@ -230,6 +239,7 @@ def parse_config(doc: Dict[str, Any], repo_root: Path) -> FameConfig:
         api_key_dir=_as_path(base, str(judge.get("api_key_dir", "api_keys"))),
         temperature=float(judge.get("temperature", 0.2)),
         max_tokens=int(judge.get("max_tokens", 2048)),
+        model_max_tokens={str(k): int(v) for k, v in dict(judge.get("model_max_tokens", {})).items()},
         timeout_s=int(judge.get("timeout_s", 120)),
     )
 
@@ -309,15 +319,22 @@ def parse_config(doc: Dict[str, Any], repo_root: Path) -> FameConfig:
         max_delta_chunks=int(isnr_budget.get("max_delta_chunks", 50)),
         max_delta_chunk_chars=int(isnr_budget.get("max_delta_chunk_chars", 6000)),
         temperature=float(isnr.get("temperature", 0.2)),
+        retry_backoff_base_seconds=float(isnr.get("retry_backoff_base_seconds", 2.0)),
+        retry_backoff_cap_seconds=float(isnr.get("retry_backoff_cap_seconds", 60.0)),
+        inter_iteration_sleep_seconds=float(isnr.get("inter_iteration_sleep_seconds", 1.0)),
     )
 
+    isrgfm = pips.get("is_rgfm", {})
     pipelines_cfg = PipelinesCfg(
         ss_rgfm=ss_rgfm,
         ms_rgfm=ms_rgfm,
         is_rgfm=is_rgfm,
         ss_rgfm_prompt_path=_as_path(base, (pips.get("ss_rgfm") or {}).get("prompt_path", "")) if str((pips.get("ss_rgfm") or {}).get("prompt_path", "")).strip() else None,
-        is_rgfm_initial_prompt_path=_as_path(base, (pips.get("is_rgfm") or {}).get("initial_prompt_path", "")) if str((pips.get("is_rgfm") or {}).get("initial_prompt_path", "")).strip() else None,
-        is_rgfm_iter_prompt_path=_as_path(base, (pips.get("is_rgfm") or {}).get("iter_prompt_path", "")) if str((pips.get("is_rgfm") or {}).get("iter_prompt_path", "")).strip() else None,
+        is_rgfm_initial_prompt_path=_as_path(base, isrgfm.get("initial_prompt_path", "")) if str(isrgfm.get("initial_prompt_path", "")).strip() else None,
+        is_rgfm_iter_prompt_path=_as_path(base, isrgfm.get("iter_prompt_path", "")) if str(isrgfm.get("iter_prompt_path", "")).strip() else None,
+        is_rgfm_retry_backoff_base_seconds=float(isrgfm.get("retry_backoff_base_seconds", 2.0)),
+        is_rgfm_retry_backoff_cap_seconds=float(isrgfm.get("retry_backoff_cap_seconds", 60.0)),
+        is_rgfm_inter_iteration_sleep_seconds=float(isrgfm.get("inter_iteration_sleep_seconds", 1.0)),
         ss_nonrag=ss_nonrag_cfg,
         is_nonrag=is_nonrag_cfg,
     )
@@ -329,6 +346,7 @@ def parse_config(doc: Dict[str, Any], repo_root: Path) -> FameConfig:
         save_context=bool(out.get("save_context", True)),
         save_meta=bool(out.get("save_meta", True)),
         write_latest_pointer=bool(out.get("write_latest_pointer", True)),
+        top_fm=max(0, int(out.get("top_fm", 3))),
     )
 
     # Logging
@@ -352,7 +370,10 @@ def parse_config(doc: Dict[str, Any], repo_root: Path) -> FameConfig:
             top_k=int(cov_doc.get("top_k", 3)),
             feature_weight=float(cov_doc.get("feature_weight", 0.9)),
             parent_weight=float(cov_doc.get("parent_weight", 0.1)),
-        )
+        ),
+        ground_truth_xml=_as_path(base, str(eval_doc.get("ground_truth_xml", "")))
+        if str(eval_doc.get("ground_truth_xml", "")).strip()
+        else None,
     )
 
     return FameConfig(
