@@ -6,14 +6,54 @@ import os
 from pathlib import Path
 
 from fame.config.load import load_config
+from fame.evaluation.coverage import CoverageConfig
+from fame.evaluation.top_fm import TopFMConfig, rank_top_fms
 from fame.judge import create_judge_client
 from fame.nonrag.is_pipeline import ISNonRagConfig, run_is_nonrag
 from fame.nonrag.cli_utils import prompt_choice, load_key_file, default_high_level_features
 from fame.exceptions import MissingKeyError, UserMessageError, format_error
 from fame.loggers import get_logger, log_exception
+from fame.utils.dirs import build_paths
+
+
+def _resolve_model_max_tokens(judge_cfg, model: str) -> int:
+    return int(getattr(judge_cfg, "model_max_tokens", {}).get(model, judge_cfg.max_tokens))
+
+
+def _prompt_int(label: str, *, default: int, min_value: int = 1) -> int:
+    while True:
+        raw = input(f"{label} [{default}]: ").strip()
+        if not raw:
+            return default
+        try:
+            val = int(raw)
+        except ValueError:
+            print("Invalid integer. Try again.")
+            continue
+        if val < min_value:
+            print(f"Value must be >= {min_value}.")
+            continue
+        return val
+
+
+def _prompt_float(label: str, *, default: float, min_value: float = 0.0) -> float:
+    while True:
+        raw = input(f"{label} [{default}]: ").strip()
+        if not raw:
+            return default
+        try:
+            val = float(raw)
+        except ValueError:
+            print("Invalid number. Try again.")
+            continue
+        if val < min_value:
+            print(f"Value must be >= {min_value}.")
+            continue
+        return val
 
 
 def main() -> None:
+    cfg_yaml = load_config()
     ap = argparse.ArgumentParser(description="Run Iterated-Stage Non-RAG (IS-NonRAG)")
     ap.add_argument("--root-feature", default="")
     ap.add_argument("--domain", default="")
@@ -25,6 +65,12 @@ def main() -> None:
     ap.add_argument("--xsd-path", default="", help="Override XSD path (default: feature_model_featureide.xsd)")
     ap.add_argument("--feature-metamodel-path", default="", help="Override feature metamodel path")
     ap.add_argument("--repeats", type=int, default=1, help="How many runs to execute sequentially (default: 1).")
+    ap.add_argument("--max-retries", type=int, default=1, help="Retries per iteration/source if it fails (default: 1).")
+    ap.add_argument("--retry-backoff-base-seconds", type=float, default=cfg_yaml.pipelines.is_nonrag.retry_backoff_base_seconds, help="Base exponential backoff in seconds for 429/rate-limit retries.")
+    ap.add_argument("--retry-backoff-cap-seconds", type=float, default=cfg_yaml.pipelines.is_nonrag.retry_backoff_cap_seconds, help="Maximum exponential backoff in seconds for 429/rate-limit retries.")
+    ap.add_argument("--inter-iteration-sleep-seconds", type=float, default=cfg_yaml.pipelines.is_nonrag.inter_iteration_sleep_seconds, help="Fixed sleep in seconds between iterations.")
+    ap.add_argument("--gt-path", default="", help="Ground-truth XML used for top_fm ranking")
+    ap.add_argument("--top-fm", type=int, default=load_config().outputs.top_fm, help="Top valid FMs to copy per metric (default from fame.yaml)")
     args = ap.parse_args()
 
     interactive = args.interactive or not (args.root_feature and args.domain)
@@ -54,12 +100,14 @@ def main() -> None:
         else:
             model = prompt_choice(
                 "Select Proprietary LLM model",
-                ("gpt-4.1", "claude-opus-4-5", "gemini-3-pro-preview"),
+                ("gpt-4.1", "o3", "claude-opus-4-5", "gemini-3.1-pro-preview", "gemini-2.5-flash"),
             )
             provider_map = {
                 "gpt-4.1": ("openai", "OPENAI_API_KEY"),
+                "o3": ("openai", "OPENAI_API_KEY"),
                 "claude-opus-4-5": ("anthropic", "ANTHROPIC_API_KEY"),
-                "gemini-3-pro-preview": ("gemini", "GEMINI_API_KEY"),
+                "gemini-3.1-pro-preview": ("gemini", "GEMINI_API_KEY"),
+                "gemini-2.5-flash": ("gemini", "GEMINI_API_KEY"),
             }
             provider, env_var = provider_map[model]
             judge_cfg = load_config().llm_judge
@@ -69,13 +117,15 @@ def main() -> None:
                 raise MissingKeyError(env_var, str(key_file))
             os.environ[env_var] = key
 
+            resolved_max_tokens = _resolve_model_max_tokens(judge_cfg, model)
+            print(f"Resolved max tokens for {model}: {resolved_max_tokens}")
             llm_client = create_judge_client(
                 provider=provider,
                 model=model,
                 base_url=judge_cfg.base_url,
                 api_key_env=env_var,
                 temperature=judge_cfg.temperature,
-                max_tokens=judge_cfg.max_tokens,
+                max_tokens=resolved_max_tokens,
                 timeout_s=judge_cfg.timeout_s,
             )
 
@@ -99,10 +149,15 @@ def main() -> None:
         else:
             high_level_features = None
         args.high_level_features = high_level_features
+        args.repeats = _prompt_int("Number of runs to execute sequentially", default=max(1, args.repeats), min_value=1)
+        args.max_retries = _prompt_int("Max retries per iteration/source", default=max(1, args.max_retries), min_value=1)
+        args.retry_backoff_base_seconds = _prompt_float("Base retry backoff seconds", default=max(0.0, args.retry_backoff_base_seconds), min_value=0.0)
+        args.retry_backoff_cap_seconds = _prompt_float("Retry backoff cap seconds", default=max(args.retry_backoff_base_seconds, args.retry_backoff_cap_seconds), min_value=0.0)
+        args.inter_iteration_sleep_seconds = _prompt_float("Fixed sleep between iterations (seconds)", default=max(0.0, args.inter_iteration_sleep_seconds), min_value=0.0)
 
     chunks_dir = Path(args.chunks_dir).expanduser().resolve() if args.chunks_dir else None
 
-    cfg_default = load_config().pipelines.is_nonrag
+    cfg_default = cfg_yaml.pipelines.is_nonrag
 
     cfg = ISNonRagConfig(
         root_feature=args.root_feature,
@@ -116,6 +171,10 @@ def main() -> None:
         iter_prompt_path=cfg_default.iter_prompt_path,
         xsd_path=Path(args.xsd_path).expanduser().resolve() if args.xsd_path else None,
         feature_metamodel_path=Path(args.feature_metamodel_path).expanduser().resolve() if args.feature_metamodel_path else None,
+        max_retries_per_iteration=args.max_retries,
+        retry_backoff_base_seconds=args.retry_backoff_base_seconds,
+        retry_backoff_cap_seconds=args.retry_backoff_cap_seconds,
+        inter_iteration_sleep_seconds=args.inter_iteration_sleep_seconds,
     )
 
     model_name = getattr(llm_client, "model", None) or os.getenv("OLLAMA_LLM_MODEL", "ollama-default")
@@ -126,6 +185,9 @@ def main() -> None:
     print(f"Chunks dir     : {chunks_dir or '(default)'}")
     print(f"Max delta chars: {cfg.max_delta_chars}")
     print(f"Max delta chunks: {cfg.max_delta_chunks}")
+    print(f"Iter retries   : {cfg.max_retries_per_iteration}")
+    print(f"Retry backoff  : base={cfg.retry_backoff_base_seconds}s cap={cfg.retry_backoff_cap_seconds}s")
+    print(f"Iter sleep     : {cfg.inter_iteration_sleep_seconds}s")
     print("---------------------------------------------------")
     print("Stage 1: Build configuration")
     print("Stage 2: Run IS-NonRAG pipeline (iterative; may take a while)...")
@@ -141,6 +203,31 @@ def main() -> None:
 
     if args.repeats > 1:
         print(f"Completed {args.repeats} runs.")
+
+    gt_path = Path(args.gt_path).expanduser().resolve() if args.gt_path else cfg_yaml.evaluation.ground_truth_xml
+    if args.top_fm > 0 and gt_path:
+        paths = build_paths()
+        xsd_path = cfg.xsd_path or (paths.specifications / "feature_model_featureide.xsd")
+        manifest = rank_top_fms(
+            candidates=results,
+            pipeline_root=paths.non_is_fm.parent,
+            cfg=TopFMConfig(
+                top_n=args.top_fm,
+                gt_xml=gt_path,
+                xsd_path=xsd_path,
+                coverage=CoverageConfig(
+                    model_name=cfg_yaml.evaluation.coverage.model_name,
+                    similarity_threshold=cfg_yaml.evaluation.coverage.similarity_threshold,
+                    top_k=cfg_yaml.evaluation.coverage.top_k,
+                    feature_weight=cfg_yaml.evaluation.coverage.feature_weight,
+                    parent_weight=cfg_yaml.evaluation.coverage.parent_weight,
+                ),
+            ),
+        )
+        if manifest:
+            print(f"Top-FM ranking written to: {Path(manifest['summary_table']).parent}")
+    elif args.top_fm > 0:
+        print("Top-FM ranking skipped: no ground-truth XML configured or provided.")
 
 
 if __name__ == "__main__":
