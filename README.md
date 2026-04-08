@@ -1,70 +1,130 @@
 # Feature Argumentation Modelling Environment (FAME)
 
-FAME builds feature models from documents using Retrieval‑Augmented (RAG) and Non‑RAG pipelines.
+FAME builds FeatureIDE-compatible feature models from textual artefacts using four LLM pipeline families:
 
-## 1) Initial setup (once)
-- See [SETUP.md](SETUP.md) for details.
-- TL;DR (macOS/Linux):
-  ```bash
-  ./scripts/initial_setup.sh
-  ```
+- `ss_nonrag` — single-stage prompt-based context conditioning
+- `is_nonrag` — iterative prompt-based context conditioning
+- `ss_rag` — single-stage retrieval-augmented generation
+- `is_rag` — iterative retrieval-augmented generation
 
-## 2) End‑to‑end launcher (recommended)
-Runs optional preprocessing, then lets you pick RAG / Non‑RAG and SS / IS variants.
+For the paper-specific reproduction workflow, see:
+
+- `MODELS_2026_EXPERIMENT.md`
+
+## 1) Initial setup
+
+- See `SETUP.md` for full setup details.
+- macOS/Linux quick start:
 
 ```bash
-PYTHONPATH=$(pwd) .venv/bin/python scripts/run_fame.py
+./scripts/initial_setup.sh
 ```
 
-## 3) Evaluation helpers
-- Coverage (semantic recall vs ground truth):
-  ```bash
-  PYTHONPATH=$(pwd) .venv/bin/python scripts/coverage_fm.py \
-    --gt data/ground_truth/federation.xml \
-    --pred results/rag/ss-rgfm/fm/your_model.xml
-  ```
-- Conformance/XSD check:
-  ```bash
-  PYTHONPATH=$(pwd) .venv/bin/python scripts/check_wellformed.py \
-    --xml results/rag/ss-rgfm/fm/your_model.xml \
-    --xsd prompts/specifications/feature_model_featureide.xsd
-  ```
+For stable runs, keep the Python environment outside OneDrive. A typical setup is:
 
-## 4) Run individual steps
-All commands assume the venv is active (`source .venv/bin/activate`) and `PYTHONPATH=$(pwd)`.
+```bash
+python3 -m venv $HOME/.venvs/fame
+source $HOME/.venvs/fame/bin/activate
+PYTHONNOUSERSITE=1 python -m pip install --upgrade pip
+PYTHONNOUSERSITE=1 python -m pip install -r config/requirements.txt
+```
+
+All commands below assume:
+
+```bash
+source $HOME/.venvs/fame/bin/activate
+export PYTHONNOUSERSITE=1
+export PYTHONPATH=$(pwd)
+```
+
+## 2) End-to-end launcher
+
+Runs optional preprocessing, then lets you pick RAG / Non-RAG and SS / IS variants.
+
+```bash
+python scripts/run_fame.py
+```
+
+## 3) Run individual steps
 
 ### Preprocessing (ingest + vectorize)
+
 ```bash
-PYTHONPATH=$(pwd) .venv/bin/python scripts/preprocessing_for_rag.py
+python scripts/preprocessing_for_rag.py
 ```
 
-### Single‑Stage Non‑RAG (SS‑NonRAG)
+### Single-stage Non-RAG
+
 ```bash
-PYTHONPATH=$(pwd) .venv/bin/python scripts/run_ss_nonrag.py --interactive
+python scripts/run_ss_nonrag.py --interactive
 ```
 
-### Iterative Non‑RAG (IS‑NonRAG)
+### Iterative Non-RAG
+
 ```bash
-PYTHONPATH=$(pwd) .venv/bin/python scripts/run_is_nonrag.py --interactive
+python scripts/run_is_nonrag.py --interactive
 ```
 
-### Single‑Stage RAG (SS‑RGFM)
+### Single-stage RAG
+
 ```bash
-PYTHONPATH=$(pwd) .venv/bin/python scripts/run_ss_rag.py --interactive
+python scripts/run_ss_rag.py --interactive
 ```
 
-### Iterative RAG (IS‑RGFM)
+### Iterative RAG
+
 ```bash
-PYTHONPATH=$(pwd) .venv/bin/python scripts/run_is_rag.py --interactive
+python scripts/run_is_rag.py --interactive
 ```
 
-## 5) Ollama host hints
-- Embeddings typically run on a local Ollama host: `OLLAMA_EMBED_HOST=http://127.0.0.1:11434`.
-- LLM generation can use cloud: `OLLAMA_LLM_HOST=https://ollama.com`.
-Set these before running preprocessing/pipelines if you split hosts.
+## 4) Evaluation helpers
 
-## 6) Logs & outputs
-- Results: `results/` (FM XMLs, prompts, stats, etc.)
-- Logs: `results/logs/fame.log` (structured JSON)
+Coverage for a single FM:
 
-For more setup detail, read [SETUP.md](SETUP.md).
+```bash
+python scripts/coverage_fm.py \
+  --gt data/ground_truth/federation.xml \
+  --pred results/rag/ss-rgfm/fm/your_model.xml
+```
+
+Well-formedness / XSD conformance:
+
+```bash
+python scripts/check_wellformed.py \
+  --xml results/rag/ss-rgfm/fm/your_model.xml \
+  --xsd prompts/specifications/feature_model_featureide.xsd
+```
+
+Duplicate feature names:
+
+```bash
+python scripts/check_feature_duplicates.py \
+  --xml results/rag/ss-rgfm/fm/your_model.xml
+```
+
+## 5) Outputs and directories
+
+Main output locations:
+
+- generated FMs: `results/**/fm/`
+- pipeline reports / metadata: `results/**/reports/`
+- top-ranked FMs: `results/**/top_fm/`
+- overall analysis datasets: `results/analysis/`
+- curated final FMs: `final_fm/`
+
+## 6) Environment notes
+
+- Chroma database defaults to:
+  - `data/chroma_db`
+- Ollama embedding default:
+  - `OLLAMA_EMBED_MODEL=nomic-embed-text`
+- evaluation embedding default:
+  - `all-mpnet-base-v2`
+
+If the repository is stored under OneDrive, keep at least these outside OneDrive:
+
+- Python virtual environments
+- Chroma persistent storage
+- temporary runtime / analysis copies
+
+For more setup detail, read `SETUP.md`.
