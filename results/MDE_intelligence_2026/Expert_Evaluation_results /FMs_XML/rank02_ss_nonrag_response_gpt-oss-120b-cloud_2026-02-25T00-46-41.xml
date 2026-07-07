@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<featureModel>
+  <properties/>
+  <struct>
+    <feature name="Model_Federation">
+      <description>Model Federation integrates heterogeneous models, reifies their dependencies, and provides mechanisms for consistent evolution and security management. Trace: [Article_11 §1]</description>
+      <and name="High_Level_Dimensions">
+        <feature name="Structural" abstract="true">
+          <description>Covers the artefacts, links, and structural features of Model Federation, including model composition, graph structure, formalism, domain, and technological context. Trace: [Article_11 §2]</description>
+          <and name="Structural_Categories">
+            <feature name="Artefacts" abstract="true">
+              <description>Artifacts that constitute the federation such as models, repositories and connectors. Trace: [Article_11 §4]</description>
+              <or name="Artefact_Types">
+                <feature name="Model_Registry" mandatory="true">
+                  <description>Stores all models and related artifacts in a versioned repository. Trace: [Article_11 §4]</description>
+                </feature>
+                <feature name="Sandbox">
+                  <description>Local copy of the repository for individual modelers to work offline. Trace: [Article_11 §5]</description>
+                </feature>
+                <feature name="Connector">
+                  <description>Software component that links a specific DSML model to the federation. Trace: [Article_11 §6]</description>
+                </feature>
+                <feature name="Virtual_Model">
+                  <description>Container for FlexoConcept instances representing federated concepts. Trace: [Article_13 §3]</description>
+                </feature>
+                <feature name="Flexo_Concept">
+                  <description>Abstract representation of a reified dependency between modelling elements. Trace: [Article_13 §4]</description>
+                </feature>
+                <feature name="Model_Slot">
+                  <description>Symbolic link to an external model resource used in the concept space. Trace: [Article_13 §5]</description>
+                </feature>
+                <feature name="Type_Aware_Model_Slot">
+                  <description>Specialized ModelSlot that ensures the linked resource conforms to a given metamodel. Trace: [Article_13 §5]</description>
+                </feature>
+              </or>
+            </feature>
+            <feature name="Links" abstract="true">
+              <description>Defines reified dependencies and associated security rules. Trace: [Article_11 §3]</description>
+              <or name="Link_Types">
+                <feature name="Dependency_Link">
+                  <description>Represents a data flow from an output attribute of one model to an input attribute of another. Trace: [Article_11 §8]</description>
+                </feature>
+                <feature name="Security_Rule_Link">
+                  <description>Attaches a security rule to a dependency link for evaluation upon changes. Trace: [Article_11 §14]</description>
+                </feature>
+              </or>
+            </feature>
+            <feature name="Formalism" abstract="true">
+              <description>Supported modeling languages and metamodels. Trace: [Article_11 §2]</description>
+              <or name="Supported_Formalisms">
+                <feature name="UML">
+                  <description>General‑purpose modeling language used for structural models. Trace: [Article_11 §24]</description>
+                </feature>
+                <feature name="SysML">
+                  <description>Extension of UML for systems engineering, used for requirements models. Trace: [Article_11 §24]</description>
+                </feature>
+                <feature name="BPMN">
+                  <description>Business Process Modeling Notation used for workflow models. Trace: [Article_11 §24]</description>
+                </feature>
+                <feature name="EMF">
+                  <description>Eclipse Modeling Framework used as the underlying technology for models. Trace: [Article_13 §3]</description>
+                </feature>
+                <feature name="OWL">
+                  <description>Web Ontology Language used for semantic annotations. Trace: [Article_13 §5]</description>
+                </feature>
+              </or>
+            </feature>
+            <feature name="Domain" abstract="true">
+              <description>Application domains addressed by the federation. Trace: [Article_11 §1]</description>
+              <or name="Domain_Types">
+                <feature name="Security_By_Design">
+                  <description>Focus on integrating security requirements from early development phases. Trace: [Article_11 §1]</description>
+                </feature>
+                <feature name="Multi_Modeling">
+                  <description>Handling of heterogeneous models in a coordinated environment. Trace: [Article_11 §2]</description>
+                </feature>
+              </or>
+            </feature>
+            <feature name="Technological_Context" abstract="true">
+              <description>Infrastructure and adapters enabling federation across tools. Trace: [Article_13 §2]</description>
+              <or name="Tech_Components">
+                <feature name="Version_Control_System">
+                  <description>Manages versions of all artifacts, e.g., Subversion. Trace: [Article_11 §38]</description>
+                </feature>
+                <feature name="Technology_Adapter">
+                  <description>Adapter that provides ModelSlots for a specific technology (e.g., Excel, Java). Trace: [Article_13 §6]</description>
+                </feature>
+              </or>
+            </feature>
+          </and>
+        </feature>
+        <feature name="Operational" abstract="true">
+          <description>Processes and operations that manipulate federated models. Trace: [Article_11 §3]</description>
+          <and name="Operational_Categories">
+            <feature name="Process" abstract="true">
+              <description>High‑level workflows supported by the federation. Trace: [Article_11 §3]</description>
+              <or name="Processes">
+                <feature name="Design_Process">
+                  <description>Modelers create and annotate individual DSML models. Trace: [Article_11 §13]</description>
+                </feature>
+                <feature name="Change_Detection">
+                  <description>Detects modifications in any participating model. Trace: [Article_11 §15]</description>
+                </feature>
+                <feature name="Change_Analysis">
+                  <description>Analyzes impact of detected changes via reified links and security rules. Trace: [Article_11 §16]</description>
+                </feature>
+                <feature name="Consistency_Check">
+                  <description>Evaluates attribute, constraint, and attribute‑model consistency. Trace: [Article_11 §32]</description>
+                </feature>
+                <feature name="Execution_Planning">
+                  <description>Computes an ordering of model execution respecting dependencies. Trace: [Article_11 §41]</description>
+                </feature>
+                <feature name="Rollback">
+                  <description>Restores previous versions of models and tools when inconsistencies arise. Trace: [Article_11 §10]</description>
+                </feature>
+              </or>
+            </feature>
+            <feature name="Operation" abstract="true">
+              <description>Atomic actions performed on models or attributes. Trace: [Article_11 §4]</description>
+              <or name="Operations">
+                <feature name="Data_Exchange">
+                  <description>Reading and writing of attribute values between models. Trace: [Article_11 §26]</description>
+                </feature>
+                <feature name="Notification">
+                  <description>Message sent to models when relevant events occur (e.g., constraint violation). Trace: [Article_11 §23]</description>
+                </feature>
+                <feature name="Synchronization">
+                  <description>Updates sandboxes with the latest repository state. Trace: [Article_11 §25]</description>
+                </feature>
+                <feature name="Version_Management">
+                  <description>Handles multiple versions of models and tools. Trace: [Article_11 §9]</description>
+                </feature>
+              </or>
+            </feature>
+            <feature name="Trigger" abstract="true">
+              <description>Conditions that automatically invoke operations. Trace: [Article_11 §4]</description>
+              <or name="Triggers">
+                <feature name="Model_Change_Trigger">
+                  <description>Fires when a model is edited, initiating propagation. Trace: [Article_11 §15]</description>
+                </feature>
+                <feature name="Security_Rule_Trigger">
+                  <description>Evaluates attached security rules after a change propagates. Trace: [Article_11 §14]</description>
+                </feature>
+              </or>
+            </feature>
+          </and>
+        </feature>
+        <feature name="Intentional" abstract="true">
+          <description>Addresses the objectives and goals of Model Federation, such as traceability, consistency assurance, transformation management, composition, and conceptual elicitation. Trace: [Article_11 §1]</description>
+          <and name="Intentional_Categories">
+            <feature name="Objective" abstract="true">
+              <description>High‑level purposes of the federation. Trace: [Article_11 §1]</description>
+              <or name="Objectives">
+                <feature name="Maintain_Consistency">
+                  <description>Ensure that all models stay synchronized and constraints are respected. Trace: [Article_11 §5]</description>
+                </feature>
+                <feature name="Support_Secure_Evolution">
+                  <description>Allow models to evolve while preserving security properties. Trace: [Article_11 §2]</description>
+                </feature>
+                <feature name="Enable_Tool_Agnosticism">
+                  <description>Allow heterogeneous DSMLs and tools to participate without a common language. Trace: [Article_11 §7]</description>
+                </feature>
+                <feature name="Provide_Traceability">
+                  <description>Link changes in one model to affected elements in others. Trace: [Article_11 §15]</description>
+                </feature>
+              </or>
+            </feature>
+            <feature name="Goal" abstract="true">
+              <description>Specific measurable targets derived from the objectives. Trace: [Article_11 §5]</description>
+              <or name="Goals">
+                <feature name="Attribute_Consistency">
+                  <description>All attributes are up‑to‑date with respect to their owners. Trace: [Article_11 §32]</description>
+                </feature>
+                <feature name="Constraint_Consistency">
+                  <description>No attribute violates model‑specific constraints. Trace: [Article_11 §32]</description>
+                </feature>
+                <feature name="Attribute_Model_Consistency">
+                  <description>Model edits precede any output attribute writes. Trace: [Article_11 §32]</description>
+                </feature>
+                <feature name="Security_Consistency">
+                  <description>All security rules evaluate to true after change propagation. Trace: [Article_11 §14]</description>
+                </feature>
+              </or>
+            </feature>
+            <feature name="Intention" abstract="true">
+              <description>Purpose of a particular federation instance (e.g., synchronization, security monitoring). Trace: [Article_11 §3]</description>
+              <or name="Intentions">
+                <feature name="Reify_Dependencies">
+                  <description>Make inter‑model data flows explicit in the federation model. Trace: [Article_11 §3]</description>
+                </feature>
+                <feature name="Coordinate_Behaviors">
+                  <description>Orchestrate execution of models according to the computed plan. Trace: [Article_11 §41]</description>
+                </feature>
+              </or>
+            </feature>
+          </and>
+        </feature>
+      </and>
+    </feature>
+  </struct>
+  <constraints/>
+  <calculations/>
+  <comments/>
+  <featureOrder/>
+</featureModel>

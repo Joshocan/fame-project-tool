@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<featureModel>
+  <struct>
+    <and name="Model_Federation" mandatory="true">
+      <description>Root feature representing the Model Federation approach for integrating heterogeneous models and managing their evolution, especially with security concerns. Trace: [Article_11 §III]</description>
+
+      <!-- Structural Dimension -->
+      <and name="Structural" abstract="true">
+        <description>Structural aspects of Model Federation covering artifacts, links, graph structure, formalism, domain and technological context. Trace: [Article_11 §III.A]</description>
+
+        <or name="Artifacts">
+          <description>Concrete artifacts stored and managed in the federation. Trace: [Article_11 §III.A.1]</description>
+          <feature name="Model"><description>Individual domain‑specific model participating in the federation. Trace: [Article_11 §III.A.1]</description></feature>
+          <feature name="Model_Registry"><description>Registry that enumerates the models belonging to a federation. Trace: [Article_11 §III.A.1]</description></feature>
+          <feature name="Connector"><description>Software component that connects a DSML model to the federation, handling attribute read/write. Trace: [Article_11 §III.A.1]</description></feature>
+          <feature name="Multi_Model_Manager"><description>Tool assisting modelers to integrate models, invoke connectors, and manage consistency. Trace: [Article_11 §III.A.1]</description></feature>
+          <feature name="Execution_Automation_Engine"><description>Component that determines execution order and orchestrates model execution to achieve consistency. Trace: [Article_11 §III.A.1]</description></feature>
+          <feature name="Version_Control_System"><description>System (e.g., Subversion) that stores all federation artifacts under version control. Trace: [Article_11 §III.A.1]</description></feature>
+          <feature name="Sandbox"><description>Local copy of the repository allowing modelers to work concurrently without interfering with others. Trace: [Article_11 §III.A.1]</description></feature>
+        </or>
+
+        <or name="Links">
+          <description>Explicit relationships between model elements across different models. Trace: [Article_11 §III.A.2]</description>
+          <feature name="Dependency_Link"><description>Reified dependency between two model elements, possibly carrying security rules. Trace: [Article_11 §III.A.2]</description></feature>
+          <feature name="Data_Exchange_Link"><description>Link representing attribute flow from the output of one model to the input of another. Trace: [Article_11 §III.A.2]</description></feature>
+          <feature name="Security_Rule_Link"><description>Link annotated with a security rule that is evaluated upon changes. Trace: [Article_11 §III.A.2]</description></feature>
+        </or>
+
+        <or name="Graph_Structure">
+          <description>Graph representations used to reason about dependencies and execution. Trace: [Article_11 §III.A.3]</description>
+          <feature name="Dependency_Graph"><description>Directed graph where vertices are models and edges are dependency links. Trace: [Article_11 §III.A.3]</description></feature>
+          <feature name="Execution_Plan_Graph"><description>Ordered graph derived from the dependency graph to drive change propagation. Trace: [Article_11 §III.A.3]</description></feature>
+        </or>
+
+        <or name="Formalism">
+          <description>Modeling constructs provided by the OpenFlexo infrastructure. Trace: [Article_13 §3]</description>
+          <feature name="FlexoConcept"><description>Core abstraction representing an n‑ary relationship among modelling elements, used to define federated concepts. Trace: [Article_13 §3.1]</description></feature>
+          <feature name="VirtualModel"><description>Container of FlexoConcept instances that can be serialized back to the information space. Trace: [Article_13 §3.1]</description></feature>
+          <feature name="ModelSlot"><description>Adapter exposing a concrete model (e.g., EMF, XML) to the concept space. Trace: [Article_13 §3.2]</description></feature>
+          <feature name="TechnologyAdapter"><description>Component that implements a ModelSlot for a specific technology. Trace: [Article_13 §3.2]</description></feature>
+        </or>
+
+        <or name="Domain">
+          <description>Supported domain‑specific modeling languages. Trace: [Article_11 §III.A.1]</description>
+          <feature name="UML"><description>Unified Modeling Language used for structural specifications. Trace: [Article_11 §III.A.1]</description></feature>
+          <feature name="SysML"><description>Systems Modeling Language used for requirements and safety models. Trace: [Article_11 §III.A.1]</description></feature>
+          <feature name="BPMN"><description>Business Process Model and Notation used for workflow specifications. Trace: [Article_11 §III.A.1]</description></feature>
+          <feature name="Ptolemy_II"><description>Tool for algorithmic models and simulations. Trace: [Article_11 §III.A.1]</description></feature>
+          <feature name="Excel"><description>Spreadsheet used for analytical models such as reliability. Trace: [Article_11 §III.A.1]</description></feature>
+        </or>
+
+        <or name="Technological_Context">
+          <description>Spaces defined by the federation infrastructure. Trace: [Article_13 §3]</description>
+          <feature name="Information_Space"><description>Repository of heterogeneous model files and resources. Trace: [Article_13 §3]</description></feature>
+          <feature name="Concept_Space"><description>Space where federated concepts (FlexoConcepts) are defined and related. Trace: [Article_13 §3]</description></feature>
+          <feature name="Design_Space"><description>Space where designers interact with tools and visualisations. Trace: [Article_13 §3]</description></feature>
+        </or>
+      </and>
+
+      <!-- Operational Dimension -->
+      <and name="Operational" abstract="true">
+        <description>Operational mechanisms for querying, synchronising, validating and managing federated models. Trace: [Article_11 §III.B]</description>
+
+        <or name="Querying">
+          <description>Operations to retrieve information from the federation. Trace: [Article_11 §III.B.1]</description>
+          <feature name="Dependency_Query"><description>Query that returns the set of dependencies for a given model element. Trace: [Article_11 §III.B.1]</description></feature>
+          <feature name="Consistency_Query"><description>Query that checks whether the current state satisfies all consistency properties. Trace: [Article_11 §III.B.1]</description></feature>
+        </or>
+
+        <or name="Synchronisation">
+          <description>Mechanisms to propagate changes across models. Trace: [Article_11 §III.B.2]</description>
+          <feature name="Change_Propagation"><description>Process that traverses the execution plan graph to update dependent models. Trace: [Article_11 §III.B.2]</description></feature>
+          <feature name="Attribute_Synchronisation"><description>Ensures that attribute values written by one model are visible to readers after propagation. Trace: [Article_11 §III.B.2]</description></feature>
+        </or>
+
+        <or name="Validation">
+          <description>Checks performed to guarantee model and federation correctness. Trace: [Article_11 §III.B.3]</description>
+          <feature name="Consistency_Checks"><description>Verification of attribute, constraint and attribute‑model consistency as defined by NAOMI. Trace: [Article_11 §III.B.3]</description></feature>
+          <feature name="Constraint_Evaluation"><description>Evaluation of security constraints attached to links after a change. Trace: [Article_11 §III.B.3]</description></feature>
+        </or>
+
+        <or name="Management">
+          <description>Support for versioning, rollback and notifications. Trace: [Article_11 §III.B.4]</description>
+          <feature name="Version_Management"><description>Use of the version control system to keep historic versions of models and federation artifacts. Trace: [Article_11 §III.B.4]</description></feature>
+          <feature name="Rollback"><description>Capability to revert models and attributes to a previous consistent state. Trace: [Article_11 §III.B.4]</description></feature>
+          <feature name="Notification_Management"><description>Generation and delivery of notifications when constraints are violated or changes occur. Trace: [Article_11 §III.B.4]</description></feature>
+        </or>
+      </and>
+
+      <!-- Intentional Dimension -->
+      <and name="Intentional" abstract="true">
+        <description>Intentional goals such as traceability, consistency assurance, transformation management and composition. Trace: [Article_11 §III.C]</description>
+
+        <or name="Traceability">
+          <description>Facilities to track the impact of changes and the origin of security violations. Trace: [Article_11 §III.C.1]</description>
+          <feature name="Change_Traceability"><description>Linking a model change to the set of dependent elements and evaluated security rules. Trace: [Article_11 §III.C.1]</description></feature>
+          <feature name="Rule_Traceability"><description>Recording which security rule caused a violation during analysis. Trace: [Article_11 §III.C.1]</description></feature>
+        </or>
+
+        <or name="Consistency_Assurance">
+          <description>Explicit consistency types defined for the federation. Trace: [Article_11 §III.C.2]</description>
+          <feature name="Attribute_Consistency"><description>All attributes have been updated by their owner since the last input change. Trace: [Article_11 §III.C.2]</description></feature>
+          <feature name="Constraint_Consistency"><description>No attribute value violates model‑specific constraints. Trace: [Article_11 §III.C.2]</description></feature>
+          <feature name="Attribute_Model_Consistency"><description>Model edit timestamps precede timestamps of their output attributes. Trace: [Article_11 §III.C.2]</description></feature>
+          <feature name="NAOMI_Consistency"><description>Combination of the three consistency types, guaranteeing a steady state. Trace: [Article_11 §III.C.2]</description></feature>
+        </or>
+
+        <or name="Transformation_Management">
+          <description>Handling of security‑oriented transformations within the federation. Trace: [Article_11 §III.C.3]</description>
+          <feature name="Security_Rule_Evaluation"><description>Execution of FML‑defined predicates attached to Security_Rule_Link when a change occurs. Trace: [Article_11 §III.C.3]</description></feature>
+          <feature name="Model_Transformation"><description>Use of adapters to transform model representations while preserving security annotations. Trace: [Article_11 §III.C.3]</description></feature>
+        </or>
+
+        <or name="Composition">
+          <description>Mechanisms to compose multiple models into a coherent federation. Trace: [Article_11 §III.C.4]</description>
+          <feature name="Model_Composition"><description>Definition of a VirtualModel that aggregates several FlexoConcepts representing different DSML models. Trace: [Article_11 §III.C.4]</description></feature>
+          <feature name="Federation_Composition"><description>Combining several VirtualModels to build hierarchical federations. Trace: [Article_11 §III.C.4]</description></feature>
+        </or>
+
+        <or name="Conceptual_Elicitation">
+          <description>Deriving dependencies and security requirements from heterogeneous models. Trace: [Article_11 §III.C.5]</description>
+          <feature name="Dependency_Elicitation"><description>Manual or tool‑supported identification of inter‑model dependencies. Trace: [Article_11 §III.C.5]</description></feature>
+          <feature name="Security_Requirement_Elicitation"><description>Specification of security rules attached to links based on security analysis. Trace: [Article_11 §III.C.5]</description></feature>
+        </or>
+      </and>
+    </and>
+  </struct>
+  <constraints/>
+</featureModel>

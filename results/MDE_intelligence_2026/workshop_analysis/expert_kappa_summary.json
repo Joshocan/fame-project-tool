@@ -1,0 +1,8 @@
+{
+  "n_common_items": 14,
+  "relevance_kappa": 1.0,
+  "feature_correctness_weighted_kappa": -0.14379084967320255,
+  "structural_quality_weighted_kappa": 0.3494949494949495,
+  "constraint_validity_weighted_kappa": 0.5714285714285714,
+  "overall_score_weighted_kappa": 0.22543352601156064
+}

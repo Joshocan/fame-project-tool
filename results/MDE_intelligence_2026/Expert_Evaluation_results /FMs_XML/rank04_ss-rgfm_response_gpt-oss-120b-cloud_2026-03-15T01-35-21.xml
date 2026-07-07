@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<featureModel>
+  <struct>
+    <feature name="Model_Federation">
+      <description>Root feature representing the Model Federation approach that integrates heterogeneous models, links, and processes across domains and technologies.</description>
+      <feature name="Structural" abstract="true">
+        <description>Structural dimension covering artefacts, links, formalisms, domains, technologies, and metamodels involved in Model Federation.</description>
+        <feature name="Artefacts" abstract="true">
+          <description>Group of concrete modelling artefacts used in the federation.</description>
+          <feature name="Software_Code_Repository" mandatory="false">
+            <description>Software code is stored and collaboratively developed using GitHub as a repository. Trace: [Article_5 §Chunk_127]</description>
+          </feature>
+          <feature name="ROS_Protocol_Files" mandatory="false">
+            <description>Interfaces are modelled as ROS protocol files containing attribute types and names. Trace: [Article_5 §Chunk_127]</description>
+          </feature>
+          <feature name="Visio_UML_Diagrams" mandatory="false">
+            <description>Mechatronics engineers use Visio‑based UML diagrams to model hardware connections and actions. Trace: [Article_5 §Chunk_127]</description>
+          </feature>
+          <feature name="Matlab_Algorithms" mandatory="false">
+            <description>Algorithms are defined in Matlab to support analysis and optimisation tasks. Trace: [Article_13 §Chunk_25]</description>
+          </feature>
+          <feature name="Business_Process_Models" mandatory="false">
+            <description>Business process models are employed to describe tool‑chain workflows. Trace: [Article_3 §Chunk_57]</description>
+          </feature>
+          <feature name="DSML_Models" mandatory="false">
+            <description>Domain‑specific modelling languages (DSML) are used to capture specialised concepts. Trace: [Article_1 §Chunk_54]</description>
+          </feature>
+          <feature name="Model_Repository" mandatory="false">
+            <description>A central repository stores models in their native forms and provides versioning. Trace: [Article_1 §Chunk_54]</description>
+          </feature>
+        </feature>
+        <feature name="Formalism" abstract="true">
+          <description>Set of modelling formalisms that can be federated.</description>
+          <or name="Formalism_Selection" min="0" max="8">
+            <feature name="Queueing_Networks" mandatory="false">
+              <description>Queueing network formalism for performance analysis. Trace: [Article_9 §Chunk_27]</description>
+            </feature>
+            <feature name="Stochastic_Petri_Nets" mandatory="false">
+              <description>Stochastic Petri net formalism for concurrent system modelling. Trace: [Article_9 §Chunk_27]</description>
+            </feature>
+            <feature name="Stochastic_Process_Algebras" mandatory="false">
+              <description>Stochastic process algebra formalism for behavioural description. Trace: [Article_9 §Chunk_27]</description>
+            </feature>
+            <feature name="Markov_Chains" mandatory="false">
+              <description>Markov chain formalism for probabilistic state analysis. Trace: [Article_9 §Chunk_27]</description>
+            </feature>
+            <feature name="Fault_Trees" mandatory="false">
+              <description>Fault tree formalism for reliability assessment. Trace: [Article_9 §Chunk_27]</description>
+            </feature>
+            <feature name="Probabilistic_Time_Automata" mandatory="false">
+              <description>Probabilistic timed automata formalism for real‑time stochastic systems. Trace: [Article_9 §Chunk_27]</description>
+            </feature>
+            <feature name="Formalism_Transformation_Graph" mandatory="false">
+              <description>The FTG captures formalisms as nodes and their transformation links. Trace: [Article_4 §Chunk_15]</description>
+            </feature>
+            <feature name="Process_Model" mandatory="false">
+              <description>The PM defines the ordered execution of operations on models. Trace: [Article_4 §Chunk_15]</description>
+            </feature>
+          </or>
+        </feature>
+        <feature name="Links" abstract="true">
+          <description>Types of links that connect artefacts and models within the federation.</description>
+          <feature name="Consistency_Links" mandatory="false">
+            <description>Links that capture semantic consistency relations between model elements. Trace: [Article_13 §Chunk_25]</description>
+          </feature>
+          <feature name="Traceability_Links" mandatory="false">
+            <description>Links that enable cross‑model traceability of requirements and design decisions. Trace: [Article_9 §Chunk_26]</description>
+          </feature>
+          <feature name="Transformation_Links" mandatory="false">
+            <description>Links that represent model transformation mappings defined by view types. Trace: [Article_2 §Chunk_102]</description>
+          </feature>
+        </feature>
+        <feature name="Domain" abstract="true">
+          <description>Application domains addressed by the federation.</description>
+          <feature name="Software_Engineering" mandatory="false">
+            <description>General software engineering domain providing the primary context. Trace: [Article_2 §Chunk_19]</description>
+          </feature>
+          <feature name="Mechatronics" mandatory="false">
+            <description>Domain covering hardware‑centric modelling activities. Trace: [Article_5 §Chunk_127]</description>
+          </feature>
+          <feature name="Quality_Assessment" mandatory="false">
+            <description>Domain focusing on quality attribute evaluation and integration. Trace: [Article_12 §Chunk_0]</description>
+          </feature>
+          <feature name="NFP_Analysis" mandatory="false">
+            <description>Domain dedicated to non‑functional property analysis such as performance and reliability. Trace: [Article_9 §Chunk_113]</description>
+          </feature>
+          <feature name="Agile_Methodologies" mandatory="false">
+            <description>Domain supporting agile processes for co‑evolution of models and stakeholder viewpoints. Trace: [Article_10 §Chunk_3]</description>
+          </feature>
+        </feature>
+        <feature name="Technology" abstract="true">
+          <description>Technological platforms and standards employed for integration.</description>
+          <or name="Technology_Selection" min="0" max="9">
+            <feature name="OASIS_OSLC" mandatory="false">
+              <description>OSLC standard provides web‑based, RESTful interoperability between tools. Trace: [Article_30 §Chunk_11]</description>
+            </feature>
+            <feature name="Open_Tool_Integration_Framework" mandatory="false">
+              <description>OTIF offers meta‑model based transformations for tool integration. Trace: [Article_16 §Chunk_70]</description>
+            </feature>
+            <feature name="Electronic_Tool_Integration" mandatory="false">
+              <description>ETI uses lightweight web‑service data exchange for tool coupling. Trace: [Article_16 §Chunk_70]</description>
+            </feature>
+            <feature name="GPPL_Java" mandatory="false">
+              <description>General‑purpose programming language Java is used for implementing transformation rules. Trace: [Article_17 §Chunk_242]</description>
+            </feature>
+            <feature name="Linked_Data_Modeling" mandatory="false">
+              <description>Linked‑data techniques model resources and relationships across tools. Trace: [Article_22 §Chunk_2]</description>
+            </feature>
+            <feature name="REST_Architecture" mandatory="false">
+              <description>REST architectural style underpins web‑based tool communication. Trace: [Article_30 §Chunk_11]</description>
+            </feature>
+            <feature name="MOF_UML" mandatory="false">
+              <description>MOF and UML provide a standard metamodeling foundation. Trace: [Article_15 §Chunk_15]</description>
+            </feature>
+            <feature name="OSLC_Resource_Shapes" mandatory="false">
+              <description>Resource shapes define the structure of linked data resources. Trace: [Article_22 §Chunk_2]</description>
+            </feature>
+            <feature name="Linked_Data_Infrastructure" mandatory="false">
+              <description>Infrastructure based on W3C Linked Data initiatives supports scalable integration. Trace: [Article_30 §Chunk_11]</description>
+            </feature>
+          </or>
+        </feature>
+        <feature name="Metamodel" abstract="true">
+          <description>Metamodels that define the abstract syntax and semantics of federated models.</description>
+          <feature name="V_SUM" mandatory="false">
+            <description>V‑SUM metamodel defines virtual single underlying models and consistency rules. Trace: [Article_2 §Chunk_102]</description>
+          </feature>
+          <feature name="Vitruvius" mandatory="false">
+            <description>Vitruvius approach formalises virtual underlying models and their properties. Trace: [Article_2 §Chunk_19]</description>
+          </feature>
+        </feature>
+      </feature>
+      <feature name="Operational" abstract="true">
+        <description>Operational dimension covering queries, synchronization, validation, management, automation, and design‑space exploration.</description>
+        <feature name="Query" abstract="true">
+          <description>Mechanisms for retrieving information from the megamodel.</description>
+          <feature name="Megamodel_Queries" mandatory="false">
+            <description>Queries that search the megamodel for required information. Trace: [Article_8 §Chunk_108]</description>
+          </feature>
+          <feature name="Information_Retrieval_Queries" mandatory="false">
+            <description>Queries that retrieve artefacts or model elements from linked data sources. Trace: [Article_8 §Chunk_108]</description>
+          </feature>
+        </feature>
+        <feature name="Synchronization" abstract="true">
+          <description>Operations that keep federated models consistent over time.</description>
+          <feature name="Incremental_Propagation" mandatory="false">
+            <description>Incremental propagation of changes across models to maintain consistency. Trace: [Article_4 §Chunk_43]</description>
+          </feature>
+          <feature name="Consistent_CoEvolution" mandatory="false">
+            <description>Mechanisms ensuring co‑evolution of software and analysis models. Trace: [Article_26 §Chunk_26]</description>
+          </feature>
+        </feature>
+        <feature name="Validation" abstract="true">
+          <description>Procedures for checking model correctness and property satisfaction.</description>
+          <feature name="Consistency_Validation" mandatory="false">
+            <description>Validation of global consistency among linked models. Trace: [Article_5 §Chunk_25]</description>
+          </feature>
+          <feature name="NFP_Validation" mandatory="false">
+            <description>Validation of non‑functional properties against analysis results. Trace: [Article_9 §Chunk_113]</description>
+          </feature>
+        </feature>
+        <feature name="Management" abstract="true">
+          <description>Management activities for models and processes.</description>
+          <feature name="Model_Management" mandatory="false">
+            <description>Management of model artefacts, versions, and lifecycles. Trace: [Article_22 §Chunk_2]</description>
+          </feature>
+          <feature name="Process_Management" mandatory="false">
+            <description>Management of the ordered execution of operations defined in the process model. Trace: [Article_18 §Chunk_15]</description>
+          </feature>
+        </feature>
+        <feature name="Automation" abstract="true">
+          <description>Automation of repetitive or decision‑making tasks within the federation.</description>
+          <feature name="Automated_Query_Execution" mandatory="false">
+            <description>Automatic execution of queries when required information is missing. Trace: [Article_8 §Chunk_108]</description>
+          </feature>
+          <feature name="SemiAutomated_Process_Steps" mandatory="false">
+            <description>Semi‑automated steps that assist designers while still requiring human input. Trace: [Article_26 §Chunk_26]</description>
+          </feature>
+        </feature>
+        <feature name="DesignSpaceSearch" abstract="true">
+          <description>Techniques for exploring alternative design configurations.</description>
+          <feature name="Metaheuristic_Approaches" mandatory="false">
+            <description>Metaheuristic algorithms reduce the size of the design space to be explored. Trace: [Article_4 §Chunk_43]</description>
+          </feature>
+          <feature name="Design_Space_Exploration" mandatory="false">
+            <description>Systematic exploration of design alternatives for NFP trade‑offs. Trace: [Article_9 §Chunk_113]</description>
+          </feature>
+        </feature>
+        <feature name="ToolIntegration" abstract="true">
+          <description>Integration of heterogeneous tool chains and data exchange mechanisms.</description>
+          <feature name="Tool_Chain_Integration" mandatory="false">
+            <description>Integration of tool chains using general‑purpose modelling languages and domain‑specific languages. Trace: [Article_12 §Chunk_2]</description>
+          </feature>
+          <feature name="LightWeight_Data_Exchange" mandatory="false">
+            <description>Lightweight data exchange via web‑services to connect tools. Trace: [Article_16 §Chunk_70]</description>
+          </feature>
+        </feature>
+      </feature>
+      <feature name="Intentional" abstract="true">
+        <description>Intentional dimension addressing goals such as traceability, consistency, transformation management, composition, and stakeholder elicitation.</description>
+        <feature name="Traceability" abstract="true">
+          <description>Support for tracking relationships across models and viewpoints.</description>
+          <feature name="CrossModel_Traceability" mandatory="false">
+            <description>Enables tracing of artefacts across heterogeneous models. Trace: [Article_26 §Chunk_26]</description>
+          </feature>
+          <feature name="Semantic_Links" mandatory="false">
+            <description>Semantic links capture the meaning of relationships between model elements. Trace: [Article_5 §Chunk_25]</description>
+          </feature>
+        </feature>
+        <feature name="Consistency" abstract="true">
+          <description>Mechanisms ensuring global and local consistency of federated models.</description>
+          <feature name="Global_Consistency" mandatory="false">
+            <description>Architects ensure global consistency across all stakeholder viewpoints. Trace: [Article_10 §Chunk_3]</description>
+          </feature>
+          <feature name="Consistency_Preservation" mandatory="false">
+            <description>Methodologists define consistency preservation rules within the V‑SUM metamodel. Trace: [Article_14 §Chunk_102]</description>
+          </feature>
+        </feature>
+        <feature name="TransformationManagement" abstract="true">
+          <description>Management of model transformations and view types.</description>
+          <feature name="Model_Transformation" mandatory="false">
+            <description>Transformations between formalisms are defined using OTIF and ETI frameworks. Trace: [Article_16 §Chunk_70]</description>
+          </feature>
+          <feature name="View_Types" mandatory="false">
+            <description>Pre‑defined view types allow developers to create and manipulate V‑SUM views. Trace: [Article_14 §Chunk_102]</description>
+          </feature>
+        </feature>
+        <feature name="Composition" abstract="true">
+          <description>Composition mechanisms for combining models and functions.</description>
+          <feature name="Model_Composition" mandatory="false">
+            <description>Construction process applies model composition to integrate domain models. Trace: [Article_1 §Chunk_39]</description>
+          </feature>
+          <feature name="Function_Composition" mandatory="false">
+            <description>Function composition is performed using a function database and part library. Trace: [Article_28 §Chunk_162]</description>
+          </feature>
+        </feature>
+        <feature name="ConceptualElicitation" abstract="true">
+          <description>Activities for eliciting stakeholder viewpoints and requirements.</description>
+          <feature name="Stakeholder_Viewpoint_Elicitation" mandatory="false">
+            <description>Stakeholder viewpoints are elicited to integrate architectural concerns. Trace: [Article_25 §Chunk_119]</description>
+          </feature>
+          <feature name="Requirement_Elicitation" mandatory="false">
+            <description>Process activities are mapped to architecture model elements to capture requirements. Trace: [Article_5 §Chunk_25]</description>
+          </feature>
+        </feature>
+      </feature>
+    </feature>
+  </struct>
+  <constraints/>
+</featureModel>

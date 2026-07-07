@@ -1,0 +1,677 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<featureModel>
+  <struct>
+    <and name="Model_Federation">
+      <description>The root feature representing the Model Federation approach, specifically focusing on the NAOMI experimental platform for multi-modeling.</description>
+      
+      <and name="Structural" abstract="true">
+        <description>Covers the artefacts, links, and structural features of Model Federation, including model composition, graph structure, formalism, domain, and technological context.</description>
+        
+        <and name="Artifacts">
+          <description>The entities that define the multi-model and are stored in the repository. Trace: [Article_1.pdf::chunk::22]</description>
+          <or name="Models">
+            <description>The individual models participating in the multi-model. Trace: [Article_1.pdf::chunk::23]</description>
+            <feature name="Specification_Models">
+              <description>Models that help define the system being modeled, such as UML class hierarchies or state charts. Trace: [Article_1.pdf::chunk::23; Article_1.pdf::chunk::24]</description>
+            </feature>
+            <and name="Analytical_Models">
+              <description>Models that analyze aspects of the defined system, such as evaluating safety parameters or Non-Functional Properties (NFPs). Trace: [Article_1.pdf::chunk::23; Article_9.pdf::chunk::1]</description>
+              <feature name="Queueing_Networks">
+                <description>Performance models good at capturing contention for resources, including Layered Queueing Networks (LQN). Trace: [Article_9.pdf::chunk::22; Article_9.pdf::chunk::23]</description>
+              </feature>
+              <feature name="Stochastic_Petri_Nets">
+                <description>Flow models able to represent concurrency, often solved with Markov chain-based solutions. Trace: [Article_9.pdf::chunk::24]</description>
+              </feature>
+              <feature name="Markov_Chains">
+                <description>Stochastic models with discrete state space used for analytical performance solutions. Trace: [Article_9.pdf::chunk::21]</description>
+              </feature>
+              <feature name="Stochastic_Process_Algebra">
+                <description>A compositional approach based on enhanced process algebra like PEPA for performance evaluation. Trace: [Article_9.pdf::chunk::25]</description>
+              </feature>
+            </and>
+            <feature name="Ontology_Models">
+              <description>Models used to construct a formal knowledge foundation and formulate the domain conceptual architecture. Trace: [Article_10.pdf::chunk::21; Article_10.pdf::chunk::28]</description>
+            </feature>
+            <feature name="Virtual_Model">
+              <description>An interaction model capturing dependencies between model elements in different models, serving as the main structural element in FML. Trace: [Article_11.pdf::chunk::35; Article_13.pdf::chunk::29]</description>
+            </feature>
+            <feature name="Viewpoint_Models">
+              <description>Models of the system that contain only the objects visible from a specific viewpoint. Trace: [Article_12.pdf::chunk::12; Article_12.pdf::chunk::13]</description>
+            </feature>
+            <feature name="Megamodels">
+              <description>Models used to represent the structure of MDE projects, including typed nodes and relationships among various artifacts. Trace: [Article_14.pdf::chunk::10; Article_14.pdf::chunk::140]</description>
+            </feature>
+            <feature name="V_SUM">
+              <description>Virtual Single Underlying Model representing the system from different viewpoints, consisting of metamodels, consistency preservation rules, and view types. Trace: [Article_2.pdf::chunk::100; Article_2.pdf::chunk::104]</description>
+            </feature>
+            <feature name="FTG_PM">
+              <description>Formalism Transformation Graph and Process Model used to explicitly model and enact all aspects of Multi-Paradigm Modelling, keeping track of formalisms, operations, and workflows. Trace: [Article_4.pdf::chunk::15; Article_4.pdf::chunk::16]</description>
+            </feature>
+            <and name="Support_Models">
+              <description>Models used to architect viewpoints and their interrelations, complementing engineering models. Trace: [Article_3.pdf::chunk::118; Article_3.pdf::chunk::121]</description>
+              <feature name="Viewpoint_Contracts">
+                <description>Define key vocabulary for communication among stakeholders and make assumptions and obligations explicit. Trace: [Article_3.pdf::chunk::11; Article_3.pdf::chunk::129]</description>
+              </feature>
+              <feature name="Dependency_Models">
+                <description>Explicitly codify relations between product properties across different viewpoints. Trace: [Article_3.pdf::chunk::129; Article_3.pdf::chunk::130]</description>
+              </feature>
+              <feature name="Tool_Integration_Models">
+                <description>Describe tool chain interactions and relationships between tools, models, and people. Trace: [Article_3.pdf::chunk::114; Article_3.pdf::chunk::115]</description>
+              </feature>
+              <and name="F_IDE_Views">
+                <description>Modelling views that cover the early phases of federated tool-chain development. Trace: [Article_6.pdf::chunk::2; Article_6.pdf::chunk::23]</description>
+                <feature name="Domain_Specification_View">
+                  <description>Defines the types of resources, their properties, and relationships using OSLC Core and Resource Shapes. Trace: [Article_6.pdf::chunk::32]</description>
+                </feature>
+                <feature name="Resource_Allocation_View">
+                  <description>Allocates resources to data sources, giving an overview of where resources are available and consumed. Trace: [Article_6.pdf::chunk::37; Article_6.pdf::chunk::38]</description>
+                </feature>
+                <feature name="Adapter_Design_View">
+                  <description>Designs the internal details of the tool interface according to the OSLC standard. Trace: [Article_6.pdf::chunk::40; Article_6.pdf::chunk::41]</description>
+                </feature>
+              </and>
+            </and>
+          </or>
+          <feature name="Model_Registry">
+            <description>A simple list used to determine membership of models in the multi-model. Trace: [Article_1.pdf::chunk::28]</description>
+          </feature>
+          <and name="Attributes">
+            <description>Data items used for exchange between models, owned by a single model. Trace: [Article_1.pdf::chunk::25; Article_1.pdf::chunk::26]</description>
+            <feature name="Inputs">
+              <description>Attributes that are read by a model. Trace: [Article_1.pdf::chunk::25]</description>
+            </feature>
+            <feature name="Outputs">
+              <description>Attributes that are written by a model. Trace: [Article_1.pdf::chunk::25]</description>
+            </feature>
+          </and>
+          <feature name="Interfaces">
+            <description>The tuple of language, inputs, and outputs that a model exposes to the system. Trace: [Article_1.pdf::chunk::25]</description>
+          </feature>
+          <or name="Constraints">
+            <description>Conditions associated with model inputs and outputs acting as triggers. Trace: [Article_1.pdf::chunk::28]</description>
+            <feature name="Input_Constraints">
+              <description>Constraints on input attributes that notify the model if violated by the owner. Trace: [Article_1.pdf::chunk::29]</description>
+            </feature>
+            <feature name="Output_Constraints">
+              <description>Constraints used to ensure written attributes are valid from the writing model's perspective. Trace: [Article_1.pdf::chunk::29]</description>
+            </feature>
+            <feature name="Security_Rules">
+              <description>Rules attached to links that reify dependencies to detect security inconsistencies when models evolve. Trace: [Article_11.pdf::chunk::19; Article_11.pdf::chunk::25]</description>
+            </feature>
+          </or>
+          <feature name="Notifications">
+            <description>Messages sent to models to inform them of interesting events, such as constraint violations. Trace: [Article_1.pdf::chunk::29]</description>
+          </feature>
+          <feature name="Sandboxes">
+            <description>Local copies of the repository allowing modelers to work without being affected by concurrent changes. Trace: [Article_1.pdf::chunk::30]</description>
+          </feature>
+          <and name="Multimodel_Entities">
+            <description>Additional entities that extend entities on the different viewpoint models to hold inter-viewpoint relationships. Trace: [Article_12.pdf::chunk::13]</description>
+            <or name="Inter_Viewpoint_Relationships">
+              <description>Relationships defined among elements on different viewpoints with various semantics. Trace: [Article_12.pdf::chunk::27; Article_12.pdf::chunk::28]</description>
+              <feature name="Implication">
+                <description>A model element in a viewpoint implies an element in another viewpoint. Trace: [Article_12.pdf::chunk::28]</description>
+              </feature>
+              <feature name="Co_Implication">
+                <description>A model element in a viewpoint implies an element in another viewpoint and vice versa. Trace: [Article_12.pdf::chunk::28]</description>
+              </feature>
+              <feature name="Exclusion">
+                <description>A model element in a viewpoint excludes a model element in another viewpoint. Trace: [Article_12.pdf::chunk::28]</description>
+              </feature>
+              <feature name="Decomposition">
+                <description>A model element in a viewpoint can be decomposed into elements in other viewpoints. Trace: [Article_12.pdf::chunk::29]</description>
+              </feature>
+              <feature name="Representation">
+                <description>A model element in a viewpoint can be represented by a set of elements in another viewpoint. Trace: [Article_12.pdf::chunk::29]</description>
+              </feature>
+              <feature name="Impact">
+                <description>A model element in a viewpoint impacts on an element on another viewpoint, potentially quantified by weights. Trace: [Article_12.pdf::chunk::30; Article_12.pdf::chunk::33]</description>
+              </feature>
+            </or>
+            <and name="Reactive_Links">
+              <description>Links that automatically propagate fine-grained changes at the level of model properties across multi-domain artifacts. Trace: [Article_5.pdf::chunk::13; Article_5.pdf::chunk::101]</description>
+              <or name="Link_Triggers">
+                <description>Triggers that determine when a reactive link propagates changes. Trace: [Article_5.pdf::chunk::104]</description>
+                <feature name="Automatic_Propagation">
+                  <description>Links automatically trigger every time the dependency is touched by a change. Trace: [Article_5.pdf::chunk::104; Article_5.pdf::chunk::105]</description>
+                </feature>
+                <feature name="Manual_Propagation">
+                  <description>Engineers manually trigger the links, often as part of the commit process. Trace: [Article_5.pdf::chunk::104; Article_5.pdf::chunk::105]</description>
+                </feature>
+              </or>
+              <and name="Link_Operators">
+                <description>Operators defining the behavior of the link for propagation and inconsistency detection. Trace: [Article_5.pdf::chunk::101]</description>
+                <feature name="Assignment_Operator">
+                  <description>Used for the propagation direction to assign values across linked properties. Trace: [Article_5.pdf::chunk::101]</description>
+                </feature>
+                <feature name="Equality_Operator">
+                  <description>Used in the reverse direction to detect inconsistencies between linked properties. Trace: [Article_5.pdf::chunk::101]</description>
+                </feature>
+              </and>
+            </and>
+          </and>
+          <and name="Correspondence_Model">
+            <description>A trace model used to explicitly store relations between elements to identify which are related for fulfilling consistency rules. Trace: [Article_2.pdf::chunk::104; Article_2.pdf::chunk::137]</description>
+            <and name="Relationship_Types">
+              <description>Types of relationships captured by the correspondence meta-model. Trace: [Article_7.pdf::chunk::42; Article_7.pdf::chunk::53]</description>
+              <feature name="Direct_Relationships">
+                <description>One-to-one mappings between a concept defined in one DSML and a concept defined in another DSML. Trace: [Article_7.pdf::chunk::42; Article_7.pdf::chunk::53]</description>
+              </feature>
+              <and name="Indirect_Relationships">
+                <description>Relationships where some entities in both models are affected by a change in a single entity. Trace: [Article_7.pdf::chunk::42; Article_7.pdf::chunk::53]</description>
+                <feature name="Internal_Relationships">
+                  <description>Indirect relationships classified as internal. Trace: [Article_7.pdf::chunk::53]</description>
+                </feature>
+                <feature name="External_Relationships">
+                  <description>Indirect relationships classified as external. Trace: [Article_7.pdf::chunk::53]</description>
+                </feature>
+              </and>
+            </and>
+          </and>
+          <and name="Uniform_Data_Representation">
+            <description>A uniform representation based on a meta-metamodel used to store engineering data in the common environment. Trace: [Article_5.pdf::chunk::132; Article_5.pdf::chunk::133]</description>
+            <feature name="InstanceTypes">
+              <description>Elements that store the structure of the model elements or metamodel. Trace: [Article_5.pdf::chunk::134]</description>
+            </feature>
+            <feature name="PropertyTypes">
+              <description>Elements that describe each property in the metamodel, which can be a generic type or a reference. Trace: [Article_5.pdf::chunk::134; Article_5.pdf::chunk::135]</description>
+            </feature>
+            <feature name="Instances">
+              <description>Elements that store the actual data of the artifact based on the defined InstanceTypes. Trace: [Article_5.pdf::chunk::135]</description>
+            </feature>
+          </and>
+        </and>
+
+        <or name="Viewpoints">
+          <description>Abstractions that yield the specification of the whole system restricted to a particular set of concerns. Trace: [Article_12.pdf::chunk::11; Article_12.pdf::chunk::14]</description>
+          <feature name="Variability_Viewpoint">
+            <description>Introduced for the representation of a software product line where variability management is crucial. Trace: [Article_12.pdf::chunk::20]</description>
+          </feature>
+          <feature name="Quality_Viewpoint">
+            <description>Introduced for the explicit representation of quality information and product quality improvement. Trace: [Article_12.pdf::chunk::20]</description>
+          </feature>
+          <feature name="Functional_Viewpoint">
+            <description>Represents the structure and components that the system comprises. Trace: [Article_12.pdf::chunk::20]</description>
+          </feature>
+          <feature name="Transformations_Viewpoint">
+            <description>Represents model transformations as a key means for developing software systems. Trace: [Article_12.pdf::chunk::21]</description>
+          </feature>
+        </or>
+
+        <and name="Components">
+          <description>The software components that make up the NAOMI platform architecture. Trace: [Article_1.pdf::chunk::43]</description>
+          <feature name="Connectors">
+            <description>Software components that connect individual models to the multi-model, allowing controlled information exchange. Trace: [Article_1.pdf::chunk::43]</description>
+          </feature>
+          <feature name="Multi_Model_Manager">
+            <description>Component responsible for integrating connectors, performing consistency checks, and visualizing the repository. Trace: [Article_1.pdf::chunk::45]</description>
+          </feature>
+          <feature name="Execution_Automation_Engine">
+            <description>Component responsible for determining execution order and orchestrating the execution process. Trace: [Article_1.pdf::chunk::46]</description>
+          </feature>
+          <feature name="Version_Control_System">
+            <description>System that keeps all artifacts under version control, such as Subversion. Trace: [Article_1.pdf::chunk::42; Article_1.pdf::chunk::48]</description>
+          </feature>
+          <feature name="Megamodel_Visualizer">
+            <description>Component that generates interactive graphical representations of recovered megamodels using HTML5 and Javascript. Trace: [Article_14.pdf::chunk::120; Article_14.pdf::chunk::121]</description>
+          </feature>
+          <feature name="Modelverse">
+            <description>A prototype tool for Multi-Paradigm Modelling that runs as a service and acts as a repository for models, languages, and operations. Trace: [Article_4.pdf::chunk::37; Article_4.pdf::chunk::48]</description>
+          </feature>
+          <feature name="Common_Environment">
+            <description>A server that stores all artifacts and facilitates the storage and reasoning of engineering knowledge, such as DesignSpace. Trace: [Article_5.pdf::chunk::131; Article_5.pdf::chunk::132]</description>
+          </feature>
+          <and name="SeMMA">
+            <description>Semantic Multi-Modeling Architecture that permits the semantic integration of models defined in various languages. Trace: [Article_7.pdf::chunk::15; Article_7.pdf::chunk::40]</description>
+            <feature name="Change_Analyzer_Module">
+              <description>Monitors the model repository for changes in the various models in the multi-model. Trace: [Article_7.pdf::chunk::41]</description>
+            </feature>
+            <feature name="Consistency_Checker_Module">
+              <description>Relies on a relationship correspondence meta-model to describe relationships between entities and attributes. Trace: [Article_7.pdf::chunk::41; Article_7.pdf::chunk::42]</description>
+            </feature>
+            <feature name="Warning_Module">
+              <description>Logs changes in a change log and highlights them to the stakeholders. Trace: [Article_7.pdf::chunk::41; Article_7.pdf::chunk::43]</description>
+            </feature>
+          </and>
+          <and name="Plugin_Adapters">
+            <description>Custom-built adapters responsible for translating between a tool's internal metamodel and the common environment's data representation. Trace: [Article_5.pdf::chunk::139; Article_5.pdf::chunk::140]</description>
+            <feature name="Bidirectional_Communication">
+              <description>Standard communication where changes are synchronized both ways between the tool and the server. Trace: [Article_5.pdf::chunk::142]</description>
+            </feature>
+            <feature name="Unidirectional_Communication">
+              <description>Communication where updates from the tool are synchronized to the server, but server changes are not transported back. Trace: [Article_5.pdf::chunk::142]</description>
+            </feature>
+          </and>
+          <and name="OpenFlexo">
+            <description>A mature model-federation framework providing infrastructure to connect multiple models while keeping each in its technology space. Trace: [Article_11.pdf::chunk::33; Article_13.pdf::chunk::0]</description>
+            <and name="Model_Slots">
+              <description>Technological connectors used by OpenFlexo to enable concepts to access information on external models. Trace: [Article_11.pdf::chunk::36; Article_13.pdf::chunk::36]</description>
+              <feature name="TypeAwareModelSlot">
+                <description>A specialized ModelSlot offering as source of information a model conform to a metamodel. Trace: [Article_13.pdf::chunk::37]</description>
+              </feature>
+            </and>
+            <and name="Flexo_Concepts">
+              <description>Metaclasses created in the interaction model to establish links between elements in participating models. Trace: [Article_11.pdf::chunk::36; Article_13.pdf::chunk::29]</description>
+              <feature name="ConceptRole">
+                <description>Assigns a name to a ModellingElement reference in the context of a FlexoConcept definition. Trace: [Article_13.pdf::chunk::35]</description>
+              </feature>
+              <feature name="Local_Flexo_Concept">
+                <description>Concepts specifically developed for the virtual model that do not belong to any existing technological space. Trace: [Article_8.pdf::chunk::22]</description>
+              </feature>
+              <feature name="Remote_Flexo_Concept">
+                <description>A local proxy of a technological model concept in the virtual model, introducing some redundancy. Trace: [Article_8.pdf::chunk::23]</description>
+              </feature>
+              <feature name="Dynamic_Link">
+                <description>A connection maintained between a local flexo concept and a technological model concept to synchronize changes. Trace: [Article_8.pdf::chunk::22; Article_8.pdf::chunk::23]</description>
+              </feature>
+              <feature name="Edition_Actions">
+                <description>Actions associated with flexo concepts used to execute modifications in the technological model. Trace: [Article_8.pdf::chunk::26]</description>
+              </feature>
+            </and>
+            <feature name="TechnologyAdapter">
+              <description>A software component handling a given technology, offering one or more ModelSlots to provide interpretations of resource data. Trace: [Article_13.pdf::chunk::40]</description>
+            </feature>
+            <feature name="ResourceCenter">
+              <description>Manages resources and does the binding between the actual source of information and TechnologyAdapters. Trace: [Article_13.pdf::chunk::40]</description>
+            </feature>
+          </and>
+          <and name="OSLC_Service_Provider">
+            <description>Describes the OSLC services offered by a tool, accessible via web UI or clients. Trace: [Article_6.pdf::chunk::42]</description>
+            <feature name="Creation_Factories">
+              <description>Enables clients to create resources. Trace: [Article_6.pdf::chunk::42]</description>
+            </feature>
+            <feature name="Query_Capabilities">
+              <description>Enables clients to query resources. Trace: [Article_6.pdf::chunk::42]</description>
+            </feature>
+            <feature name="Delegated_UI_Dialogs">
+              <description>Enables clients to create and select resources via a web UI. Trace: [Article_6.pdf::chunk::42]</description>
+            </feature>
+          </and>
+        </and>
+
+        <or name="Languages">
+          <description>The modeling languages used to construct the models. Trace: [Article_1.pdf::chunk::4]</description>
+          <feature name="DSMLs">
+            <description>Domain-Specific Modeling Languages used to provide precise abstractions. Trace: [Article_1.pdf::chunk::0; Article_1.pdf::chunk::4]</description>
+          </feature>
+          <feature name="Meta_Modelling">
+            <description>The creation of languages as instances of a meta-language, forming a meta-hierarchy with a meta-circular topmost level. Trace: [Article_4.pdf::chunk::26; Article_4.pdf::chunk::27]</description>
+          </feature>
+          <or name="General_Purpose_Languages">
+            <description>General-purpose modeling languages mentioned in the context. Trace: [Article_1.pdf::chunk::4]</description>
+            <feature name="UML">
+              <description>Unified Modeling Language used for specification models. Trace: [Article_1.pdf::chunk::4; Article_1.pdf::chunk::27]</description>
+            </feature>
+            <feature name="SysML">
+              <description>Systems Modeling Language used for general-purpose modeling. Trace: [Article_1.pdf::chunk::4; Article_1.pdf::chunk::35]</description>
+            </feature>
+            <feature name="BPMN">
+              <description>Business Process Model and Notation used to model processes. Trace: [Article_11.pdf::chunk::12; Article_11.pdf::chunk::31]</description>
+            </feature>
+          </or>
+          <or name="Architecture_Description_Languages">
+            <description>Languages used to describe software architecture and its components. Trace: [Article_12.pdf::chunk::24]</description>
+            <feature name="AADL">
+              <description>Architecture Analysis and Design Language used for functional viewpoints. Trace: [Article_12.pdf::chunk::24]</description>
+            </feature>
+          </or>
+          <or name="Quality_Models">
+            <description>Models or languages used to express quality concerns. Trace: [Article_12.pdf::chunk::23]</description>
+            <feature name="SQuaRE">
+              <description>A quality model standard used for the quality viewpoint. Trace: [Article_12.pdf::chunk::23; Article_12.pdf::chunk::25]</description>
+            </feature>
+          </or>
+          <or name="NFP_Annotations">
+            <description>Profiles and extensions used to annotate software models with Non-Functional Properties (NFP) information. Trace: [Article_9.pdf::chunk::26]</description>
+            <feature name="SPT">
+              <description>UML Profile for Schedulability, Performance, and Time defined for UML 1.x. Trace: [Article_9.pdf::chunk::27]</description>
+            </feature>
+            <feature name="MARTE">
+              <description>UML Profile for Modeling and Analysis of Real-Time and Embedded systems for UML 2.x. Trace: [Article_9.pdf::chunk::27; Article_9.pdf::chunk::28]</description>
+            </feature>
+            <feature name="DAM">
+              <description>Dependability Analysis Model profile, a specialization of MARTE for dependability analysis. Trace: [Article_9.pdf::chunk::30]</description>
+            </feature>
+          </or>
+          <feature name="OWL">
+            <description>Ontology Web Language used to specify static semantics and build M&amp;S ontology metamodels. Trace: [Article_10.pdf::chunk::35; Article_10.pdf::chunk::36]</description>
+          </feature>
+          <or name="Security_Extensions">
+            <description>Extensions to modeling languages to include security information by default. Trace: [Article_11.pdf::chunk::12]</description>
+            <feature name="UMLsec">
+              <description>An extension of the UML standard providing a profile with security properties in the form of stereotypes. Trace: [Article_11.pdf::chunk::13; Article_9.pdf::chunk::28]</description>
+            </feature>
+            <feature name="SecBPMN">
+              <description>An extension of BPMN containing security annotations related to properties such as confidentiality. Trace: [Article_11.pdf::chunk::14]</description>
+            </feature>
+          </or>
+          <feature name="FML">
+            <description>Federation Model Language used by OpenFlexo to design models and their behavior. Trace: [Article_11.pdf::chunk::33]</description>
+          </feature>
+          <or name="Consistency_Preservation_Languages">
+            <description>Languages used to specify consistency preservation rules between models. Trace: [Article_2.pdf::chunk::133]</description>
+            <feature name="Reactions_Language">
+              <description>Provides imperative and unidirectional specifications of consistency preservation with declarative constructs for recurring actions. Trace: [Article_2.pdf::chunk::133; Article_2.pdf::chunk::136]</description>
+            </feature>
+            <feature name="Mappings_Language">
+              <description>Provides highly declarative, bidirectional specifications of consistency rules. Trace: [Article_2.pdf::chunk::134]</description>
+            </feature>
+          </or>
+          <and name="TIL">
+            <description>Tool Integration Language, a DSML for describing tool chains systematically on an architectural level. Trace: [Article_3.pdf::chunk::100; Article_3.pdf::chunk::101]</description>
+            <feature name="ToolChain">
+              <description>Provides a container for all elements of a tool chain, which can be composed hierarchically. Trace: [Article_3.pdf::chunk::102]</description>
+            </feature>
+            <feature name="ToolAdapter">
+              <description>Exposes functionality and data of an integrated development tool, adapting technical spaces. Trace: [Article_3.pdf::chunk::102; Article_3.pdf::chunk::103]</description>
+            </feature>
+            <feature name="ToolAdapterMetamodel">
+              <description>Specifies the structure of the data and the signature of the functionality exposed by the ToolAdapter. Trace: [Article_3.pdf::chunk::103]</description>
+            </feature>
+            <feature name="ControlChannel">
+              <description>Describes concurrent control flow, specifying source and target components and services. Trace: [Article_3.pdf::chunk::104]</description>
+            </feature>
+            <feature name="Sequencer">
+              <description>Allows for sequential control flow, executing a sequence of services in a defined order. Trace: [Article_3.pdf::chunk::105]</description>
+            </feature>
+            <feature name="TIL_User">
+              <description>A representative for a real tool chain user, describing possible interactions with the tool chain. Trace: [Article_3.pdf::chunk::105; Article_3.pdf::chunk::106]</description>
+            </feature>
+            <feature name="DataChannel">
+              <description>Transfers data between ToolAdapters, potentially attaching model transformations. Trace: [Article_3.pdf::chunk::106]</description>
+            </feature>
+            <feature name="TraceChannel">
+              <description>Describes the possibility to establish trace links between tool data at runtime. Trace: [Article_3.pdf::chunk::107]</description>
+            </feature>
+            <feature name="Repository_Adapter">
+              <description>A tool adapter that provides storage and version management. Trace: [Article_3.pdf::chunk::108]</description>
+            </feature>
+          </and>
+          <feature name="Resource_Shapes">
+            <description>A Linked Data constraint language used to define the properties allowed or required of a type of resource. Trace: [Article_6.pdf::chunk::28]</description>
+          </feature>
+        </or>
+
+        <or name="Standards" abstract="true">
+          <description>Standards and specifications used to promote interoperability and portability.</description>
+          <feature name="SMP2">
+            <description>Simulation Model Portability 2 standard comprising a metamodel for simulation models to promote technical interoperability. Trace: [Article_10.pdf::chunk::31; Article_10.pdf::chunk::32]</description>
+          </feature>
+          <feature name="HLA">
+            <description>High Level Architecture, an IEEE standard developed to promote interoperability between different simulation systems. Trace: [Article_10.pdf::chunk::1; Article_10.pdf::chunk::18]</description>
+          </feature>
+          <feature name="ISO_IEC_42010">
+            <description>Standard proposed to document how to manage the integration of different viewpoints into the same modeling space. Trace: [Article_13.pdf::chunk::20; Article_13.pdf::chunk::21]</description>
+          </feature>
+          <feature name="Architecture_Frameworks">
+            <description>Standards like MODAF, DODAF, TOGAF, and UPDM that provide a way to organize the many views and models used to describe a given system. Trace: [Article_13.pdf::chunk::19; Article_13.pdf::chunk::20]</description>
+          </feature>
+          <feature name="OSLC">
+            <description>Open Services for Lifecycle Collaboration standard on tool interoperability based on Linked Data. Trace: [Article_6.pdf::chunk::1; Article_6.pdf::chunk::11]</description>
+          </feature>
+          <feature name="Linked_Data">
+            <description>W3C initiative adopting the REST architectural pattern to integrate information from different engineering tools. Trace: [Article_6.pdf::chunk::10; Article_6.pdf::chunk::11]</description>
+          </feature>
+        </or>
+
+        <or name="Roles">
+          <description>Roles associated with the operation and construction of federated models or V-SUMs. Trace: [Article_2.pdf::chunk::100]</description>
+          <feature name="Methodologist">
+            <description>Role responsible for constructing and maintaining the V-SUM metamodel, selecting metamodels, and defining consistency rules. Trace: [Article_2.pdf::chunk::101; Article_2.pdf::chunk::102]</description>
+          </feature>
+          <feature name="Developer">
+            <description>Role that uses predefined view types to create, access, and manipulate the V-SUM for the system under consideration. Trace: [Article_2.pdf::chunk::101; Article_2.pdf::chunk::102]</description>
+          </feature>
+        </or>
+      </and>
+
+      <and name="Operational" abstract="true">
+        <description>Includes the processes, operations, and triggers in Model Federation, focusing on querying, synchronisation, validation, and management of federated models and links.</description>
+        
+        <or name="Development_Processes">
+          <description>Processes for building and utilizing engineering and support models. Trace: [Article_3.pdf::chunk::116]</description>
+          <feature name="Top_Down_Process">
+            <description>A decomposition procedure or green field approach where product concepts and architecture are emphasized first. Trace: [Article_3.pdf::chunk::117; Article_3.pdf::chunk::118]</description>
+          </feature>
+          <feature name="Bottom_Up_Process">
+            <description>An integration or re-engineering process where engineering models already exist and support models are built afterwards. Trace: [Article_3.pdf::chunk::124; Article_3.pdf::chunk::125]</description>
+          </feature>
+          <feature name="Process_Modelling">
+            <description>Explicitly modelling the development process and workflows, often enacted through a Process Model. Trace: [Article_4.pdf::chunk::5; Article_4.pdf::chunk::16]</description>
+          </feature>
+        </or>
+
+        <or name="Model_Operations">
+          <description>Operations that define the semantics of models or perform model management, such as transformations or simulations. Trace: [Article_4.pdf::chunk::40]</description>
+          <feature name="Denotational_Semantics">
+            <description>Semantics defined by mapping a model to another semantically equivalent model in a language that has semantics. Trace: [Article_4.pdf::chunk::40]</description>
+          </feature>
+          <feature name="Operational_Semantics">
+            <description>Semantics defined by executing the model directly, changing the current model and creating an execution trace. Trace: [Article_4.pdf::chunk::40]</description>
+          </feature>
+          <feature name="Model_Transformations">
+            <description>Declarative operations based on rewriting rules with explicit left-hand and right-hand sides, often using RAMification. Trace: [Article_4.pdf::chunk::41; Article_4.pdf::chunk::45]</description>
+          </feature>
+          <feature name="Imperative_Action_Code">
+            <description>Explicitly modelled action language used for operations that are well-studied and have proven algorithms, like reachability analysis. Trace: [Article_4.pdf::chunk::51; Article_4.pdf::chunk::52]</description>
+          </feature>
+        </or>
+
+        <and name="Design_Space_Exploration">
+          <description>Methods to explore the design space for balancing multiple Non-Functional Properties (NFPs). Trace: [Article_9.pdf::chunk::32]</description>
+          <feature name="Metaheuristics">
+            <description>Search techniques like genetic algorithms used to find better design models when multiple NFP models are considered. Trace: [Article_9.pdf::chunk::34]</description>
+          </feature>
+          <feature name="Multi_Criteria_Optimization">
+            <description>Traditional optimization methods like integer linear programming used mostly for single NFP analysis. Trace: [Article_9.pdf::chunk::33]</description>
+          </feature>
+          <feature name="Rule_Based_Techniques">
+            <description>Techniques using diagnostic and design-change rules to automate performance analysis and explore design changes. Trace: [Article_9.pdf::chunk::36]</description>
+          </feature>
+        </and>
+
+        <and name="Multimodel_Definition_Process">
+          <description>The process for defining a multimodel to integrate different viewpoints. Trace: [Article_12.pdf::chunk::14]</description>
+          <feature name="Goal_Establishment">
+            <description>Establishing the goal of the multimodel using techniques like the Goal/Question/Metric (GQM) template. Trace: [Article_12.pdf::chunk::15]</description>
+          </feature>
+          <feature name="Viewpoint_Identification">
+            <description>Identifying the relevant multimodel viewpoints derived from the established goals and questions. Trace: [Article_12.pdf::chunk::18]</description>
+          </feature>
+          <feature name="Formalism_Selection">
+            <description>Selecting the formalisms or modeling languages in which each viewpoint will be expressed. Trace: [Article_12.pdf::chunk::21]</description>
+          </feature>
+          <feature name="Inter_Consistency_Validation">
+            <description>Performing consistency analysis to validate variability, quality relationships, and constraints using automatic solvers. Trace: [Article_12.pdf::chunk::35]</description>
+          </feature>
+        </and>
+
+        <and name="V_SUM_Construction">
+          <description>The process steps executed by a methodologist to construct a V-SUM metamodel. Trace: [Article_2.pdf::chunk::108]</description>
+          <feature name="Selecting_Metamodels">
+            <description>Including metamodels for different purposes or development paradigms into the V-SUM metamodel. Trace: [Article_2.pdf::chunk::109]</description>
+          </feature>
+          <feature name="Defining_Consistency_Preservation">
+            <description>Realizing consistency preservation rules by defining incremental model transformations. Trace: [Article_2.pdf::chunk::112; Article_2.pdf::chunk::113]</description>
+          </feature>
+          <feature name="Defining_View_Types">
+            <description>Creating view types with projectional-complete scopes to replace originally used metamodels and provide access to V-SUM elements. Trace: [Article_2.pdf::chunk::120; Article_2.pdf::chunk::121]</description>
+          </feature>
+        </and>
+
+        <and name="Data_Exchange">
+          <description>The process of sharing data between models. Trace: [Article_1.pdf::chunk::31]</description>
+          <feature name="Attribute_Sharing">
+            <description>Accomplished via attributes where owners write and readers synchronize to access data. Trace: [Article_1.pdf::chunk::31]</description>
+          </feature>
+          <feature name="Data_Transformation">
+            <description>Transformations of data during inter-model exchanges, treated as a model in NAOMI. Trace: [Article_1.pdf::chunk::18; Article_1.pdf::chunk::46]</description>
+          </feature>
+        </and>
+
+        <and name="Change_Propagation">
+          <description>The controlled exchange of attributes to propagate modifications across dependent models. Trace: [Article_1.pdf::chunk::33]</description>
+          <feature name="Dependency_Analysis">
+            <description>Analyzing the pseudo graph of models and edges to determine dependencies. Trace: [Article_1.pdf::chunk::33]</description>
+          </feature>
+          <alt name="Execution_Ordering">
+            <description>Methods for determining the order in which models should be executed. Trace: [Article_1.pdf::chunk::34]</description>
+            <feature name="Depth_First_Search">
+              <description>Using DFS on the dependency graph to select leaves and propagate changes upwards. Trace: [Article_1.pdf::chunk::34]</description>
+            </feature>
+            <feature name="Rule_Based_Execution">
+              <description>Using expert-defined rules to handle cycles or nondeterministic models. Trace: [Article_1.pdf::chunk::35; Article_1.pdf::chunk::36]</description>
+            </feature>
+          </alt>
+          <feature name="Event_Based_Communication">
+            <description>Any change to an artifact results in notifications sent via protocols like gRPC using proto requests to synchronize data. Trace: [Article_5.pdf::chunk::140; Article_5.pdf::chunk::141]</description>
+          </feature>
+          <or name="Synchronization_Modes">
+            <description>Modes of synchronization between federated models when evolution occurs. Trace: [Article_8.pdf::chunk::47]</description>
+            <feature name="Automatic_Synchronization">
+              <description>Changes are automatically synchronized between the virtual model and technological models. Trace: [Article_8.pdf::chunk::47]</description>
+            </feature>
+            <feature name="Alert_Based_Synchronization">
+              <description>The designer gets notified when a corresponding model is evolved to remain in control of synchronization. Trace: [Article_8.pdf::chunk::47]</description>
+            </feature>
+          </or>
+          <feature name="Consistent_Co_Evolution">
+            <description>Support for automatically flagging or propagating changes to keep software and analysis models consistent. Trace: [Article_9.pdf::chunk::100; Article_9.pdf::chunk::112]</description>
+          </feature>
+        </and>
+
+        <and name="Consistency_Management">
+          <description>Ensuring the composition of constituent models is consistent. Trace: [Article_1.pdf::chunk::36]</description>
+          <feature name="Attribute_Consistency">
+            <description>All attributes have been updated by their owner model since the last input change. Trace: [Article_1.pdf::chunk::37]</description>
+          </feature>
+          <feature name="Constraint_Consistency">
+            <description>Current values of all attributes do not violate any model-specific constraints. Trace: [Article_1.pdf::chunk::37]</description>
+          </feature>
+          <feature name="Attribute_Model_Consistency">
+            <description>Modification times of all models are earlier than the modification times of their output attributes. Trace: [Article_1.pdf::chunk::37]</description>
+          </feature>
+          <feature name="NAOMI_Consistency">
+            <description>A state where attribute, constraint, and attribute-model consistencies are all met. Trace: [Article_1.pdf::chunk::38]</description>
+          </feature>
+          <feature name="Security_Consistency">
+            <description>Checking whether changed elements violate security rules attached to reified links. Trace: [Article_11.pdf::chunk::27; Article_11.pdf::chunk::42]</description>
+          </feature>
+          <feature name="Consistency_Preservation_Rules">
+            <description>Incremental model transformations that update one model after another was modified to preserve consistency. Trace: [Article_2.pdf::chunk::112; Article_2.pdf::chunk::113]</description>
+          </feature>
+        </and>
+
+        <and name="Version_Management">
+          <description>Managing versions of artifacts to allow synchronization and historical reconstruction. Trace: [Article_1.pdf::chunk::42]</description>
+          <feature name="Rollback">
+            <description>The ability to revert changes to earlier versions of models and tools. Trace: [Article_1.pdf::chunk::18; Article_1.pdf::chunk::42]</description>
+          </feature>
+          <feature name="Reconstruction">
+            <description>The capability to reconstruct the entire multi-model at any point during its evolution. Trace: [Article_1.pdf::chunk::23; Article_1.pdf::chunk::42]</description>
+          </feature>
+        </and>
+
+        <and name="Model_Execution">
+          <description>The process of running a model within the NAOMI platform. Trace: [Article_1.pdf::chunk::31]</description>
+          <feature name="Read_Inputs">
+            <description>Reading input attributes from the repository. Trace: [Article_1.pdf::chunk::32]</description>
+          </feature>
+          <feature name="Run_Model">
+            <description>Executing the model using its specific DSML tool. Trace: [Article_1.pdf::chunk::32]</description>
+          </feature>
+          <feature name="Write_Outputs">
+            <description>Writing the resulting output attributes back to the repository. Trace: [Article_1.pdf::chunk::32]</description>
+          </feature>
+        </and>
+
+        <and name="Architecture_Recovery_Process">
+          <description>The process of recovering megamodels from MDE projects using heuristics to detect and connect artifacts. Trace: [Article_14.pdf::chunk::10; Article_14.pdf::chunk::12]</description>
+          <feature name="Discovery_Heuristics">
+            <description>Techniques used to identify artifact types and recover relationships among them, such as ATL, KM3, and Acceleo heuristics. Trace: [Article_14.pdf::chunk::11; Article_14.pdf::chunk::128]</description>
+          </feature>
+        </and>
+
+        <or name="Use_Cases" abstract="true">
+          <description>Typical applications and scenarios where models federation is applied. Trace: [Article_13.pdf::chunk::41]</description>
+          <feature name="Model_Synchronization">
+            <description>Synchronizing multiple models conforming to different metamodels, allowing manipulation of all models simultaneously. Trace: [Article_13.pdf::chunk::42; Article_13.pdf::chunk::43]</description>
+          </feature>
+          <feature name="Model_Mapping">
+            <description>Collaborative definition of transformations from one tool targeting one expertise domain to another. Trace: [Article_13.pdf::chunk::46; Article_13.pdf::chunk::47]</description>
+          </feature>
+          <feature name="Multi_Paradigm_Modeling">
+            <description>Supporting the integration of various formalisms and paradigms well-fitted to specific concerns. Trace: [Article_13.pdf::chunk::4; Article_13.pdf::chunk::42]</description>
+          </feature>
+        </or>
+      </and>
+
+      <and name="Intentional" abstract="true">
+        <description>Addresses the objectives and goals of Model Federation, such as traceability, consistency assurance, transformation management, composition, and conceptual elicitation.</description>
+        
+        <and name="Objectives">
+          <description>The primary goals addressed by the NAOMI multi-modeling platform and MDE interoperability frameworks. Trace: [Article_1.pdf::chunk::2; Article_10.pdf::chunk::5]</description>
+          <feature name="Multi_Model_Integration">
+            <description>Combining multiple models developed in different DSMLs to work together. Trace: [Article_1.pdf::chunk::2]</description>
+          </feature>
+          <feature name="Quality_Assessment_Integration">
+            <description>Integrating quality attributes as a decision factor in the choice among design decisions in transformation processes. Trace: [Article_12.pdf::chunk::2; Article_12.pdf::chunk::5]</description>
+          </feature>
+          <feature name="Consistency_Assurance">
+            <description>Ensuring that changes are correctly propagated and no constraints are violated. Trace: [Article_1.pdf::chunk::4; Article_1.pdf::chunk::6]</description>
+          </feature>
+          <feature name="Semantic_Precision">
+            <description>Ensuring the semantics of exchanged data are precisely known and understood. Trace: [Article_1.pdf::chunk::8]</description>
+          </feature>
+          <and name="Interoperability">
+            <description>The ability of diverse systems and organizations to work together and exchange data or services at run-time. Trace: [Article_10.pdf::chunk::3; Article_10.pdf::chunk::12]</description>
+            <feature name="Technical_Interoperability">
+              <description>The capability of simulation systems to physically connect and exchange data through standard interfaces. Trace: [Article_10.pdf::chunk::5; Article_10.pdf::chunk::17]</description>
+            </feature>
+            <feature name="Substantive_Interoperability">
+              <description>The desired outcome of exchanging meaningful data so that coherent interaction among systems takes place based on conceptual alignment. Trace: [Article_10.pdf::chunk::5; Article_10.pdf::chunk::20]</description>
+            </feature>
+            <feature name="Conceptual_Interoperability">
+              <description>Ensuring global consistency, maintaining traceability, and building cross-concerns views through models federation. Trace: [Article_13.pdf::chunk::0; Article_13.pdf::chunk::2]</description>
+            </feature>
+          </and>
+          <feature name="Reusability">
+            <description>The ability of a simulation model to be reused when the application scenario changes, often off-line. Trace: [Article_10.pdf::chunk::9; Article_10.pdf::chunk::11]</description>
+          </feature>
+          <feature name="Composability">
+            <description>The capability to select and assemble simulation components in various combinations into valid systems prior to run-time. Trace: [Article_10.pdf::chunk::12; Article_10.pdf::chunk::13]</description>
+          </feature>
+          <feature name="Security_By_Design">
+            <description>A system design paradigm in which system security requirements are taken into account from the beginning of the design phase. Trace: [Article_11.pdf::chunk::11; Article_11.pdf::chunk::12]</description>
+          </feature>
+          <and name="Traceability">
+            <description>Maintaining semantic links between artifacts produced by all tools within a single modeling space. Trace: [Article_13.pdf::chunk::24]</description>
+            <feature name="Horizontal_Traceability">
+              <description>Traceability across domains, supporting model synchronization, conceptual alignment, and decomposition. Trace: [Article_13.pdf::chunk::10; Article_13.pdf::chunk::26]</description>
+            </feature>
+            <feature name="Vertical_Traceability">
+              <description>Traceability supporting detailed analysis and refinement across engineering phases. Trace: [Article_13.pdf::chunk::10; Article_13.pdf::chunk::26]</description>
+            </feature>
+            <feature name="Inter_Model_Traceability">
+              <description>Tracing Non-Functional Properties (NFPs) between software and analysis models to map expressions that calculate quantitative measures. Trace: [Article_9.pdf::chunk::102; Article_9.pdf::chunk::103]</description>
+            </feature>
+          </and>
+          <feature name="Architecture_Recovery">
+            <description>Retrieving architectural information to foster a better understanding of existing MDE-based projects. Trace: [Article_14.pdf::chunk::1; Article_14.pdf::chunk::10]</description>
+          </feature>
+          <and name="Modularity">
+            <description>Addressing the separation of concerns in multi-model systems through different dimensions of modularization. Trace: [Article_8.pdf::chunk::10; Article_8.pdf::chunk::11]</description>
+            <feature name="Structural_Modularity">
+              <description>Places all features primarily serving a common concern in a single model or module. Trace: [Article_8.pdf::chunk::11; Article_8.pdf::chunk::36]</description>
+            </feature>
+            <feature name="Conceptual_Modularity">
+              <description>Creates modules out of overlapping or tightly coupled features from different models in the conceptual space. Trace: [Article_8.pdf::chunk::11; Article_8.pdf::chunk::36]</description>
+            </feature>
+          </and>
+        </and>
+      </and>
+
+    </and>
+  </struct>
+  <constraints/>
+</featureModel>

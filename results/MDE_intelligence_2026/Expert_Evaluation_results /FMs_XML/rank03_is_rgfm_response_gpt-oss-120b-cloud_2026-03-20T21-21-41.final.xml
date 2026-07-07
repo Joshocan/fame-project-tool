@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<featureModel>
+  <struct>
+    <feature name="Model_Federation">
+      <description>Represents the overall Model Federation approach that enables integration of heterogeneous domain-specific modeling languages and tools as described in the NAOMI framework.</description>
+      <feature name="Structural" abstract="true">
+        <description>Covers the artefacts, links, and structural features of Model Federation, including model composition, graph structure, formalism, domain, and technological context.</description>
+        <feature name="Artefacts" abstract="true">
+          <description>Collects the primary modelling artefacts managed within the federation.</description>
+          <feature name="Models">
+            <description>Domain-specific models expressed in various DSMLs that reside in their native forms within the repository. Trace: [Article_1 §4; Article_1 §5]</description>
+          </feature>
+          <feature name="Connectors">
+            <description>Software components that provide language‑specific and tool‑specific interfaces to enable controlled information exchange between models. Trace: [Article_1 §3; Article_1 §4]</description>
+          </feature>
+          <feature name="Repository">
+            <description>Central storage that holds native model files and manages a model registry for discovery and access. Trace: [Article_1 §2; Article_1 §6]</description>
+          </feature>
+          <feature name="Macromodels">
+            <description>Macromodels capture how models are related to each other and support analysis of inter‑model relationships. Trace: [Article_12 §3]</description>
+          </feature>
+          <feature name="Metamodels">
+            <description>Metamodels define the abstract syntax of DSMLs and enable model creation and transformation. Trace: [Article_14 §3]</description>
+          </feature>
+          <feature name="Dynamic_Artifacts" abstract="true">
+            <description>Represents artefacts that evolve over time, such as prototypes and source code, complementing static models. Trace: [Article_5 §4]</description>
+            <feature name="Prototypes">
+              <description>Prototype artefacts are used to explore design alternatives and validate concepts. Trace: [Article_5 §4]</description>
+            </feature>
+            <feature name="Source_Code">
+              <description>Source code files constitute executable artifacts derived from models and transformations. Trace: [Article_5 §1]</description>
+            </feature>
+          </feature>
+          <feature name="Views" abstract="true">
+            <description>Modeling views that provide focused perspectives on the federated tool‑chain architecture. Trace: [Article_6 §1]</description>
+            <feature name="Resource_Allocation_View">
+              <description>Provides an overview of tool coupling/cohesion and producer/consumer relations within the federation. Trace: [Article_6 §5]</description>
+            </feature>
+            <feature name="Domain_Specification_View">
+              <description>Shows dependencies between different domains irrespective of deployment details. Trace: [Article_6 §5]</description>
+            </feature>
+          </feature>
+          <feature name="Functional_Flow_Block_Diagram">
+            <description>Functional Flow Block Diagram (FFBD) is a structured method for documenting process flow and ordering of system functions, used in systems engineering. Trace: [Article_7 §2]</description>
+          </feature>
+        </feature>
+        <feature name="Links" abstract="true">
+          <description>Defines the relationships that bind models together within the federation.</description>
+          <feature name="Shared_Attributes">
+            <description>Standardised attributes that are common across multiple facets of the system, enabling consistent linking. Trace: [Article_1 §4]</description>
+          </feature>
+          <feature name="Dependency_Links">
+            <description>Explicit links representing input‑output dependencies between models, used for constructing dependency graphs. Trace: [Article_1 §6]</description>
+          </feature>
+          <feature name="Model_Relationships" abstract="true">
+            <description>Specific relationship types that express conformance and composition between models. Trace: [Article_12 §3]</description>
+            <feature name="ConformsTo">
+              <description>Indicates that a model conforms to the specification of another model. Trace: [Article_12 §3]</description>
+            </feature>
+            <feature name="IsComposedBy">
+              <description>Specifies that a model is composed by one or more subordinate models. Trace: [Article_12 §3]</description>
+            </feature>
+          </feature>
+        </feature>
+        <feature name="Graph_Structure" abstract="true">
+          <description>Structural representation of model interdependencies.</description>
+          <feature name="Model_Dependency_Graph">
+            <description>A directed graph that captures dependencies among models based on their inputs and outputs. Trace: [Article_1 §2; Article_1 §6]</description>
+          </feature>
+        </feature>
+        <feature name="Formalism" abstract="true">
+          <description>Describes the modelling paradigms and languages supported.</description>
+          <feature name="Multi_Formalism">
+            <description>Supports the integration of models expressed in multiple formalisms within a single federation. Trace: [Article_1 §1]</description>
+          </feature>
+          <feature name="DSMLs">
+            <description>Domain‑specific modelling languages that can be freely chosen by modelers and integrated into the federation. Trace: [Article_1 §4]</description>
+          </feature>
+          <feature name="UMLsec">
+            <description>UMLsec is a security‑oriented extension of UML that enables specification of security‑relevant properties such as confidentiality and integrity. Trace: [Article_11 §1]</description>
+          </feature>
+          <feature name="SecBPMN">
+            <description>SecBPMN extends BPMN with security annotations to model confidentiality, accountability, and other security properties. Trace: [Article_11 §2]</description>
+          </feature>
+          <feature name="Model_Transformation">
+            <description>Techniques that convert models from one formalism or metamodel to another, enabling interoperability and code generation. Trace: [Article_14 §3]</description>
+          </feature>
+          <feature name="Model_Comparison">
+            <description>Techniques for assessing similarity or differences between models to support evolution and consistency checking. Trace: [Article_14 §3]</description>
+          </feature>
+          <feature name="Code_Generation">
+            <description>Automated production of executable code or textual artifacts from models, supporting rapid prototyping. Trace: [Article_14 §3]</description>
+          </feature>
+          <feature name="Business_Process_Models">
+            <description>Uses business process modeling languages to describe tool chains and integration workflows. Trace: [Article_3 §57]</description>
+          </feature>
+          <feature name="Function_Modeling" abstract="true">
+            <description>Provides mechanisms for modeling system functions and their concrete realizations.</description>
+            <feature name="Function_Database">
+              <description>Stores reusable function definitions and their parameters for model‑based system design. Trace: [Article_3 §162]</description>
+            </feature>
+            <feature name="Part_Library">
+              <description>Provides a library of component parts to assemble configurations based on functional constraints. Trace: [Article_3 §162]</description>
+            </feature>
+            <feature name="Functional_Constraints">
+              <description>Captures constraints linking functional requirements to concrete component selections. Trace: [Article_3 §162]</description>
+            </feature>
+          </feature>
+          <feature name="Knowledge_Representation" abstract="true">
+            <description>Encapsulates mechanisms for representing domain knowledge, such as ontologies and reference models, to support model integration.</description>
+            <feature name="Ontology">
+              <description>Provides ontology‑based knowledge representation to capture domain concepts and relationships for model integration. Trace: [Article_10 §6]</description>
+            </feature>
+            <feature name="Reference_Model">
+              <description>Defines a reference model that serves as a common conceptual architecture for aligning heterogeneous models. Trace: [Article_10 §2]</description>
+            </feature>
+            <feature name="Security_Annotations">
+              <description>Security annotations capture security properties and attributes attached to model elements, supporting security analysis. Trace: [Article_11 §2]</description>
+            </feature>
+            <feature name="Megamodel">
+              <description>A megamodel captures relationships among models, metamodels, and transformations, enabling higher‑level reasoning about the federation. Trace: [Article_14 §4]</description>
+            </feature>
+            <feature name="RAS_PP">
+              <description>RAS++ is a common representation language for a knowledge base that unifies diverse MDE artifacts. Trace: [Article_14 §4]</description>
+            </feature>
+            <feature name="V_SUM_Metamodel">
+              <description>Defines the V‑SUM metamodel that captures model elements and their relationships for consistency preservation. Trace: [Article_2 §2]</description>
+            </feature>
+            <feature name="View_Types">
+              <description>Specifies predefined view types that methodologists can instantiate to create, access, and manipulate the V‑SUM. Trace: [Article_2 §3]</description>
+            </feature>
+            <feature name="Viewpoint_Relations" abstract="true">
+              <description>Defines explicit relationships among viewpoints to support architecting of multiview models. Trace: [Article_3 §119]</description>
+            </feature>
+            <feature name="Traceability_Matrix" abstract="true">
+              <description>Matrix structures capture links between requirements, functions, components, and design artifacts to support traceability. Trace: [Article_5 §2]</description>
+              <feature name="Requirement_Function_Component_Matrix">
+                <description>Matrix linking requirements, functional specifications, and component structures. Trace: [Article_5 §2]</description>
+              </feature>
+            </feature>
+          </feature>
+          <feature name="Alignment" abstract="true">
+            <description>Provides mechanisms to align heterogeneous formalisms and abstraction levels, facilitating coherent federation of models.</description>
+            <feature name="Formalisms_Alignment">
+              <description>Aligns models expressed in different formalisms to enable interoperability across diverse modeling languages. Trace: [Article_10 §2]</description>
+            </feature>
+            <feature name="Abstraction_Level_Alignment">
+              <description>Ensures alignment of models at appropriate abstraction levels to reduce accidental complexity and support composition. Trace: [Article_10 §2]</description>
+            </feature>
+          </feature>
+          <feature name="Abstraction_Levels" abstract="true">
+            <description>Supports the use of models at different levels of abstraction within the federation. Trace: [Article_12 §4]</description>
+          </feature>
+          <feature name="Concern_Specific_Formalisms" abstract="true">
+            <description>Allows selection of modeling languages tailored to specific concerns of an organization or project. Trace: [Article_12 §5]</description>
+          </feature>
+          <feature name="Modeling_Environment" abstract="true">
+            <description>Provides a general‑purpose modeling environment based on standards such as MOF, UML, and Model Driven Architecture to support model‑driven engineering.</description>
+            <feature name="MOF">
+              <description>Implements the Meta‑Object Facility standard for defining metamodels. Trace: [Article_13 §15]</description>
+            </feature>
+            <feature name="MDA">
+              <description>Supports Model Driven Architecture processes for systematic model transformations. Trace: [Article_13 §15]</description>
+            </feature>
+            <feature name="UML_MDE">
+              <description>Uses UML as a modeling language within a model‑driven engineering context. Trace: [Article_13 §15]</description>
+            </feature>
+          </feature>
+          <feature name="Engine_Core" abstract="true">
+            <description>Encapsulates the core engine components such as the Concept Space that orchestrates model federation at runtime.</description>
+            <feature name="Concept_Space">
+              <description>Core component providing the conceptual space for model federation execution and management. Trace: [Article_13 §33]</description>
+            </feature>
+          </feature>
+          <feature name="FTG_PM_Model" abstract="true">
+            <description>Encapsulates the Formalism Transformation Graph (FTG) and Process Model (PM) that together describe formalisms, their transformations, and the execution order of operations. Trace: [Article_4 §1]</description>
+            <feature name="Formalism_Transformation_Graph" abstract="true">
+              <description>Represents the graph of formalisms (nodes) and the transformation links between them. Trace: [Article_4 §2]</description>
+              <feature name="Formalisms_Nodes">
+                <description>Nodes in the FTG representing each formalism used in the federation. Trace: [Article_4 §2]</description>
+              </feature>
+              <feature name="Transformation_Links">
+                <description>Links in the FTG denoting possible transformations between formalisms. Trace: [Article_4 §2]</description>
+              </feature>
+            </feature>
+            <feature name="Process_Model" abstract="true">
+              <description>Specifies the ordered operations and the models they act upon, governing enactment of the federation. Trace: [Article_4 §3]</description>
+              <feature name="Operation_Order_Mandate">
+                <description>Mandates the sequence in which operations must be executed within the process model. Trace: [Article_4 §3]</description>
+              </feature>
+              <feature name="Model_Operation_Execution">
+                <description>Executes operations that create or modify models as defined by the process model. Trace: [Article_4 §4]</description>
+              </feature>
+            </feature>
+          </feature>
+          <feature name="Tooling" abstract="true">
+            <description>Encompasses the software development and integration tools used to create, manage, and connect models and code artifacts. Trace: [Article_5 §1]</description>
+            <feature name="GitHub">
+              <description>GitHub is used as a collaborative version‑control platform for source code and model artifacts. Trace: [Article_5 §1]</description>
+            </feature>
+            <feature name="ROS_Protocol">
+              <description>ROS protocol files define the communication interfaces and expected attributes for robot operating system components. Trace: [Article_5 §1]</description>
+            </feature>
+            <feature name="Visio_UML_Diagrams">
+              <description>Visio‑based UML diagrams model hardware perspectives, connections, and actions of the product. Trace: [Article_5 §1]</description>
+            </feature>
+            <feature name="Off_The_Shelf_Components">
+              <description>Selection of off‑the‑shelf components is supported to accelerate system assembly. Trace: [Article_5 §4]</description>
+            </feature>
+            <feature name="Tool_Structure">
+              <description>Describes dependencies between tools, resources, and data allocation within the development environment. Trace: [Article_5 §6]</description>
+            </feature>
+            <feature name="Specifier">
+              <description>A tool that centrally defines the communication network of all vehicle architectures. Trace: [Article_6 §6]</description>
+            </feature>
+            <feature name="ModArc">
+              <description>A database that defines all hardware entities and their interfaces. Trace: [Article_6 §6]</description>
+            </feature>
+            <feature name="Diagnostics_Tool">
+              <description>A tool that specifies the diagnostics functionality of all vehicle architectures. Trace: [Article_6 §6]</description>
+            </feature>
+            <feature name="Requirements_Specifier">
+              <description>A proprietary tool that allows for the semi‑formal specification of system requirements. Trace: [Article_6 §6]</description>
+            </feature>
+          </feature>
+          <feature name="WML">
+            <description>WML is used to emulate component execution and generate executable operations on target platforms. Trace: [Article_7 §2]</description>
+          </feature>
+          <feature name="Extension_Mechanisms" abstract="true">
+            <description>Mechanisms to extend existing metamodels without violating MOF conformity. Trace: [Article_8 §2]</description>
+            <feature name="EMF_Facets">
+              <description>Provides non‑intrusive extensions to add attributes or operations to models. Trace: [Article_8 §2]</description>
+            </feature>
+            <feature name="KerMeta">
+              <description>Offers metamodel extension capabilities similar to EMF facets. Trace: [Article_8 §2]</description>
+            </feature>
+          </feature>
+          <feature name="Intermediate_Language">
+            <description>Intermediate language used to unify heterogeneous DSLs for transformation and composition. Trace: [Article_8 §5]</description>
+          </feature>
+          <feature name="Unified_Paradigm">
+            <description>Approach aiming to provide a single modeling paradigm covering all heterogeneous concerns. Trace: [Article_8 §5]</description>
+          </feature>
+        </feature>
+        <feature name="Modularity" abstract="true">
+          <description>Addresses structural and conceptual modularity aspects to support decomposition and reuse of model components. Trace: [Article_8 §4]</description>
+          <feature name="Structural_Modularity" abstract="true">
+            <description>Enables decomposition of models into structurally independent modules. Trace: [Article_8 §4]</description>
+          </feature>
+          <feature name="Conceptual_Modularity" abstract="true">
+            <description>Supports modular organization of conceptual spaces for better abstraction management. Trace: [Article_8 §4]</description>
+          </feature>
+        </feature>
+        <feature name="Dynamic_Linkage" abstract="true">
+          <description>Provides mechanisms to establish dynamic links between virtual models and technological models. Trace: [Article_8 §1]</description>
+          <feature name="Technological_Connectors">
+            <description>Connectors that bind virtual model elements to technological model components at runtime. Trace: [Article_8 §1]</description>
+          </feature>
+          <feature name="Model_Slots">
+            <description>Placeholders within models that can be dynamically bound to concrete implementations. Trace: [Article_8 §1]</description>
+          </feature>
+        </feature>
+        <feature name="Spaces" abstract="true">
+          <description>Defines conceptual and technological spaces used for mapping model elements across domains. Trace: [Article_8 §1]</description>
+          <feature name="Conceptual_Space">
+            <description>Abstract space representing high‑level concepts and relationships. Trace: [Article_8 §1]</description>
+          </feature>
+          <feature name="Technological_Space">
+            <description>Concrete space representing implementation‑specific model artifacts and platforms. Trace: [Article_8 §1]</description>
+          </feature>
+        </feature>
+        <feature name="Technological_Context" abstract="true">
+          <description>Technologies and frameworks that enable model integration and exchange.</description>
+          <or name="Tech_Context_Options">
+            <feature name="OTIF">
+              <description>Open Tool Integration Framework that provides meta‑model based transformations for data integration. Trace: [Article_1 §1]</description>
+            </feature>
+            <feature name="ETI">
+              <description>Electronic Tool Integration framework that uses lightweight web‑service based data exchange. Trace: [Article_1 §1]</description>
+            </feature>
+            <feature name="Web_Services">
+              <description>Web‑service mechanisms employed by ETI to facilitate tool communication. Trace: [Article_1 §1]</description>
+            </feature>
+            <feature name="OpenFleXo">
+              <description>OpenFleXo is chosen as the model federation infrastructure due to its flexibility and maturity. Trace: [Article_11 §1]</description>
+            </feature>
+            <feature name="Architecture_Framework">
+              <description>Extends an existing architecture framework to enable conceptual interoperability across federated models. Trace: [Article_13 §58]</description>
+            </feature>
+            <feature name="Tracing_Tools">
+              <description>Provides tools for tracing model interactions and dependencies across the federation. Trace: [Article_3 §58]</description>
+            </feature>
+            <feature name="OSLC">
+              <description>OASIS OSLC is an open standard that adopts REST principles to enable tool‑ and platform‑neutral interoperability. Trace: [Article_6 §2]</description>
+              <feature name="Linked_Data">
+                <description>Linked Data initiative provides a web‑based approach for representing and sharing model information. Trace: [Article_6 §2]</description>
+              </feature>
+              <feature name="REST_Architecture">
+                <description>REST architectural style underpins OSLC, offering scalable and flexible service interactions. Trace: [Article_6 §2]</description>
+              </feature>
+            </feature>
+          </or>
+        </feature>
+        <feature name="Composition" abstract="true">
+          <description>Addresses the structural aspects of integrating components and models, focusing on composability and conflict‑free assembly.</description>
+          <feature name="Composability">
+            <description>Supports the integration of components and models without causing conflicts, addressing composability at the modeling level. Trace: [Article_10 §4]</description>
+          </feature>
+        </feature>
+        <feature name="Dimensions" abstract="true">
+          <description>Organises orthogonal dimensions that facilitate navigation and modular reasoning within the SUM.</description>
+          <feature name="Orthogonal_Dimensions">
+            <description>Defines dimensions that are orthogonal to each other, enabling clear separation of concerns in the SUM. Trace: [Article_2 §4]</description>
+          </feature>
+        </feature>
+      </feature>
+      <feature name="Operational" abstract="true">
+        <description>Specifies the processes, operations, and management activities performed on federated models.</description>
+        <feature name="Processes" abstract="true">
+          <description>Core activities that drive model federation execution.</description>
+          <feature name="Model_Registration">
+            <description>Registers models in the central repository, making them discoverable for federation operations. Trace: [Article_1 §6]</description>
+          </feature>
+          <feature name="Query_Registry">
+            <description>Queries the model registry to retrieve all models participating in a project. Trace: [Article_1 §6]</description>
+          </feature>
+          <feature name="Build_Dependency_Graph">
+            <description>Constructs the model‑dependency graph based on declared inputs and outputs of each model. Trace: [Article_1 §6]</description>
+          </feature>
+          <feature name="Generate_Execution_Plan">
+            <description>Derives an ordered execution plan from the dependency graph to resolve model interactions. Trace: [Article_1 §6]</description>
+          </feature>
+          <feature name="Workflow_Management">
+            <description>Manages the workflow that orchestrates the execution of multiple DSMLs within a NAOMI project. Trace: [Article_1 §6]</description>
+          </feature>
+          <feature name="Change_Propagation">
+            <description>Coordinates the propagation of necessary changes across dependent models to maintain consistency. Trace: [Article_1 §5]</description>
+          </feature>
+          <feature name="Model_Synchronization">
+            <description>Ensures that models across different formalisms remain consistent through synchronization mechanisms. Trace: [Article_8 §3]</description>
+          </feature>
+          <feature name="Notification">
+            <description>Provides user notifications about model selection, execution status, and messages during federation activities. Trace: [Article_1 §2]</description>
+          </feature>
+          <feature name="VDI2206_Process">
+            <description>Implements the VDI2206 engineering process covering concept to verification phases. Trace: [Article_3 §163]</description>
+          </feature>
+          <feature name="Co_Simulation">
+            <description>Enables co‑simulation of heterogeneous models to evaluate integrated system behavior. Trace: [Article_3 §148]</description>
+          </feature>
+          <feature name="Inconsistency_Management" abstract="true">
+            <description>Provides mechanisms to detect, propagate, and resolve inconsistencies across heterogeneous model views. Trace: [Article_5 §3]</description>
+            <feature name="Logical_Rule_Definition">
+              <description>Defines logical rules for consistency checking across multiple views. Trace: [Article_5 §3]</description>
+            </feature>
+            <feature name="Heterogeneous_View_Management">
+              <description>Manages heterogeneous views to ensure coordinated updates and consistency. Trace: [Article_5 §3]</description>
+            </feature>
+          </feature>
+          <feature name="Architecture_Recovery" abstract="true">
+            <description>Processes that reconstruct architectural descriptions from existing model artefacts when documentation is missing or outdated.</description>
+            <feature name="Reverse_Engineering">
+              <description>Derives high‑level architectural models from low‑level code and model artefacts. Trace: [Article_14 §2]</description>
+            </feature>
+            <feature name="Trace_Based_Identification">
+              <description>Identifies relationships between artifacts by tracing references such as ANT files and module invocations. Trace: [Article_14 §5]</description>
+            </feature>
+          </feature>
+          <feature name="Process_Alignment" abstract="true">
+            <description>Maps architecture model elements to process activities to support orchestration and continuous improvement of development processes.</description>
+            <feature name="Architecture_Process_Mapping">
+              <description>Defines explicit mappings between architectural models and stakeholder process intentions. Trace: [Article_13 §25]</description>
+            </feature>
+            <feature name="Semantic_Link_Capture">
+              <description>Captures semantic links between models and process intents to enable robust orchestration. Trace: [Article_13 §25]</description>
+            </feature>
+          </feature>
+          <feature name="Agile_Support" abstract="true">
+            <description>Supports agile methodologies to manage co‑evolution and reconciliation of multiple modeling concerns.</description>
+            <feature name="Agile_Methodologies">
+              <description>Provides mechanisms for agile planning and iterative development within model federation. Trace: [Article_13 §3]</description>
+            </feature>
+            <feature name="Co_Evolution_Management">
+              <description>Manages the co‑evolution of models and viewpoints across collaborative processes. Trace: [Article_13 §3]</description>
+            </feature>
+          </feature>
+          <feature name="Model_Centric_Development" abstract="true">
+            <description>Emphasizes a model‑centric approach where minimal code is required and short iterations are supported for tool evolution.</description>
+            <feature name="Model_Centric_Approach">
+              <description>Enables development driven primarily by models, reducing code overhead. Trace: [Article_13 §33]</description>
+            </feature>
+          </feature>
+          <feature name="Consistency_Management" abstract="true">
+            <description>Ensures global consistency across diverse models and concerns to achieve correct‑by‑construction implementations.</description>
+            <feature name="Global_Consistency_Management">
+              <description>Provides mechanisms to maintain consistency across all federated artefacts. Trace: [Article_13 §4]</description>
+            </feature>
+          </feature>
+          <feature name="Quality_Integration" abstract="true">
+            <description>Integrates quality assessment activities into the federation processes. Trace: [Article_12 §2]</description>
+            <feature name="Integrate_Quality_Assessment">
+              <description>Applies multimodel quality assessment techniques to evaluate model interactions and outcomes. Trace: [Article_12 §2]</description>
+            </feature>
+          </feature>
+          <feature name="Measurement" abstract="true">
+            <description>Defines measurement structures based on the Goal‑Question‑Metric approach for evaluating federation quality. Trace: [Article_12 §6]</description>
+            <feature name="Measurement_Model">
+              <description>Implements a GQM measurement model comprising goals, questions, and metrics. Trace: [Article_12 §6]</description>
+            </feature>
+            <feature name="Goal_Question_Metrics">
+              <description>Specifies concrete goals, associated questions, and derived metrics for quality assessment. Trace: [Article_12 §6]</description>
+            </feature>
+          </feature>
+          <feature name="Evolution" abstract="true">
+            <description>Mechanisms that support the evolution of models and their interrelationships over time.</description>
+            <feature name="Inter_Artifact_Tracing">
+              <description>Records relationships between artifacts across different modeling levels to support evolution tracking. Trace: [Article_11 §1]</description>
+            </feature>
+            <feature name="Graph_Transformation_Synchronization">
+              <description>Graph transformation techniques synchronize evolving models by applying rule‑based modifications to the model dependency graph. Trace: [Article_11 §1]</description>
+            </feature>
+            <feature name="Security_Rules_Definition">
+              <description>Security rules, expressed using OCL predicates, define consistency constraints for security properties within the federation. Trace: [Article_11 §6]</description>
+            </feature>
+          </feature>
+          <feature name="Model_Management_Tool_MMINT">
+            <description>A graphical model management environment that supports model transformation, comparison, and code generation. Trace: [Article_14 §4]</description>
+          </feature>
+          <feature name="Transformation_Tooling" abstract="true">
+            <description>Tool support for applying model transformations and generating code.</description>
+            <feature name="Acceleo">
+              <description>Acceleo is a model‑to‑text transformation language used for code generation from models. Trace: [Article_14 §6]</description>
+            </feature>
+            <feature name="ATL">
+              <description>ATL (ATLAS Transformation Language) enables model‑to‑model transformations within MDE projects. Trace: [Article_14 §6]</description>
+            </feature>
+          </feature>
+          <feature name="Verification" abstract="true">
+            <description>Activities that check model correctness and security compliance.</description>
+            <feature name="OCL_Predicates">
+              <description>OCL predicates are used to verify security rules and model consistency within the federation. Trace: [Article_11 §1]</description>
+            </feature>
+          </feature>
+          <feature name="Management" abstract="true">
+            <description>Administrative functions for maintaining the federation infrastructure.</description>
+            <feature name="Model_Repository_Management">
+              <description>Handles lifecycle operations of models within the repository, including storage and versioning. Trace: [Article_1 §2]</description>
+            </feature>
+          </feature>
+          <feature name="Methodology" abstract="true">
+            <description>Defines the methodological steps and roles for applying the Vitruvius and OSM approaches.</description>
+            <feature name="Vitruvius_Approach">
+              <description>Provides a development process that defines roles, consistency rules, and integration steps for existing models. Trace: [Article_2 §2]</description>
+            </feature>
+            <feature name="OSM_Process">
+              <description>Specifies the OSM process with methodologist and developer roles for creating SUM metamodels and view types. Trace: [Article_2 §4]</description>
+            </feature>
+            <feature name="Methodologist_Role">
+              <description>Responsible for creating SUM metamodels and view types. Trace: [Article_2 §4]</description>
+            </feature>
+            <feature name="Developer_Role">
+              <description>Instantiates the SUM metamodel and modifies instances using generated views. Trace: [Article_2 §4]</description>
+            </feature>
+            <feature name="Consistency_Preservation">
+              <description>Specifies the consistency preservation steps defined in the Vitruvius approach. Trace: [Article_2 §5]</description>
+            </feature>
+            <feature name="Correspondence_Rules">
+              <description>Defines required correspondences between existing models and the V‑SUM to ensure consistency. Trace: [Article_2 §5]</description>
+            </feature>
+          </feature>
+          <feature name="Tools" abstract="true">
+            <description>Software utilities that support model extraction, reverse engineering, and transformation within the federation.</description>
+            <feature name="Extract_Tool">
+              <description>Tool used to create architectural models and correspondence models for projects, with reverse‑engineering capabilities. Trace: [Article_2 §5]</description>
+            </feature>
+            <feature name="Reverse_Engineering_Rules">
+              <description>Rules for reverse engineering components, interfaces, and data types, noted as not conforming to CPRs. Trace: [Article_2 §5]</description>
+            </feature>
+          </feature>
+          <feature name="FTG_PM_Applications" abstract="true">
+            <description>Describes the two primary uses of the FTG+PM model: documentation and enactment. Trace: [Article_4 §2]</description>
+            <feature name="Documentation">
+              <description>Provides a concise overview of all formalisms, operations, and their relationships for reference purposes. Trace: [Article_4 §2]</description>
+            </feature>
+            <feature name="Enactment">
+              <description>Executes the ordered operations defined in the Process Model, creating or modifying models as specified. Trace: [Article_4 §4]</description>
+            </feature>
+          </feature>
+          <feature name="Multi_Model_Analysis">
+            <description>Multi‑model analysis enables assessment of functionality, evolution, change impact, and traceability across combined models. Trace: [Article_7 §5]</description>
+          </feature>
+          <feature name="Change_Traceability">
+            <description>Ensures change traceability across models to support consistency and impact analysis. Trace: [Article_7 §6]</description>
+          </feature>
+          <!-- New Automation Features from Article_9 -->
+          <feature name="Automation" abstract="true">
+            <description>Mechanisms to automate software process steps, reducing manual effort and enabling automatic query retrieval and change propagation. Trace: [Article_9 §2]</description>
+            <feature name="Automated_Query_Retrieval">
+              <description>Retrieves required information from the megamodel automatically via queries, minimizing designer input. Trace: [Article_9 §2]</description>
+            </feature>
+            <feature name="Incremental_Change_Propagation">
+              <description>Propagates changes incrementally between software and analysis models to keep them consistent. Trace: [Article_9 §1]</description>
+            </feature>
+            <feature name="Metaheuristic_Design_Space_Reduction">
+              <description>Applies metaheuristic algorithms to reduce the design space size for NFP exploration. Trace: [Article_9 §1]</description>
+            </feature>
+            <feature name="NFP_Analysis_Automation">
+              <description>Automates non‑functional property analysis tasks, minimizing human interventions. Trace: [Article_9 §2]</description>
+            </feature>
+            <feature name="Tradeoff_Decision_Support">
+              <description>Provides decision support for trade‑offs among competing NFPs during design space exploration. Trace: [Article_9 §3]</description>
+            </feature>
+            <feature name="Feedback_of_Analysis_Results">
+              <description>Feeds analysis results back into the development process to guide subsequent modeling steps. Trace: [Article_9 §6]</description>
+            </feature>
+            <feature name="Cross_Model_Traceability">
+              <description>Ensures traceability across software and analysis models to support consistent co‑evolution. Trace: [Article_9 §6]</description>
+            </feature>
+          </feature>
+        </feature>
+      </feature>
+      <feature name="Intentional" abstract="true">
+        <description>Captures the goals and motivations behind establishing the model federation.</description>
+        <feature name="Goals" abstract="true">
+          <description>High‑level objectives that the federation aims to achieve.</description>
+          <feature name="Heterogeneous_Integration">
+            <description>Enables models created with different DSMLs to interoperate within a single project. Trace: [Article_1 §4]</description>
+          </feature>
+          <feature name="Lightweight_Connectors">
+            <description>Provides simple, lightweight connector components to facilitate easy integration of new languages and tools. Trace: [Article_1 §3]</description>
+          </feature>
+          <feature name="Extensibility">
+            <description>Supports the addition of new modeling languages and tools without redesigning the federation core. Trace: [Article_1 §4]</description>
+          </feature>
+          <feature name="Traceability">
+            <description>Offers mechanisms to trace model interactions and dependencies across the federation. Trace: [Article_1 §5]</description>
+          </feature>
+          <feature name="Paradigm_Testbed">
+            <description>Serves as a testbed for exploring combinations of diverse modeling paradigms. Trace: [Article_1 §5]</description>
+          </feature>
+          <feature name="Interoperability">
+            <description>Ensures that diverse simulation systems and models can work together, achieving seamless data exchange and coordinated execution. Trace: [Article_10 §1]</description>
+          </feature>
+          <feature name="Reusability">
+            <description>Enables simulation models to be reused across different application scenarios, increasing applicability and efficiency. Trace: [Article_10 §3]</description>
+          </feature>
+          <feature name="Security">
+            <description>Ensures that the federation addresses security concerns such as confidentiality, integrity, and accountability. Trace: [Article_11 §2]</description>
+            <feature name="Security_Goals" abstract="true">
+              <description>Specific security objectives pursued by the federation.</description>
+              <feature name="Confidentiality">
+                <description>Protects sensitive information from unauthorized disclosure. Trace: [Article_11 §2]</description>
+              </feature>
+              <feature name="Integrity">
+                <description>Guarantees that model data remains accurate and unaltered during federation processes. Trace: [Article_11 §2]</description>
+              </feature>
+              <feature name="Accountability">
+                <description>Ensures that actions on models can be traced back to responsible entities. Trace: [Article_11 §2]</description>
+              </feature>
+            </feature>
+          </feature>
+          <feature name="Quality_Assessment">
+            <description>Integrates quality assessment mechanisms to evaluate the effectiveness of model integration and federation processes. Trace: [Article_12 §2]</description>
+          </feature>
+          <feature name="Correctness_Goals" abstract="true">
+            <description>Defines objectives to achieve correct‑by‑construction implementations through global consistency.</description>
+            <feature name="Correctness_by_Construction">
+              <description>Ensures that the resulting system is correct by construction via rigorous model integration. Trace: [Article_13 §4]</description>
+            </feature>
+          </feature>
+          <feature name="Integration_of_Existing_Models">
+            <description>Enables integration of pre‑existing models into the Vitruvius process without re‑creating them. Trace: [Article_2 §2]</description>
+          </feature>
+          <feature name="Multi_Paradigm_Modeling">
+            <description>Supports modeling across multiple formalisms and abstraction levels as advocated by Multi‑Paradigm Modeling (MPM). Trace: [Article_4 §5]</description>
+          </feature>
+          <feature name="Design_Decision_Goals" abstract="true">
+            <description>Targets the capture and management of design decisions linking requirements, functions, and components throughout development.</description>
+            <feature name="Design_Decision_Management">
+              <description>Manages design decisions, their rationale, and traceability to requirements and artifacts. Trace: [Article_5 §4]</description>
+            </feature>
+          </feature>
+          <feature name="Model_Driven_Engineering">
+            <description>Model Driven Engineering promotes high‑level models as primary artifacts, decoupling architectural decisions from implementation. Trace: [Article_7 §1]</description>
+          </feature>
+          <feature name="Process_Efficiency">
+            <description>Improves efficiency of the software development process by reducing manual steps through automation. Trace: [Article_9 §2]</description>
+          </feature>
+        </feature>
+      </feature>
+    </feature>
+  </struct>
+  <constraints/>
+</featureModel>

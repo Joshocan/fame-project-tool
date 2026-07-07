@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<featureModel>
+  <struct>
+    <feature name="Model_Federation">
+      <description>Root feature representing the overall Model Federation approach described in the article.</description>
+      <feature name="Structural" abstract="true">
+        <description>Covers the artefacts, links, formalism, domains, and technological context of Model Federation.</description>
+        <feature name="Artefacts">
+          <description>Group of concrete modelling artefacts used in the federation.</description>
+          <feature name="ROS_Protocol_Files">
+            <description>ROS protocol files model interfaces and expected attributes for software components. Trace: [Article_5 §chunk127]</description>
+          </feature>
+          <feature name="UML_Diagrams">
+            <description>Visio-based UML diagrams capture hardware perspective and connections. Trace: [Article_5 §chunk127]</description>
+          </feature>
+          <feature name="GitHub_Repositories">
+            <description>GitHub repositories host collaborative source code and communication interfaces. Trace: [Article_5 §chunk127]</description>
+          </feature>
+          <feature name="Matlab_Scripts">
+            <description>Matlab scripts define algorithms and model roles for process stakeholders. Trace: [Article_13 §chunk25]</description>
+          </feature>
+          <feature name="DSML_Models">
+            <description>Domain Specific Modeling Language models are stored in the repository with their native editors. Trace: [Article_1 §chunk54]</description>
+          </feature>
+          <feature name="AMMEE_Execution_Plan">
+            <description>The Automated Multi-Model Execution Engine provides execution plans and status for federated models. Trace: [Article_1 §chunk54]</description>
+          </feature>
+        </feature>
+        <feature name="Links">
+          <description>Types of connections between models and artefacts.</description>
+          <feature name="Transformation_Links">
+            <description>Links that represent model transformations between formalisms. Trace: [Article_4 §chunk19]</description>
+          </feature>
+          <feature name="Mapping_Links">
+            <description>Mappings that associate elements across different models. Trace: [Article_4 §chunk19]</description>
+          </feature>
+          <feature name="Traceability_Links">
+            <description>Links enabling cross‑model traceability of analysis results. Trace: [Article_9 §chunk26]</description>
+          </feature>
+          <feature name="Coevolution_Links">
+            <description>Links supporting consistent co‑evolution of software and analysis models. Trace: [Article_10 §chunk10]</description>
+          </feature>
+          <feature name="Incremental_Propagation_Links">
+            <description>Links that allow incremental propagation of changes across models. Trace: [Article_9 §chunk43]</description>
+          </feature>
+        </feature>
+        <feature name="Formalisms">
+          <description>Modeling languages and formal representations employed.</description>
+          <feature name="V_SUM_Metamodel">
+            <description>The virtual single underlying model metamodel defines consistency rules and correspondences. Trace: [Article_2 §chunk19]</description>
+          </feature>
+          <feature name="FTG">
+            <description>Formalism Transformation Graph captures nodes (formalisms) and their relations. Trace: [Article_4 §chunk15]</description>
+          </feature>
+          <feature name="PM">
+            <description>Process Model mandates the order of operations on models. Trace: [Article_4 §chunk15]</description>
+          </feature>
+          <feature name="OTIF">
+            <description>Open Tool Integration Framework provides meta‑model based transformations for tool integration. Trace: [Article_1 §chunk70]</description>
+          </feature>
+          <feature name="ETI">
+            <description>Electronic Tool Integration uses lightweight web‑services for data exchange. Trace: [Article_1 §chunk70]</description>
+          </feature>
+          <feature name="MOF">
+            <description>Meta‑Object Facility is a standard for defining metamodels. Trace: [Article_13 §chunk15]</description>
+          </feature>
+          <feature name="UML">
+            <description>Unified Modeling Language is used for structural and behavioral modeling. Trace: [Article_13 §chunk15]</description>
+          </feature>
+          <feature name="Queueing_Networks">
+            <description>Queueing network formalism models performance aspects. Trace: [Article_9 §chunk27]</description>
+          </feature>
+          <feature name="Stochastic_Petri_Nets">
+            <description>Stochastic Petri nets capture probabilistic behavior of systems. Trace: [Article_9 §chunk27]</description>
+          </feature>
+          <feature name="Stochastic_Process_Algebras">
+            <description>Stochastic process algebras describe concurrent stochastic processes. Trace: [Article_9 §chunk27]</description>
+          </feature>
+          <feature name="Markov_Chains">
+            <description>Markov chains model state transitions with probabilities. Trace: [Article_9 §chunk27]</description>
+          </feature>
+          <feature name="Fault_Trees">
+            <description>Fault trees are used for reliability analysis. Trace: [Article_9 §chunk27]</description>
+          </feature>
+          <feature name="Probabilistic_Time_Automata">
+            <description>Probabilistic timed automata model time‑bounded stochastic behavior. Trace: [Article_9 §chunk27]</description>
+          </feature>
+        </feature>
+        <feature name="Domains">
+          <description>Application domains addressed by the federation.</description>
+          <feature name="Software_Engineering">
+            <description>Software engineering concerns are central to the approach. Trace: [Article_2 §chunk19]</description>
+          </feature>
+          <feature name="Systems_Engineering">
+            <description>Systems engineering aspects such as hardware modeling are included. Trace: [Article_5 §chunk127]</description>
+          </feature>
+          <feature name="NFP_Analysis">
+            <description>Non‑functional property analysis drives many federation operations. Trace: [Article_9 §chunk113]</description>
+          </feature>
+          <feature name="Quality_Assessment">
+            <description>Quality assessment is integrated across multiple models. Trace: [Article_21 §chunk0]</description>
+          </feature>
+        </feature>
+        <feature name="Technological_Context">
+          <description>Technologies, standards, and platforms supporting federation.</description>
+          <feature name="OSLC">
+            <description>OASIS OSLC provides web‑based, tool‑neutral interoperability. Trace: [Article_6 §chunk30]</description>
+          </feature>
+          <feature name="REST">
+            <description>REST architectural style underlies OSLC services. Trace: [Article_6 §chunk30]</description>
+          </feature>
+          <feature name="Web_Services">
+            <description>Web services enable lightweight data exchange in ETI. Trace: [Article_1 §chunk70]</description>
+          </feature>
+          <feature name="Linked_Data">
+            <description>Linked Data principles are used for resource representation. Trace: [Article_6 §chunk30]</description>
+          </feature>
+          <feature name="Resource_Shapes">
+            <description>Resource shapes define the structure of linked data resources. Trace: [Article_6 §chunk30]</description>
+          </feature>
+          <feature name="Java">
+            <description>Java is employed for implementing transformation rules. Trace: [Article_2 §chunk242]</description>
+          </feature>
+          <feature name="GPPL">
+            <description>General‑purpose programming language serves as baseline for implementations. Trace: [Article_2 §chunk242]</description>
+          </feature>
+          <feature name="Java_Rules">
+            <description>Java‑based rules translate PCM models to executable artifacts. Trace: [Article_2 §chunk242]</description>
+          </feature>
+          <feature name="PCM">
+            <description>PCM (Palladio Component Model) abstracts component functionality. Trace: [Article_2 §chunk242]</description>
+          </feature>
+        </feature>
+      </feature>
+      <feature name="Operational" abstract="true">
+        <description>Encompasses processes, queries, automation, validation, and management activities of Model Federation.</description>
+        <feature name="Processes">
+          <description>Defined sequences of steps for managing federated models.</description>
+          <feature name="Model_Integration_Process">
+            <description>Integrates existing models into the Vitruvius federation framework. Trace: [Article_2 §chunk19]</description>
+          </feature>
+          <feature name="Consistency_Preservation_Process">
+            <description>Ensures consistency rules are respected across linked models. Trace: [Article_2 §chunk102]</description>
+          </feature>
+          <feature name="View_Type_Definition_Process">
+            <description>Defines view types used by developers to manipulate the V‑SUM. Trace: [Article_2 §chunk102]</description>
+          </feature>
+          <feature name="Metamodel_Selection_Process">
+            <description>Selects appropriate metamodels for a given domain. Trace: [Article_2 §chunk102]</description>
+          </feature>
+          <feature name="Design_Space_Exploration_Process">
+            <description>Explores alternative configurations to evaluate NFP trade‑offs. Trace: [Article_9 §chunk113]</description>
+          </feature>
+          <feature name="Metaheuristic_Reduction_Process">
+            <description>Applies metaheuristic techniques to reduce the design space size. Trace: [Article_9 §chunk108]</description>
+          </feature>
+        </feature>
+        <feature name="Queries">
+          <description>Mechanisms to retrieve information from the megamodel or linked data.</description>
+          <feature name="Megamodel_Query">
+            <description>Queries the megamodel to locate required artifacts automatically. Trace: [Article_9 §chunk108]</description>
+          </feature>
+          <feature name="Information_Retrieval_Query">
+            <description>Retrieves hidden information from linked data resources. Trace: [Article_9 §chunk108]</description>
+          </feature>
+        </feature>
+        <feature name="Automation">
+          <description>Automation capabilities for executing federation tasks.</description>
+          <feature name="Automated_Execution">
+            <description>Executes model operations without human intervention when possible. Trace: [Article_9 §chunk108]</description>
+          </feature>
+          <feature name="Semi_Automated_Steps">
+            <description>Supports partially automated steps requiring occasional user input. Trace: [Article_9 §chunk26]</description>
+          </feature>
+          <feature name="Incremental_Propagation">
+            <description>Propagates changes incrementally across linked models. Trace: [Article_9 §chunk43]</description>
+          </feature>
+        </feature>
+        <feature name="Validation">
+          <description>Checks to ensure model quality and consistency.</description>
+          <feature name="Consistency_Check">
+            <description>Validates that models obey defined consistency rules. Trace: [Article_2 §chunk187]</description>
+          </feature>
+          <feature name="Traceability_Check">
+            <description>Verifies that cross‑model traceability links are intact. Trace: [Article_9 §chunk26]</description>
+          </feature>
+          <feature name="NFP_Diagnosis">
+            <description>Diagnoses non‑functional property issues based on analysis results. Trace: [Article_9 §chunk93]</description>
+          </feature>
+        </feature>
+        <feature name="Management">
+          <description>Higher‑level management of viewpoints, agility, and stakeholder concerns.</description>
+          <feature name="Viewpoint_Integration">
+            <description>Integrates multiple stakeholder viewpoints into a coherent model. Trace: [Article_13 §chunk10]</description>
+          </feature>
+          <feature name="Agile_Support">
+            <description>Provides agile methodology support for co‑evolution of models. Trace: [Article_13 §chunk10]</description>
+          </feature>
+          <feature name="Coevolution_Management">
+            <description>Manages the co‑evolution of software and analysis models. Trace: [Article_13 §chunk10]</description>
+          </feature>
+          <feature name="Stakeholder_Integration">
+            <description>Ensures stakeholder concerns are represented and reconciled. Trace: [Article_13 §chunk10]</description>
+          </feature>
+        </feature>
+      </feature>
+      <feature name="Intentional" abstract="true">
+        <description>Addresses the motivations, goals, and intended outcomes of Model Federation.</description>
+        <feature name="Goals">
+          <description>High‑level objectives the federation aims to achieve.</description>
+          <feature name="Traceability">
+            <description>Provides cross‑model traceability to support impact analysis. Trace: [Article_9 §chunk26]</description>
+          </feature>
+          <feature name="Consistency_Assurance">
+            <description>Guarantees consistency across all federated models. Trace: [Article_2 §chunk187]</description>
+          </feature>
+          <feature name="Transformation_Management">
+            <description>Manages transformations between heterogeneous formalisms. Trace: [Article_4 §chunk19]</description>
+          </feature>
+          <feature name="Composition">
+            <description>Defines clear composition of models and their roles. Trace: [Article_13 §chunk5]</description>
+          </feature>
+          <feature name="Conceptual_Elicitation">
+            <description>Elicits conceptual information from stakeholders to guide modeling. Trace: [Article_13 §chunk5]</description>
+          </feature>
+          <feature name="Quality_Improvement">
+            <description>Improves software product and process quality through federation. Trace: [Article_9 §chunk20]</description>
+          </feature>
+        </feature>
+        <feature name="Objectives">
+          <description>Specific measurable aims derived from the overarching goals.</description>
+          <feature name="Reduce_Human_Intervention">
+            <description>Minimizes manual steps by automating information retrieval. Trace: [Article_9 §chunk108]</description>
+          </feature>
+          <feature name="Efficient_NFP_Analysis">
+            <description>Enables efficient analysis of non‑functional properties across models. Trace: [Article_9 §chunk113]</description>
+          </feature>
+          <feature name="Scalability">
+            <description>Supports massive scalability of tool integration via OSLC. Trace: [Article_6 §chunk30]</description>
+          </feature>
+          <feature name="Flexibility">
+            <description>Provides flexibility to accommodate diverse domains and technologies. Trace: [Article_6 §chunk30]</description>
+          </feature>
+        </feature>
+      </feature>
+    </feature>
+  </struct>
+  <constraints/>
+</featureModel>

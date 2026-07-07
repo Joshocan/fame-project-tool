@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<featureModel>
+  <properties/>
+  <struct>
+    <feature name="Model_Federation" mandatory="true">
+      <description>The root feature representing the Model Federation approach, which integrates heterogeneous models from different modeling languages and tools into a cohesive multi-model system while maintaining consistency and enabling coordinated evolution. Trace: [Article_11 §II. Background; Article_13 §3. Federating models]</description>
+      <feature name="Structural" abstract="true">
+        <description>Covers the artefacts, links, and structural features of Model Federation, including model composition, graph structure, formalism, domain, and technological context.</description>
+        <feature name="Artifacts" abstract="true">
+          <description>Represents the core entities stored and managed within the federation, including models, registries, and auxiliary data.</description>
+          <feature name="Model" mandatory="true">
+            <description>A constituent model participating in the federation, conforming to a specific modeling language and representing a viewpoint or aspect of the system. Trace: [Article_1 §3.1 NAOMI Multi-model Repository; Article_11 §II. Background; Article_12 §II. The Role of Multimodels in MDE]</description>
+            <feature name="Specification_Model" abstract="true">
+              <description>A model that defines the system structure or behavior, such as UML class diagrams or state machines. Trace: [Article_1 §3.1 Model Attributes and Interfaces]</description>
+            </feature>
+            <feature name="Analytical_Model" abstract="true">
+              <description>A model that analyzes system aspects, such as performance or reliability. Trace: [Article_1 §3.1 Model Attributes and Interfaces]</description>
+            </feature>
+            <feature name="Interface" mandatory="true">
+              <description>Exposes a model's inputs and outputs as attributes, defining its role in data exchange. Trace: [Article_1 §3.1 Model Attributes and Interfaces]</description>
+            </feature>
+            <feature name="Attributes">
+              <description>Data elements exchanged between models, owned by a single model and written only by that owner. Trace: [Article_1 §3.1 Model Attributes and Interfaces]</description>
+            </feature>
+          </feature>
+          <feature name="Model_Registry">
+            <description>A list enumerating the models that are members of the multi-model, determining participation. Trace: [Article_1 §3.1 Model Registry]</description>
+          </feature>
+          <feature name="Constraints">
+            <description>Rules or conditions attached to model attributes to enforce validity, triggering notifications when violated. Trace: [Article_1 §3.1 Constraints]</description>
+          </feature>
+          <feature name="Notifications">
+            <description>Messages sent to models to inform them of events such as constraint violations or attribute changes. Trace: [Article_1 §3.1 Notifications]</description>
+          </feature>
+          <feature name="Federation_Model" abstract="true">
+            <description>A model that reifies dependencies and links between federated models, serving as the central coordination artifact. Trace: [Article_11 §II. Background; Article_13 §3.1 Principles]</description>
+            <feature name="Virtual_Model">
+              <description>In OpenFlexo, a container for FlexoConcepts that federates information from multiple sources. Trace: [Article_13 §3.1 Principles; Article_13 §3.2 How models federation takes place?]</description>
+            </feature>
+            <feature name="FlexoConcept">
+              <description>A conceptual entity in OpenFlexo representing an n-ary relationship between ModellingElements from different models, carrying contextual semantics. Trace: [Article_13 §3.1 Principles]</description>
+            </feature>
+            <feature name="ConceptRole">
+              <description>Assigns a name to a ModellingElement reference within a FlexoConcept definition. Trace: [Article_13 §3.1 Principles]</description>
+            </feature>
+          </feature>
+        </feature>
+        <feature name="Links" abstract="true">
+          <description>Relationships and dependencies that connect models and their elements within the federation.</description>
+          <feature name="Dependency">
+            <description>A relationship where one model depends on the output attributes of another, forming edges in the multi-model graph. Trace: [Article_1 §3.2 Change Propagation]</description>
+          </feature>
+          <feature name="Inter_Viewpoint_Relationship" abstract="true">
+            <description>A link between elements of different viewpoint models in a multimodel, with specific semantics like implication or impact. Trace: [Article_12 §III.E Definition of inter-viewpoint relationships]</description>
+            <feature name="Implication">
+              <description>An element in one viewpoint implies an element in another viewpoint. Trace: [Article_12 §III.E Definition of inter-viewpoint relationships]</description>
+            </feature>
+            <feature name="Exclusion">
+              <description>An element in one viewpoint excludes an element in another viewpoint. Trace: [Article_12 §III.E Definition of inter-viewpoint relationships]</description>
+            </feature>
+            <feature name="Impact">
+              <description>An element in one viewpoint impacts a quality attribute or element in another viewpoint. Trace: [Article_12 §III.E Definition of inter-viewpoint relationships]</description>
+            </feature>
+          </feature>
+          <feature name="Security_Rule">
+            <description>A rule attached to a link in a security-oriented federation to check consistency upon model evolution. Trace: [Article_11 §III.A.2 Build the security model federation]</description>
+          </feature>
+        </feature>
+        <feature name="Formalism" abstract="true">
+          <description>The modeling languages and paradigms used for the constituent models.</description>
+          <feature name="Domain_Specific_Modeling_Language">
+            <description>A modeling language tailored to a specific domain, allowing precise abstraction of domain constructs. Trace: [Article_1 §Abstract; Article_13 §2.1 Domain Specific Modeling]</description>
+          </feature>
+          <feature name="General_Purpose_Modeling_Language">
+            <description>A modeling language like UML or SysML used across domains, often extended with profiles. Trace: [Article_1 §1 Introduction; Article_11 §II.A Security by design]</description>
+          </feature>
+          <feature name="Formalism_Extension">
+            <description>Extensions to standard languages to incorporate additional concerns, such as security annotations. Trace: [Article_11 §II.A Security by design]</description>
+            <feature name="UMLsec">
+              <description>A UML profile for security, adding stereotypes and constraints. Trace: [Article_11 §II.A Security by design]</description>
+            </feature>
+            <feature name="SecBPMN">
+              <description>A BPMN extension with security annotations. Trace: [Article_11 §II.A Security by design]</description>
+            </feature>
+          </feature>
+        </feature>
+        <feature name="Domain" abstract="true">
+          <description>The application domain or system context in which the model federation is applied.</description>
+          <feature name="Automotive">
+            <description>Automotive software product lines as an example domain. Trace: [Article_12 §III.A Establishing the goal of the multimodel]</description>
+          </feature>
+          <feature name="Radar_Systems">
+            <description>Radar system design involving signal processing and architecture models. Trace: [Article_13 §2.2 Model Based System Engineering]</description>
+          </feature>
+          <feature name="Medical_Application">
+            <description>Healthcare systems like iTrust, focusing on security requirements. Trace: [Article_11 §IV Case Study]</description>
+          </feature>
+          <feature name="Traffic_Light_Control">
+            <description>A traffic light control system used as an experimental multi-model. Trace: [Article_1 §5 Experiments]</description>
+          </feature>
+        </feature>
+        <feature name="Technological_Context" abstract="true">
+          <description>The tools, platforms, and technical infrastructure supporting the federation.</description>
+          <feature name="Connectors">
+            <description>Software components that connect individual models to the multi-model, enabling controlled information exchange. Trace: [Article_1 §3.3 Connectors]</description>
+            <feature name="Technology_Adapter">
+              <description>In OpenFlexo, a connector handling a specific technology and providing ModelSlots for accessing resources. Trace: [Article_13 §3.1 Principles]</description>
+            </feature>
+            <feature name="ModelSlot">
+              <description>In OpenFlexo, a symbolic link to a resource in the Information Space, exposing its structure and behavior to the Concept Space. Trace: [Article_13 §3.1 Principles]</description>
+            </feature>
+          </feature>
+          <feature name="Repository">
+            <description>A version-controlled storage for all federation artifacts, enabling reconstruction and collaboration. Trace: [Article_1 §3.1 NAOMI Multi-model Repository]</description>
+            <feature name="Sandbox">
+              <description>A local copy of the repository allowing modelers to work independently and synchronize changes. Trace: [Article_1 §3.1 Sandboxes]</description>
+            </feature>
+          </feature>
+          <feature name="Version_Control_System">
+            <description>A system like Subversion that manages artifact versions and enables rollback and synchronization. Trace: [Article_1 §3.2 Version Management]</description>
+          </feature>
+          <feature name="Execution_Engine">
+            <description>A component that determines an order of execution based on dependencies and orchestrates model execution. Trace: [Article_1 §3.3 Execution Automation Engine]</description>
+          </feature>
+          <feature name="Multi_Model_Manager">
+            <description>A component assisting modelers in integrating connectors, performing consistency checks, and visualizing the repository. Trace: [Article_1 §3.3 Multi-Model Manager]</description>
+          </feature>
+        </feature>
+      </feature>
+      <feature name="Operational" abstract="true">
+        <description>Includes the processes, operations, and triggers in Model Federation, focusing on querying, synchronization, validation, and management of federated models and links.</description>
+        <feature name="Data_Exchange">
+          <description>The mechanism for sharing data between models via attributes, where owners write attributes and readers synchronize to access them. Trace: [Article_1 §3.2 Data Exchange]</description>
+        </feature>
+        <feature name="Model_Execution">
+          <description>The process of reading input attributes, running the model using its DSML tool, and writing output attributes. Trace: [Article_1 §3.2 Model Execution]</description>
+        </feature>
+        <feature name="Change_Propagation">
+          <description>The coordinated propagation of changes from one model to dependent models based on dependency analysis. Trace: [Article_1 §3.2 Change Propagation]</description>
+          <feature name="Dependency_Graph_Analysis">
+            <description>Analyzing the graph of model dependencies to determine an order for change propagation. Trace: [Article_1 §3.2 Change Propagation]</description>
+          </feature>
+          <feature name="Execution_Rules">
+            <description>User-defined rules specifying system behavior for nondeterministic models or cyclic dependencies. Trace: [Article_1 §3.2 Change Propagation]</description>
+          </feature>
+        </feature>
+        <feature name="Consistency_Management" abstract="true">
+          <description>Ensuring that the multi-model remains consistent after changes, covering various consistency types.</description>
+          <feature name="Attribute_Consistency">
+            <description>All attributes have been updated by their owner model since the last change to their owner's input attributes. Trace: [Article_1 §3.2 Consistency Management]</description>
+          </feature>
+          <feature name="Constraint_Consistency">
+            <description>The current values of all attributes do not violate any model-specific constraints. Trace: [Article_1 §3.2 Consistency Management]</description>
+          </feature>
+          <feature name="Attribute_Model_Consistency">
+            <description>The modification times of all models are earlier than the modification times of their output attributes. Trace: [Article_1 §3.2 Consistency Management]</description>
+          </feature>
+          <feature name="NAOMI_Consistency">
+            <description>A multi-model that is attribute consistent, constraint consistent, and attribute-model consistent. Trace: [Article_1 §3.2 Consistency Management]</description>
+          </feature>
+        </feature>
+        <feature name="Synchronization">
+          <description>The process of keeping federated models aligned, either automatically or interactively, across technological spaces. Trace: [Article_13 §4.1 Model synchronization]</description>
+        </feature>
+        <feature name="Validation">
+          <description>Checking constraints and security rules attached to links to detect inconsistencies. Trace: [Article_11 §III.B Using the security model federation]</description>
+        </feature>
+        <feature name="Querying">
+          <description>Querying the federated models to extract cross-cutting views or information. Trace: [Article_13 §2.4 Synthesis]</description>
+        </feature>
+        <feature name="Version_Management">
+          <description>Managing multiple versions of models and tools, supporting rollback and reconstruction. Trace: [Article_1 §3.2 Version Management]</description>
+        </feature>
+      </feature>
+      <feature name="Intentional" abstract="true">
+        <description>Addresses the objectives and goals of Model Federation, such as traceability, consistency assurance, transformation management, composition, and conceptual elicitation.</description>
+        <feature name="Traceability">
+          <description>Maintaining traceability links between artifacts across domains and technological spaces for horizontal and vertical traceability. Trace: [Article_13 §2.4 Synthesis]</description>
+        </feature>
+        <feature name="Consistency_Assurance">
+          <description>Ensuring global consistency across heterogeneous models and viewpoints. Trace: [Article_1 §2.2 Challenge 2: Maintaining Multi-model Consistency; Article_13 §1 Introduction]</description>
+        </feature>
+        <feature name="Transformation_Management">
+          <description>Managing model-to-model transformations and data transformations during inter-model exchange. Trace: [Article_1 §2.4 Requirements; Article_13 §4.2 Model mapping]</description>
+        </feature>
+        <feature name="Composition">
+          <description>Composing multiple models into a coherent multi-model or system representation. Trace: [Article_1 §Abstract; Article_12 §Abstract]</description>
+        </feature>
+        <feature name="Conceptual_Elicitation">
+          <description>Deriving new concepts and relationships from federated models to support reasoning and analysis. Trace: [Article_13 §3.1 Principles]</description>
+        </feature>
+        <feature name="Security_By_Design">
+          <description>Integrating security requirements from early design phases and ensuring consistent evolution of secured models. Trace: [Article_11 §II.A Security by design]</description>
+        </feature>
+        <feature name="Interoperability" abstract="true">
+          <description>Achieving interoperability between heterogeneous models, tools, and formalisms.</description>
+          <feature name="Technical_Interoperability">
+            <description>Physical connectivity and data exchange between simulation systems. Trace: [Article_10 §III.A Technical Interoperability]</description>
+          </feature>
+          <feature name="Substantive_Interoperability">
+            <description>Meaningful data exchange and coherent interaction based on shared conceptual frameworks. Trace: [Article_10 §III.B Substantive Interoperability]</description>
+          </feature>
+          <feature name="Conceptual_Interoperability">
+            <description>Reconciling heterogeneous viewpoints through model federation to enable consistent reasoning. Trace: [Article_13 §Abstract]</description>
+          </feature>
+        </feature>
+        <feature name="Reusability">
+          <description>Enabling reuse of models and components across different simulation scenarios. Trace: [Article_10 §II.A Reusability and Interoperability]</description>
+        </feature>
+        <feature name="Composability">
+          <description>The capability to select and assemble simulation components into valid systems to satisfy requirements. Trace: [Article_10 §II.B Composability and Interoperability]</description>
+        </feature>
+      </feature>
+    </feature>
+  </struct>
+  <constraints>
+    <rule>
+      <conj>
+        <var>Specification_Model</var>
+        <var>Analytical_Model</var>
+      </conj>
+    </rule>
+    <rule>
+      <imp>
+        <var>Security_Rule</var>
+        <conj>
+          <var>Links</var>
+          <var>Validation</var>
+        </conj>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Sandbox</var>
+        <var>Repository</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Technology_Adapter</var>
+        <var>ModelSlot</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>FlexoConcept</var>
+        <var>Virtual_Model</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>ConceptRole</var>
+        <var>FlexoConcept</var>
+      </imp>
+    </rule>
+  </constraints>
+  <calculations/>
+  <comments/>
+  <featureOrder/>
+</featureModel>

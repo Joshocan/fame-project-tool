@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<featureModel>
+  <struct>
+    <feature name="Model_Federation">
+      <description>Root feature representing the Model Federation approach proposed in the article.</description>
+      <feature name="Structural" abstract="true">
+        <description>Structural dimension covering artefacts, links, graph structure, formalisms, domain and technological context of Model Federation.</description>
+        <feature name="Artefacts" abstract="true">
+          <description>Category grouping the different types of models used in federation.</description>
+          <or name="Artefact_Types" min="0" max="3">
+            <feature name="Software_Model">
+              <description>Software model representing code artifacts. Trace: [Article_5 §Software_Model]</description>
+            </feature>
+            <feature name="Analysis_Model">
+              <description>Analysis model used for performance and NFP evaluation. Trace: [Article_9 §Analysis_Model]</description>
+            </feature>
+            <feature name="Hardware_Model">
+              <description>Hardware model describing physical components and connections. Trace: [Article_5 §Hardware_Model]</description>
+            </feature>
+          </or>
+        </feature>
+        <feature name="Links" abstract="true">
+          <description>Category of relationships linking artefacts across domains.</description>
+          <or name="Link_Types" min="0" max="2">
+            <feature name="Traceability_Link">
+              <description>Link enabling cross-model traceability between artefacts. Trace: [Article_9 §Cross_Model_Traceability]</description>
+            </feature>
+            <feature name="Consistency_Link">
+              <description>Link ensuring consistency constraints between related models. Trace: [Article_13 §Consistency_Preservation]</description>
+            </feature>
+          </or>
+        </feature>
+        <feature name="Graph_Structure" abstract="true">
+          <description>Structural representation of models and their interconnections.</description>
+          <or name="Graph_Elements" min="0" max="2">
+            <feature name="Formalism_Transformation_Graph">
+              <description>Formalism Transformation Graph (FTG) capturing formalisms and their mappings. Trace: [Article_4 §FTG]</description>
+            </feature>
+            <feature name="Process_Model">
+              <description>Process Model (PM) defining the order of operations on models. Trace: [Article_4 §PM]</description>
+            </feature>
+          </or>
+        </feature>
+        <feature name="Formalisms" abstract="true">
+          <description>Set of formal modeling languages supported in the federation.</description>
+          <or name="Formalism_Options" min="0" max="5">
+            <feature name="Queueing_Network">
+              <description>Queueing network formalism for performance analysis. Trace: [Article_9 §Queueing_Network]</description>
+            </feature>
+            <feature name="Stochastic_Petri_Net">
+              <description>Stochastic Petri net formalism for concurrent system modeling. Trace: [Article_9 §Stochastic_Petri_Net]</description>
+            </feature>
+            <feature name="Markov_Chain">
+              <description>Markov chain formalism for probabilistic behavior modeling. Trace: [Article_9 §Markov_Chain]</description>
+            </feature>
+            <feature name="Fault_Tree">
+              <description>Fault tree formalism for reliability analysis. Trace: [Article_9 §Fault_Tree]</description>
+            </feature>
+            <feature name="Probabilistic_Time_Automata">
+              <description>Probabilistic time automata formalism for timed probabilistic analysis. Trace: [Article_9 §Probabilistic_Time_Automata]</description>
+            </feature>
+          </or>
+        </feature>
+        <feature name="Domain_Context" abstract="true">
+          <description>Domain-specific contexts addressed by the federation.</description>
+          <or name="Domain_Types" min="0" max="2">
+            <feature name="Robotics">
+              <description>Robotics domain models expressed via ROS protocol files. Trace: [Article_5 §ROS]</description>
+            </feature>
+            <feature name="Mechatronics">
+              <description>Mechatronics domain models using Visio-based UML diagrams. Trace: [Article_5 §Visio_UML]</description>
+            </feature>
+          </or>
+        </feature>
+        <feature name="Technological_Context" abstract="true">
+          <description>Technologies and standards enabling model integration.</description>
+          <or name="Technology_Options" min="0" max="3">
+            <feature name="OSLC">
+              <description>Open Services for Lifecycle Collaboration (OSLC) standard for tool integration. Trace: [Article_6 §OSLC]</description>
+            </feature>
+            <feature name="OTIF">
+              <description>Open Tool Integration Framework (OTIF) for meta-model based transformations. Trace: [Article_1 §OTIF]</description>
+            </feature>
+            <feature name="ETI">
+              <description>Electronic Tool Integration (ETI) framework using web services for lightweight data exchange. Trace: [Article_1 §ETI]</description>
+            </feature>
+          </or>
+        </feature>
+        <feature name="Metamodels" abstract="true">
+          <description>Metamodel definitions used to describe and relate federated models.</description>
+          <feature name="V_SUM">
+            <description>V-SUM metamodel providing virtual single underlying model concepts. Trace: [Article_2 §V_SUM]</description>
+          </feature>
+        </feature>
+      </feature>
+      <feature name="Operational" abstract="true">
+        <description>Operational dimension covering processes, queries, synchronization, validation, management and automation in Model Federation.</description>
+        <feature name="Queries" abstract="true">
+          <description>Mechanisms for retrieving information from the federated model repository.</description>
+          <feature name="Automatic_Query">
+            <description>Automatically generated queries to retrieve model information without user intervention. Trace: [Article_9 §Automatic_Query]</description>
+          </feature>
+        </feature>
+        <feature name="Synchronisation" abstract="true">
+          <description>Processes to keep federated models consistent over time.</description>
+          <feature name="Incremental_Propagation">
+            <description>Incremental propagation of changes across linked models. Trace: [Article_9 §Incremental_Propagation]</description>
+          </feature>
+        </feature>
+        <feature name="Validation" abstract="true">
+          <description>Activities to verify model correctness and non-functional properties.</description>
+          <or name="Validation_Tasks" min="0" max="2">
+            <feature name="Consistency_Validation">
+              <description>Validation of consistency constraints between models. Trace: [Article_13 §Consistency_Validation]</description>
+            </feature>
+            <feature name="NFP_Validation">
+              <description>Validation of non-functional property (NFP) requirements. Trace: [Article_9 §NFP_Validation]</description>
+            </feature>
+          </or>
+        </feature>
+        <feature name="Management" abstract="true">
+          <description>Operations for handling model repositories and process orchestration.</description>
+          <or name="Management_Tasks" min="0" max="2">
+            <feature name="Model_Repository_Management">
+              <description>Management of model repository storing native model artifacts. Trace: [Article_1 §Repository]</description>
+            </feature>
+            <feature name="Process_Orchestration">
+              <description>Orchestration of process steps to support agile co-evolution of models. Trace: [Article_13 §Process_Orchestration]</description>
+            </feature>
+          </or>
+        </feature>
+        <feature name="Automation" abstract="true">
+          <description>Automation techniques to reduce manual effort in model analysis and design space exploration.</description>
+          <or name="Automation_Techniques" min="0" max="2">
+            <feature name="Metaheuristic_Reduction">
+              <description>Use of metaheuristic algorithms to reduce design space size for exploration. Trace: [Article_9 §Metaheuristic_Reduction]</description>
+            </feature>
+            <feature name="Automated_Process_Steps">
+              <description>Automation of software process steps based on available information. Trace: [Article_9 §Automated_Process_Steps]</description>
+            </feature>
+          </or>
+        </feature>
+      </feature>
+      <feature name="Intentional" abstract="true">
+        <description>Intentional dimension addressing goals such as traceability, consistency assurance, transformation management, composition and conceptual elicitation.</description>
+        <feature name="Traceability" abstract="true">
+          <description>Goals related to tracking relationships between model elements across domains.</description>
+          <feature name="Cross_Model_Traceability_Goal">
+            <description>Goal of achieving cross-model traceability for impact analysis. Trace: [Article_9 §Cross_Model_Traceability]</description>
+          </feature>
+        </feature>
+        <feature name="Consistency_Assurance" abstract="true">
+          <description>Goal of maintaining consistency among federated models.</description>
+          <feature name="Consistency_Preservation">
+            <description>Preservation of consistency constraints during model evolution. Trace: [Article_13 §Consistency_Preservation]</description>
+          </feature>
+        </feature>
+        <feature name="Transformation_Management" abstract="true">
+          <description>Management of model transformations to preserve semantics.</description>
+          <feature name="Transformation_Rules_Management">
+            <description>Definition and enforcement of transformation rules within the V-SUM metamodel. Trace: [Article_2 §Transformation_Management]</description>
+          </feature>
+        </feature>
+        <feature name="Composition" abstract="true">
+          <description>Goal of composing multiple models into a coherent federation.</description>
+          <feature name="Model_Composition">
+            <description>Composition of models from different domains to form a unified view. Trace: [Article_5 §Model_Composition]</description>
+          </feature>
+        </feature>
+        <feature name="Conceptual_Elicitation" abstract="true">
+          <description>Goal of eliciting stakeholder intentions and viewpoints.</description>
+          <feature name="Stakeholder_Viewpoint_Integration">
+            <description>Integration of stakeholder viewpoints into the federated model. Trace: [Article_13 §Stakeholder_Viewpoint_Integration]</description>
+          </feature>
+        </feature>
+        <feature name="Roles" abstract="true">
+          <description>Stakeholder roles involved in the federation process.</description>
+          <or name="Role_Types" min="0" max="2">
+            <feature name="Methodologist_Role">
+              <description>Methodologist defines metamodels and view types for federation. Trace: [Article_2 §Methodologist]</description>
+            </feature>
+            <feature name="Developer_Role">
+              <description>Developer creates and manipulates views derived from the V-SUM. Trace: [Article_2 §Developer]</description>
+            </feature>
+          </or>
+        </feature>
+      </feature>
+    </feature>
+  </struct>
+  <constraints/>
+</featureModel>

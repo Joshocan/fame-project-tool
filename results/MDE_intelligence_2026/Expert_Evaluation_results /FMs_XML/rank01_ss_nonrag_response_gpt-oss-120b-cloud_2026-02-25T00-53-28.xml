@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<featureModel>
+  <properties/>
+  <struct>
+    <feature name="Model_Federation">
+      <description>Represents the overall approach of Model Federation for integrating heterogeneous models and managing their evolution. </description>
+      <feature name="Structural" abstract="true">
+        <description>Covers the artefacts, links, and structural aspects of Model Federation, including models, virtual models, concepts, and technological infrastructure. </description>
+        <feature name="Artifacts" abstract="true">
+          <description>Groups the primary modelling artefacts involved in a federation. </description>
+          <feature name="Model" mandatory="true">
+            <description>Represents an individual model participating in the federation, such as UML, BPMN, Excel, or SysML models. Trace: [Article_11 §34] </description>
+          </feature>
+          <feature name="VirtualModel" mandatory="true">
+            <description>A container that holds FlexoConcept instances and can be serialized back to the information space. Trace: [Article_11 §34] </description>
+          </feature>
+          <feature name="FlexoConcept" mandatory="true">
+            <description>An n‑ary relationship between modelling elements that defines a federated concept. Trace: [Article_13 §35] </description>
+          </feature>
+          <feature name="ConceptRole" mandatory="true">
+            <description>Assigns a name to a modelling element reference within a FlexoConcept. Trace: [Article_13 §35] </description>
+          </feature>
+        </feature>
+        <feature name="Links" abstract="true">
+          <description>Defines the reified connections between artefacts in the federation. </description>
+          <feature name="FlexoLink" mandatory="true">
+            <description>A link that reifies a dependency between two modelling elements. Trace: [Article_11 §44] </description>
+          </feature>
+          <feature name="SecurityRuleLink" mandatory="true">
+            <description>A link that carries an attached security rule for evaluation upon changes. Trace: [Article_11 §44] </description>
+          </feature>
+        </feature>
+        <feature name="GraphStructure" abstract="true">
+          <description>Describes the graph‑based representation of model dependencies. </description>
+          <feature name="DependencyGraph" mandatory="true">
+            <description>A directed graph capturing dependencies among models for ordering change propagation. Trace: [Article_11 §33] </description>
+          </feature>
+          <feature name="MultiModelGraph" mandatory="true">
+            <description>The pseudo‑graph G(V,E) where vertices are models and edges represent data flow between output and input attributes. Trace: [Article_11 §33] </description>
+          </feature>
+        </feature>
+        <feature name="Formalism" abstract="true">
+          <description>Specifies the modelling languages and adapters used to access models. </description>
+          <feature name="DSML" mandatory="true">
+            <description>Domain‑specific modelling languages such as UML, BPMN, SysML, etc., used to create the participating models. Trace: [Article_11 §46] </description>
+          </feature>
+          <feature name="TechnologyAdapter" mandatory="true">
+            <description>Software component that provides read/write access to a specific technology or file format. Trace: [Article_13 §42] </description>
+          </feature>
+        </feature>
+        <feature name="Domain" abstract="true">
+          <description>Addresses domain‑specific concerns, notably security. </description>
+          <feature name="SecurityDomain" mandatory="true">
+            <description>Encapsulates security‑related concepts, requirements and annotations used in the federation. Trace: [Article_11 §45] </description>
+          </feature>
+        </feature>
+        <feature name="TechnologicalContext" abstract="true">
+          <description>Infrastructure components that support storage, versioning and access to models. </description>
+          <feature name="Repository" mandatory="true">
+            <description>A version‑controlled storage that holds all artefacts of the multi‑model. Trace: [Article_11 §38] </description>
+          </feature>
+          <feature name="Sandbox" mandatory="true">
+            <description>Local copy of the repository allowing modelers to work concurrently without interfering with others. Trace: [Article_11 §25] </description>
+          </feature>
+          <feature name="ModelSlot" mandatory="true">
+            <description>A symbolic link to a resource in the information space, exposing its structural and behavioural contents. Trace: [Article_13 §48] </description>
+          </feature>
+          <feature name="TypeAwareModelSlot" mandatory="true">
+            <description>A ModelSlot that enforces conformance to a specific metamodel. Trace: [Article_13 §48] </description>
+          </feature>
+        </feature>
+      </feature>
+      <feature name="Operational" abstract="true">
+        <description>Encompasses the processes, operations and triggers that manipulate federated models, focusing on querying, synchronisation, validation and management. </description>
+        <feature name="Querying" abstract="true">
+          <description>Mechanisms to retrieve information about model dependencies and attributes. </description>
+          <feature name="DependencyQuery" mandatory="true">
+            <description>Provides queries over the dependency graph to determine propagation order or impact analysis. Trace: [Article_11 §41] </description>
+          </feature>
+        </feature>
+        <feature name="Synchronisation" abstract="true">
+          <description>Handles the propagation of changes across models in the federation. </description>
+          <feature name="ChangePropagation" abstract="true">
+            <description>Strategies for propagating model edits through the dependency graph. </description>
+            <or name="PropagationMechanisms" min="1" max="3">
+              <feature name="DepthFirstSearchPropagation" mandatory="true">
+                <description>Executes a depth‑first search on the dependency graph, propagating changes from leaves upward. Trace: [Article_11 §33] </description>
+              </feature>
+              <feature name="RuleBasedPropagation" mandatory="true">
+                <description>Uses security rules attached to links to decide how and when to propagate changes. Trace: [Article_11 §44] </description>
+              </feature>
+              <feature name="ExpertInputPropagation" mandatory="true">
+                <description>Invokes expert input to resolve cycles or ambiguous ordering in the dependency graph. Trace: [Article_11 §33] </description>
+              </feature>
+            </or>
+          </feature>
+        </feature>
+        <feature name="Validation" abstract="true">
+          <description>Ensures that the federated models remain consistent and respect defined constraints. </description>
+          <feature name="ConsistencyCheck" abstract="true">
+            <description>Checks different aspects of multi‑model consistency. </description>
+            <feature name="AttributeConsistency" mandatory="true">
+              <description>All attributes have been updated by their owner model since the last input change. Trace: [Article_11 §32] </description>
+            </feature>
+            <feature name="ConstraintConsistency" mandatory="true">
+              <description>Current attribute values do not violate any model‑specific constraints. Trace: [Article_11 §32] </description>
+            </feature>
+            <feature name="AttributeModelConsistency" mandatory="true">
+              <description>Model edit timestamps precede the timestamps of their output attributes. Trace: [Article_11 §32] </description>
+            </feature>
+          </feature>
+          <feature name="SecurityValidation" mandatory="true">
+            <description>Evaluates attached security rules after a change to detect violations. Trace: [Article_11 §44] </description>
+          </feature>
+        </feature>
+        <feature name="Management" abstract="true">
+          <description>Operational support for versioning, notifications and execution orchestration. </description>
+          <feature name="VersionManagement" mandatory="true">
+            <description>Provides rollback, version control and reconstruction of any federation state. Trace: [Article_11 §38] </description>
+          </feature>
+          <feature name="NotificationManagement" mandatory="true">
+            <description>Sends notifications to models when relevant events (e.g., attribute change, rule violation) occur. Trace: [Article_11 §29] </description>
+          </feature>
+          <feature name="ExecutionManagement" mandatory="true">
+            <description>Determines an execution order based on dependencies and orchestrates model execution to reach a consistent state. Trace: [Article_11 §41] </description>
+          </feature>
+        </feature>
+      </feature>
+      <feature name="Intentional" abstract="true">
+        <description>Addresses the goals and objectives of Model Federation such as traceability, consistency assurance, transformation management, composition and security. </description>
+        <feature name="Objectives" abstract="true">
+          <description>High‑level aims pursued by the federation. </description>
+          <feature name="ConsistencyAssurance" abstract="true">
+            <description>Ensures that the multi‑model satisfies defined consistency properties. </description>
+            <feature name="NAOMIConsistency" mandatory="true">
+              <description>Defines a NAOMI‑consistent multi‑model as having attribute, constraint and attribute‑model consistency. Trace: [Article_11 §36] </description>
+            </feature>
+          </feature>
+          <feature name="SecurityAssurance" mandatory="true">
+            <description>Guarantees that security requirements (privacy, integrity, authentication, authorization) are respected throughout model evolution. Trace: [Article_11 §45] </description>
+          </feature>
+        </feature>
+        <feature name="Composition" abstract="true">
+          <description>Mechanisms to compose and federate heterogeneous models. </description>
+          <feature name="ModelComposition" mandatory="true">
+            <description>Creates a VirtualModel that aggregates FlexoConcepts to represent the federation of individual models. Trace: [Article_11 §33] </description>
+          </feature>
+        </feature>
+        <feature name="Traceability" abstract="true">
+          <description>Facilities to track changes and their impact across the federation. </description>
+          <feature name="ChangeTraceability" mandatory="true">
+            <description>Records which models and attributes were affected by a change and propagates this information to dependent models. Trace: [Article_11 §29] </description>
+          </feature>
+        </feature>
+        <feature name="TransformationManagement" abstract="true">
+          <description>Handles data transformations during inter‑model exchanges. </description>
+          <feature name="DataTransformation" mandatory="true">
+            <description>Allows transformation of attribute data when moving between models of different DSMLs. Trace: [Article_11 §11] </description>
+          </feature>
+        </feature>
+        <feature name="ConceptualElicitation" abstract="true">
+          <description>Processes to make implicit dependencies explicit and to attach semantics. </description>
+          <feature name="DependencyReification" mandatory="true">
+            <description>Reifies inter‑model dependencies as explicit links (FlexoLink) within the federation. Trace: [Article_11 §44] </description>
+          </feature>
+        </feature>
+      </feature>
+    </feature>
+  </struct>
+  <constraints/>
+</featureModel>

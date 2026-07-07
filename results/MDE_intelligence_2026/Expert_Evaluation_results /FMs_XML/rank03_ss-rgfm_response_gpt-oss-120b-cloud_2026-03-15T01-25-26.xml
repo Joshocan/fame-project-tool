@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<featureModel>
+  <struct>
+    <feature name="Model_Federation" abstract="false">
+      <description>Model Federation is the approach that integrates heterogeneous models, links, and processes to enable coordinated analysis and development across domains.</description>
+      <feature name="Structural" abstract="true" mandatory="true">
+        <description>Covers the artefacts, links, and structural features of Model Federation, including model composition, graph structure, formalism, domain, and technological context.</description>
+        <feature name="Artefacts" abstract="true">
+          <description>Represents the concrete modeling artefacts used within the federation.</description>
+          <feature name="ROS_Protocol_Files" abstract="false">
+            <description>ROS protocol files model the software interfaces and contain attribute types and names. Trace: [Article_5 §ProcessLayout]</description>
+          </feature>
+          <feature name="UML_Diagrams" abstract="false">
+            <description>Visio-based UML diagrams capture hardware perspective, connections, and actions. Trace: [Article_5 §ProcessLayout]</description>
+          </feature>
+          <feature name="DSML_Models" abstract="false">
+            <description>Domain-specific modeling languages (DSML) describe system aspects and are stored in the repository. Trace: [Article_1 §MultiModelExecutionEngine]</description>
+          </feature>
+          <feature name="Repository" abstract="false">
+            <description>The repository manages models and their native forms, providing access and versioning. Trace: [Article_1 §Repository]</description>
+          </feature>
+        </feature>
+        <feature name="Links" abstract="true">
+          <description>Defines the types of connections between federated models.</description>
+          <feature name="Dependency_Graph" abstract="false">
+            <description>The model-dependency graph visualizes relationships among models for execution planning. Trace: [Article_1 §ModelDependencyGraph]</description>
+          </feature>
+        </feature>
+        <feature name="Formalism" abstract="true">
+          <description>Specifies the modeling languages and formalisms employed in the federation.</description>
+          <feature name="General_Purpose_Modeling_Languages" abstract="false">
+            <description>General-purpose modeling languages provide broad expressive capabilities for model definition. Trace: [Article_3 §IntegrationFrameworks]</description>
+          </feature>
+          <feature name="Domain_Specific_Languages" abstract="false">
+            <description>Domain-specific languages tailor modeling constructs to particular engineering domains. Trace: [Article_3 §IntegrationFrameworks]</description>
+          </feature>
+          <feature name="Business_Process_Models" abstract="false">
+            <description>Business process models describe tool chains and integration workflows. Trace: [Article_3 §IntegrationFrameworks]</description>
+          </feature>
+          <feature name="MOF" abstract="false">
+            <description>The Meta-Object Facility (MOF) defines meta-modeling foundations for model interchange. Trace: [Article_13 §GeneralPurposeModelingEnvironment]</description>
+          </feature>
+          <feature name="UML" abstract="false">
+            <description>Unified Modeling Language (UML) is used for structural and behavioral specifications. Trace: [Article_13 §GeneralPurposeModelingEnvironment]</description>
+          </feature>
+          <feature name="Queueing_Networks" abstract="false">
+            <description>Queueing networks model performance aspects of systems. Trace: [Article_9 §Formalisms]</description>
+          </feature>
+          <feature name="Stochastic_Petri_Nets" abstract="false">
+            <description>Stochastic Petri nets capture concurrent stochastic behavior. Trace: [Article_9 §Formalisms]</description>
+          </feature>
+          <feature name="Stochastic_Process_Algebras" abstract="false">
+            <description>Stochastic process algebras describe probabilistic process interactions. Trace: [Article_9 §Formalisms]</description>
+          </feature>
+          <feature name="Markov_Chains" abstract="false">
+            <description>Markov chains are used for reliability and performance analysis. Trace: [Article_9 §Formalisms]</description>
+          </feature>
+          <feature name="Fault_Trees" abstract="false">
+            <description>Fault trees support safety and failure analysis. Trace: [Article_9 §Formalisms]</description>
+          </feature>
+          <feature name="Probabilistic_Time_Automata" abstract="false">
+            <description>Probabilistic time automata model timed stochastic behaviors. Trace: [Article_9 §Formalisms]</description>
+          </feature>
+        </feature>
+        <feature name="Domain" abstract="true">
+          <description>Identifies the application domains addressed by the federation.</description>
+          <feature name="Software_Engineering" abstract="false">
+            <description>Software engineering domain provides the primary context for model-driven development. Trace: [Article_14 §MDEBackground]</description>
+          </feature>
+          <feature name="Analysis" abstract="false">
+            <description>Analysis domain includes performance, reliability, and other non-functional evaluations. Trace: [Article_9 §IncrementalPropagation]</description>
+          </feature>
+          <feature name="Quality_Assessment" abstract="false">
+            <description>Quality assessment domain focuses on integrating quality metrics into model evaluation. Trace: [Article_12 §Abstract]</description>
+          </feature>
+        </feature>
+        <feature name="Technological_Context" abstract="true">
+          <description>Describes the technological platforms, standards, and tools supporting federation.</description>
+          <feature name="OTIF_Framework" abstract="false">
+            <description>Open Tool Integration Framework (OTIF) provides meta-model based transformations for tool integration. Trace: [Article_1 §OTIF]</description>
+          </feature>
+          <feature name="ETI_Framework" abstract="false">
+            <description>Electronic Tool Integration (ETI) uses lightweight web services for data exchange. Trace: [Article_1 §ETI]</description>
+          </feature>
+          <feature name="OSLC_Standard" abstract="false">
+            <description>OASIS OSLC standard enables linked data modeling and RESTful interactions across tools. Trace: [Article_6 §OSLC]</description>
+          </feature>
+          <feature name="REST_Architecture" abstract="false">
+            <description>REST architectural pattern underlies web-service based integration. Trace: [Article_6 §REST]</description>
+          </feature>
+          <feature name="Web_Services" abstract="false">
+            <description>Web services act as the communication mechanism between heterogeneous tools. Trace: [Article_1 §ETI]</description>
+          </feature>
+          <feature name="Java" abstract="false">
+            <description>Java is employed for implementing model transformations and rule engines. Trace: [Article_2 §Implementation]</description>
+          </feature>
+          <feature name="GPPL" abstract="false">
+            <description>General-purpose programming languages (GPPL) such as Java are used for transformation code. Trace: [Article_2 §Implementation]</description>
+          </feature>
+        </feature>
+      </feature>
+      <feature name="Operational" abstract="true" mandatory="true">
+        <description>Includes the processes, operations, and triggers in Model Federation, focusing on querying, synchronisation, validation, and management of federated models and links.</description>
+        <feature name="Querying" abstract="true">
+          <description>Mechanisms to retrieve information from the megamodel and linked artifacts.</description>
+          <feature name="Megamodel_Query" abstract="false">
+            <description>Queries over the megamodel retrieve required information for automation. Trace: [Article_9 §Automation]</description>
+          </feature>
+          <feature name="Information_Retrieval" abstract="false">
+            <description>Retrieval of hidden information from artifacts enables informed decision making. Trace: [Article_9 §Automation]</description>
+          </feature>
+        </feature>
+        <feature name="Synchronisation" abstract="true">
+          <description>Ensures consistency between models during evolution.</description>
+          <feature name="Incremental_Propagation" abstract="false">
+            <description>Incremental propagation propagates changes across models efficiently. Trace: [Article_9 §IncrementalPropagation]</description>
+          </feature>
+          <feature name="Consistent_CoEvolution" abstract="false">
+            <description>Co-evolution mechanisms keep software and analysis models aligned. Trace: [Article_13 §CoEvolution]</description>
+          </feature>
+        </feature>
+        <feature name="Validation" abstract="true">
+          <description>Checks and enforces consistency and correctness of federated models.</description>
+          <feature name="Consistency_Preservation" abstract="false">
+            <description>Preserves consistency by applying defined preservation rules. Trace: [Article_2 §Methodologist]</description>
+          </feature>
+          <feature name="Validation_Rules" abstract="false">
+            <description>Validation rules encode constraints that must hold across linked models. Trace: [Article_2 §Methodologist]</description>
+          </feature>
+        </feature>
+        <feature name="Management" abstract="true">
+          <description>Handles storage, versioning, and execution planning of models.</description>
+          <feature name="Model_Repository_Management" abstract="false">
+            <description>Manages the lifecycle of models within a central repository. Trace: [Article_1 §Repository]</description>
+          </feature>
+          <feature name="Execution_Plan_Management" abstract="false">
+            <description>Creates and monitors execution plans for model-driven processes. Trace: [Article_1 §ExecutionPlan]</description>
+          </feature>
+        </feature>
+        <feature name="Automation" abstract="true">
+          <description>Automates repetitive process steps and reduces manual effort.</description>
+          <feature name="Automated_Process_Steps" abstract="false">
+            <description>Automated steps execute based on available information in the megamodel. Trace: [Article_9 §Automation]</description>
+          </feature>
+          <feature name="Metaheuristic_Reduction" abstract="false">
+            <description>Metaheuristic techniques reduce the explored design space size. Trace: [Article_9 §Metaheuristics]</description>
+          </feature>
+        </feature>
+        <feature name="DesignSpaceExploration" abstract="true">
+          <description>Explores alternative configurations and evaluates trade-offs.</description>
+          <feature name="State_Space_Exploration" abstract="false">
+            <description>State space exploration evaluates different design alternatives for NFPs. Trace: [Article_9 §StateSpaceExploration]</description>
+          </feature>
+          <feature name="Tradeoff_Analysis" abstract="false">
+            <description>Trade-off analysis compares solutions affecting multiple NFPs. Trace: [Article_9 §StateSpaceExploration]</description>
+          </feature>
+        </feature>
+        <feature name="Transformation" abstract="true">
+          <description>Transforms models between formalisms and levels of abstraction.</description>
+          <feature name="MetaModel_Based_Transformation" abstract="false">
+            <description>Meta-model based transformations enable interoperability between tools. Trace: [Article_1 §MetaModelTransformation]</description>
+          </feature>
+          <feature name="Model_Transformation" abstract="false">
+            <description>Model transformations convert models to target formalisms for analysis. Trace: [Article_3 §IntegrationFrameworks]</description>
+          </feature>
+        </feature>
+      </feature>
+      <feature name="Intentional" abstract="true" mandatory="true">
+        <description>Addresses the objectives and goals of Model Federation, such as traceability, consistency assurance, transformation management, composition, and conceptual elicitation.</description>
+        <feature name="Traceability" abstract="true">
+          <description>Provides mechanisms to trace elements across models and analyses.</description>
+          <feature name="CrossModel_Traceability" abstract="false">
+            <description>Cross-model traceability links model elements to analysis results. Trace: [Article_9 §CrossModelTraceability]</description>
+          </feature>
+          <feature name="Feedback_of_Analysis_Results" abstract="false">
+            <description>Feedback mechanisms deliver analysis outcomes back to source models. Trace: [Article_9 §CrossModelTraceability]</description>
+          </feature>
+        </feature>
+        <feature name="ConsistencyAssurance" abstract="true">
+          <description>Ensures that federated models remain consistent with each other.</description>
+          <feature name="Consistency_Rules" abstract="false">
+            <description>Consistency rules define required correspondences between model elements. Trace: [Article_2 §ConsistencyPreservation]</description>
+          </feature>
+          <feature name="Consistency_Checks" abstract="false">
+            <description>Automated checks verify that consistency rules are satisfied. Trace: [Article_13 §SemanticLinks]</description>
+          </feature>
+        </feature>
+        <feature name="Composition" abstract="true">
+          <description>Combines multiple models or viewpoints into a coherent federation.</description>
+          <feature name="Model_Composition" abstract="false">
+            <description>Model composition merges artefacts based on defined links. Trace: [Article_4 §FTG]</description>
+          </feature>
+          <feature name="Viewpoint_Composition" abstract="false">
+            <description>Viewpoint composition integrates selected viewpoints into a unified model. Trace: [Article_3 §ViewpointArchitecting]</description>
+          </feature>
+        </feature>
+        <feature name="ConceptualElicitation" abstract="true">
+          <description>Derives concepts and requirements from stakeholder and domain knowledge.</description>
+          <feature name="Stakeholder_Integration" abstract="false">
+            <description>Integrates stakeholder viewpoints to capture requirements. Trace: [Article_13 §StakeholderIntegration]</description>
+          </feature>
+          <feature name="Viewpoint_Selection" abstract="false">
+            <description>Selects appropriate viewpoints for the federation based on goals. Trace: [Article_3 §ViewpointSelection]</description>
+          </feature>
+        </feature>
+        <feature name="TransformationManagement" abstract="true">
+          <description>Manages definition and application of view types and consistency preservation.</description>
+          <feature name="View_Type_Definition" abstract="false">
+            <description>Defines view types that specify how models are presented and linked. Trace: [Article_2 §ViewTypes]</description>
+          </feature>
+          <feature name="Consistency_Preservation_Definition" abstract="false">
+            <description>Specifies how consistency is preserved across transformations. Trace: [Article_2 §ConsistencyPreservation]</description>
+          </feature>
+        </feature>
+      </feature>
+    </feature>
+  </struct>
+  <constraints/>
+</featureModel>
