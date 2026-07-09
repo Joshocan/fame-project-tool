@@ -1,4 +1,4 @@
-# Feature Argumentation Modelling Environment (FAME)
+# Framework for Artefact-Driven Model Engineering (FAME)
 
 FAME builds FeatureIDE-compatible feature models from textual artefacts using four LLM pipeline families:
 
