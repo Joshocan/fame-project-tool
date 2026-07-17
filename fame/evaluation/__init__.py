@@ -15,9 +15,9 @@ from .run_metadata import RunMetadata, write_run_metadata, default_timestamp
 from .semantic import semantic_prf, feature_diff_stats
 from .structure import edge_jaccard_vs_gt, parent_match_rate
 from .quality_sat import analyze_sat_quality, SATQuality
-from .proxy_evidence import ProxyEvidenceConfig, ProxyEvidenceResult, score_evidence
-from .proxy_consensus import ProxyConsensusConfig, ProxyConsensusResult, CandidateSignature, build_candidate_signature, score_consensus
-from .proxy_selector import ProxySelectorConfig, build_proxy_ranked_rows, rank_proxy_fms
+from .proxy_evidence import score_evidence
+from .proxy_consensus import extract_signature, score_consensus
+from .proxy_selector import ProxyRankConfig, build_proxy_rows, rank_proxy_fms, check_admissibility
 
 __all__ = [
     'CoverageEvaluator',
@@ -40,15 +40,11 @@ __all__ = [
     'parent_match_rate',
     'analyze_sat_quality',
     'SATQuality',
-    'ProxyEvidenceConfig',
-    'ProxyEvidenceResult',
     'score_evidence',
-    'ProxyConsensusConfig',
-    'ProxyConsensusResult',
-    'CandidateSignature',
-    'build_candidate_signature',
+    'extract_signature',
     'score_consensus',
-    'ProxySelectorConfig',
-    'build_proxy_ranked_rows',
+    'ProxyRankConfig',
+    'build_proxy_rows',
     'rank_proxy_fms',
+    'check_admissibility',
 ]
