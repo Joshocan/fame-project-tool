@@ -81,6 +81,7 @@ class ISNonRagConfig:
 
     # output naming
     run_tag: str = "is-nonrag"
+    dataset: str = ""
 
     # prompt overrides
     initial_prompt_path: Optional[Path] = None  # used only for first iteration
@@ -158,6 +159,7 @@ refined. No retrieval or vector DB is used.
     run_wall_clock_start = time.perf_counter()
     paths = build_paths()
     ensure_for_stage("is-nonrag", paths)
+    dataset_subdir = (cfg.dataset or '').strip()
     ensure_for_stage("preprocess", paths)
     spec_dir = paths.specifications
     xsd_path = cfg.xsd_path or (spec_dir / "feature_model_featureide.xsd")
@@ -247,9 +249,11 @@ refined. No retrieval or vector DB is used.
 
         # save per-iteration artifacts
         iter_tag = f"{run_id_base}_iter{i:02d}_{f.stem}"
-        prompt_file = paths.non_is_runs / f"{iter_tag}.prompt.txt"
-        delta_file = paths.non_is_context / f"{iter_tag}.delta.txt"
-        out_file = paths.non_is_runs / f"{iter_tag}.xml"
+        runs_dir = (paths.non_is_runs / dataset_subdir) if dataset_subdir else paths.non_is_runs
+        context_dir = (paths.non_is_context / dataset_subdir) if dataset_subdir else paths.non_is_context
+        prompt_file = runs_dir / f"{iter_tag}.prompt.txt"
+        delta_file = context_dir / f"{iter_tag}.delta.txt"
+        out_file = runs_dir / f"{iter_tag}.xml"
 
         print("   → Calling LLM...")
         out_xml = ""
@@ -331,8 +335,10 @@ refined. No retrieval or vector DB is used.
         else f"is_nonrag_response_{ts}"
     )
 
-    final_xml_file = paths.non_is_fm / f"{run_id}.final.xml"
-    meta_file = paths.non_is_reports / f"{run_id}.meta.json"
+    fm_dir = (paths.non_is_fm / dataset_subdir) if dataset_subdir else paths.non_is_fm
+    reports_dir = (paths.non_is_reports / dataset_subdir) if dataset_subdir else paths.non_is_reports
+    final_xml_file = fm_dir / f"{run_id}.final.xml"
+    meta_file = reports_dir / f"{run_id}.meta.json"
 
     final_xml_file.write_text(previous_xml, encoding="utf-8")
 

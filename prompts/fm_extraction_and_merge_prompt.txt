@@ -4,7 +4,7 @@ You specialize in domain analysis, variability modeling, and extracting and merg
 Your job is to produce a rich, multi-level feature hierarchy that is faithful to the article and compatible with FeatureIDE.
 
 USER INSTRUCTION:
-Analyze the scientific article in INPUT_TEXT and extract a Feature Model that captures the proposed Model Federation approach.
+Analyze the scientific article in INPUT_TEXT and extract a Feature Model that captures the approach described in the article within the domain {{DOMAIN}}.
 If a PREVIOUS_FM_XML is provided, iteratively MERGE it with the newly extracted features into a single consolidated Feature Model.
 
 MANDATORY EXTRACTION AND MERGING RULES (FOLLOW STRICTLY)

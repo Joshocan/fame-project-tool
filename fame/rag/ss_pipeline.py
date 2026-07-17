@@ -52,6 +52,7 @@ class SSRGFMConfig:
 
     # output naming
     run_tag: str = "ss-rgfm"
+    dataset: str = ""
 
 
 def _default_chunks_dir(paths) -> Path:
@@ -108,6 +109,7 @@ def run_ss_rgfm(
     logger = get_logger("ss_rgfm")
     paths = build_paths()
     ensure_for_stage("ss-rgfm", paths)
+    dataset_subdir = (cfg.dataset or '').strip()
     ensure_for_stage("preprocess", paths)
     ensure_for_stage("vectorize", paths)
 
@@ -216,10 +218,14 @@ def run_ss_rgfm(
     )
     run_id = f"{cfg.run_tag}_response_{model_safe}_{ts}"
 
-    fm_file = paths.ss_fm / f"{run_id}.xml"
-    prompt_file = paths.reports / f"{run_id}.prompt.txt"
-    evidence_file = paths.reports / f"{run_id}.evidence.txt"
-    meta_file = paths.reports / f"{run_id}.meta.json"
+    fm_dir = (paths.ss_fm / dataset_subdir) if dataset_subdir else paths.ss_fm
+    reports_dir = (paths.reports / dataset_subdir) if dataset_subdir else paths.reports
+    ensure_dir(fm_dir)
+    ensure_dir(reports_dir)
+    fm_file = fm_dir / f"{run_id}.xml"
+    prompt_file = reports_dir / f"{run_id}.prompt.txt"
+    evidence_file = reports_dir / f"{run_id}.evidence.txt"
+    meta_file = reports_dir / f"{run_id}.meta.json"
 
     fm_file.write_text(fm_xml, encoding="utf-8")
     prompt_file.write_text(prompt, encoding="utf-8")

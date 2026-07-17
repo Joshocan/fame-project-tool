@@ -44,6 +44,7 @@ class SSNonRagConfig:
 
     # output naming
     run_tag: str = "ss-nonrag"
+    dataset: str = ""
 
 
 def _default_chunks_dir(paths) -> Path:
@@ -79,6 +80,7 @@ No vector database or retrieval step is used.
 """
     )
     paths = build_paths()
+    dataset_subdir = (cfg.dataset or '').strip()
     ensure_for_stage("ss-nonrag", paths)  # creates NON_SS_* dirs
     ensure_for_stage("preprocess", paths)  # ensures processed_data exists
 
@@ -176,10 +178,18 @@ No vector database or retrieval step is used.
     model_safe = re.sub(r"[^a-zA-Z0-9]+", "-", str(model_name)).strip("-").lower()
     run_id = f"ss_nonrag_response_{model_safe}_{ts}"
 
-    context_file = paths.non_ss_context / f"{run_id}.context.txt"
-    prompt_file = paths.non_ss_runs / f"{run_id}.prompt.txt"
-    meta_file = paths.non_ss_reports / f"{run_id}.meta.json"
-    fm_file = paths.non_ss_fm / f"{run_id}.xml"
+    context_dir = (paths.non_ss_context / dataset_subdir) if dataset_subdir else paths.non_ss_context
+    runs_dir = (paths.non_ss_runs / dataset_subdir) if dataset_subdir else paths.non_ss_runs
+    reports_dir = (paths.non_ss_reports / dataset_subdir) if dataset_subdir else paths.non_ss_reports
+    fm_dir = (paths.non_ss_fm / dataset_subdir) if dataset_subdir else paths.non_ss_fm
+    ensure_dir(context_dir)
+    ensure_dir(runs_dir)
+    ensure_dir(reports_dir)
+    ensure_dir(fm_dir)
+    context_file = context_dir / f"{run_id}.context.txt"
+    prompt_file = runs_dir / f"{run_id}.prompt.txt"
+    meta_file = reports_dir / f"{run_id}.meta.json"
+    fm_file = fm_dir / f"{run_id}.xml"
 
     context_file.write_text(context, encoding="utf-8")
     prompt_file.write_text(prompt, encoding="utf-8")

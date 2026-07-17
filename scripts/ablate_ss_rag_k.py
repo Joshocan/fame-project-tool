@@ -13,7 +13,13 @@ from fame.config.load import load_config
 from fame.exceptions import MissingKeyError, UserMessageError, format_error
 from fame.judge import create_judge_client
 from fame.loggers import get_logger, log_exception
-from fame.nonrag.cli_utils import default_high_level_features, load_key_file, prompt_choice
+from fame.nonrag.cli_utils import (
+    dataset_choices,
+    dataset_defaults,
+    load_high_level_features,
+    load_key_file,
+    prompt_choice,
+)
 from fame.rag.ss_pipeline import SSRGFMConfig, run_ss_rgfm
 from fame.utils.dirs import build_paths, ensure_dir
 
@@ -216,23 +222,28 @@ def _interactive_setup(args: argparse.Namespace, cfg_yaml):
     args.temperature = _prompt_float("Temperature", default=args.temperature)
     args.max_total_results = _prompt_int("Max total results (0 = no fixed cap)", default=args.max_total_results, min_value=0)
     args.max_retries_per_k = _prompt_int("Max retries per k run", default=max(1, args.max_retries_per_k), min_value=1)
+        config_override = Path(args.high_level_features_config).expanduser().resolve() if args.high_level_features_config else None
+        feats = None if args.no_high_level_features else load_high_level_features(dataset=args.dataset, config_path=config_override)
+        hl = input("Include high-level features? (Y/n): ").strip().lower()
+        if hl not in ("n", "no") and feats:
+            print("
+High-level features (loaded):")
+            for k, v in feats.items():
+                print(f"- {k}: {v}")
+            confirm = input("Use these? (Y/n): ").strip().lower()
+            if confirm not in ("n", "no"):
+                high_level_features = feats
 
-    hl = input("Include high-level features? (Y/n): ").strip().lower()
-    feats = default_high_level_features()
-    if hl not in ("n", "no"):
-        print("\nHigh-level features (default):")
-        for k, v in feats.items():
-            print(f"- {k}: {v}")
-        confirm = input("Use these? (Y/n): ").strip().lower()
-        if confirm not in ("n", "no"):
-            high_level_features = feats
 
     return llm_client, high_level_features
 
 
 def _noninteractive_setup(args: argparse.Namespace, cfg_yaml):
     llm_client = None
-    high_level_features = default_high_level_features() if args.use_default_high_level_features else None
+    config_override = _resolve_optional_path(args.high_level_features_config)
+    high_level_features = None
+    if args.use_default_high_level_features and not args.no_high_level_features:
+        high_level_features = load_high_level_features(dataset=args.dataset, config_path=config_override)
 
     provider = args.llm_provider
     if provider == "ollama":
@@ -264,6 +275,12 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument("--interactive", action="store_true", help="Run with guided prompts.")
     ap.add_argument("--root-feature", default="")
     ap.add_argument("--domain", default="")
+    ap.add_argument("--dataset", choices=dataset_choices(), default="federation", help="Dataset-specific prompt guidance to load.")
+    ap.add_argument("--high-level-features-config", default="", help="Optional YAML file overriding dataset high-level features.")
+    ap.add_argument("--no-high-level-features", action="store_true", help="Disable high-level feature guidance injection.")
+    ap.add_argument("--dataset", choices=dataset_choices(), default="federation", help="Dataset-specific prompt guidance to load.")
+    ap.add_argument("--high-level-features-config", default="", help="Optional YAML file overriding dataset high-level features.")
+    ap.add_argument("--no-high-level-features", action="store_true", help="Disable high-level feature guidance injection.")
     ap.add_argument(
         "--k-values",
         nargs="+",

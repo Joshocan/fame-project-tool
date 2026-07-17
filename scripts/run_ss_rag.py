@@ -11,9 +11,20 @@ from fame.evaluation.top_fm import TopFMConfig, rank_top_fms
 from fame.rag.ss_pipeline import SSRGFMConfig, run_ss_rgfm
 from fame.loggers import get_logger, log_exception
 from fame.exceptions import UserMessageError, MissingKeyError, format_error
-from fame.nonrag.cli_utils import prompt_choice, load_key_file, default_high_level_features
+from fame.nonrag.cli_utils import (
+    dataset_choices,
+    dataset_defaults,
+    load_high_level_features,
+    load_key_file,
+    prompt_choice,
+)
 from fame.judge import create_judge_client
 from fame.utils.dirs import build_paths
+
+
+def _default_dataset_chunks_dir(dataset: str) -> Path:
+    paths = build_paths()
+    return (paths.base_dir / "data" / "processed" / dataset / "chunks").resolve()
 
 
 def _resolve_model_max_tokens(judge_cfg, model: str) -> int:
@@ -43,6 +54,9 @@ def main() -> None:
     ap = argparse.ArgumentParser(description="Run Single-Stage RAG Generated Feature Modeling (SS-RGFM)")
     ap.add_argument("--root-feature", default="")
     ap.add_argument("--domain", default="")
+    ap.add_argument("--dataset", choices=dataset_choices(), default="federation", help="Dataset-specific prompt guidance to load.")
+    ap.add_argument("--high-level-features-config", default="", help="Optional YAML file overriding dataset high-level features.")
+    ap.add_argument("--no-high-level-features", action="store_true", help="Disable high-level feature guidance injection.")
     ap.add_argument("--chunks-dir", default="", help="Directory containing *.chunks.json (default: processed_data/chunks)")
     ap.add_argument("--temperature", type=float, default=0.2)
     ap.add_argument("--prompt-path", default="", help="Custom prompt template path")
@@ -126,26 +140,32 @@ def main() -> None:
                 timeout_s=judge_cfg.timeout_s,
             )
 
-        domain = input("Enter domain [Model Driven Engineering]: ").strip() or "Model Driven Engineering"
-        root_feature = input("Enter root feature [Model Federation]: ").strip() or "Model Federation"
+        dataset_meta = dataset_defaults(args.dataset)
+        domain = input(f"Enter domain [{dataset_meta['domain']}]: ").strip() or dataset_meta["domain"]
+        root_feature = input(f"Enter root feature [{dataset_meta['root_feature']}]: ").strip() or dataset_meta["root_feature"]
         args.domain = domain
         args.root_feature = root_feature
-
+        config_override = Path(args.high_level_features_config).expanduser().resolve() if args.high_level_features_config else None
+        feats = None if args.no_high_level_features else load_high_level_features(dataset=args.dataset, config_path=config_override)
         hl = input("Include high-level features? (Y/n): ").strip().lower()
-        feats = default_high_level_features()
-        if hl not in ("n", "no"):
-            print("\nHigh-level features (default):")
+        if hl not in ("n", "no") and feats:
+            print("\nHigh-level features (loaded):")
             for k, v in feats.items():
                 print(f"- {k}: {v}")
             confirm = input("Use these? (Y/n): ").strip().lower()
-            if confirm in ("n", "no"):
-                high_level_features = None
-            else:
+            if confirm not in ("n", "no"):
                 high_level_features = feats
+
         args.repeats = _prompt_int("Number of runs to execute sequentially", default=max(1, args.repeats), min_value=1)
         args.max_retries = _prompt_int("Max retries for a failed generation", default=max(1, args.max_retries), min_value=1)
 
-    chunks_dir = Path(args.chunks_dir).expanduser().resolve() if args.chunks_dir else None
+    if not interactive:
+        config_override = Path(args.high_level_features_config).expanduser().resolve() if args.high_level_features_config else None
+        high_level_features = None if args.no_high_level_features else load_high_level_features(dataset=args.dataset, config_path=config_override)
+    else:
+        high_level_features = getattr(args, "high_level_features", None)
+
+    chunks_dir = Path(args.chunks_dir).expanduser().resolve() if args.chunks_dir else _default_dataset_chunks_dir(args.dataset)
     prompt_path = Path(args.prompt_path).expanduser() if args.prompt_path else None
     if prompt_path is None:
         prompt_path = cfg_yaml.pipelines.ss_rgfm_prompt_path
@@ -170,6 +190,7 @@ def main() -> None:
         feature_metamodel_path=Path(args.feature_metamodel_path).expanduser().resolve() if args.feature_metamodel_path else None,
         high_level_features=high_level_features,
         max_retries=args.max_retries,
+        dataset=args.dataset,
     )
 
     print("\n==================== SS-RGFM ====================")
@@ -222,6 +243,7 @@ def main() -> None:
                     feature_weight=cfg_yaml.evaluation.coverage.feature_weight,
                     parent_weight=cfg_yaml.evaluation.coverage.parent_weight,
                 ),
+                output_subdir=args.dataset,
             ),
         )
         if manifest:

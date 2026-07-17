@@ -45,6 +45,8 @@ class ISRgfmConfig:
     inter_iteration_sleep_seconds: float = 1.0
 
     run_tag: str = "is-rgfm"
+    dataset: str = ""
+    collection_prefix: str = ""
 
 
 def _default_chunks_dir(paths) -> Path:
@@ -78,6 +80,7 @@ def run_is_rgfm(cfg: ISRgfmConfig, *, llm: Optional[object] = None, retriever: O
     run_wall_clock_start = time.perf_counter()
     paths = build_paths()
     ensure_for_stage("is-rgfm", paths)
+    dataset_subdir = (cfg.dataset or '').strip()
     ensure_for_stage("preprocess", paths)
 
     # LLM
@@ -108,7 +111,8 @@ def run_is_rgfm(cfg: ISRgfmConfig, *, llm: Optional[object] = None, retriever: O
 
     for i, f in enumerate(files, start=1):
         iter_wall_clock_start = time.perf_counter()
-        collection = default_collection_name(f)
+        base_collection = default_collection_name(f)
+        collection = f"{cfg.collection_prefix}{base_collection}" if cfg.collection_prefix else base_collection
         retrieval_start = time.perf_counter()
         res = retr.retrieve(
             root_feature=cfg.root_feature,
@@ -156,9 +160,12 @@ def run_is_rgfm(cfg: ISRgfmConfig, *, llm: Optional[object] = None, retriever: O
         prompt_build_duration = time.perf_counter() - prompt_build_start
 
         iter_tag = f"{run_id_base}_iter{i:02d}_{f.stem}"
-        prompt_file = paths.reports / f"{iter_tag}.prompt.txt"
-        context_file = paths.results / "rag" / "is-rgfm" / "context" / f"{iter_tag}.context.txt"
-        xml_file = paths.results / "rag" / "is-rgfm" / "runs" / f"{iter_tag}.xml"
+        prompt_dir = (paths.reports / dataset_subdir) if dataset_subdir else paths.reports
+        context_dir = (paths.results / "rag" / "is-rgfm" / "context" / dataset_subdir) if dataset_subdir else (paths.results / "rag" / "is-rgfm" / "context")
+        runs_dir = (paths.results / "rag" / "is-rgfm" / "runs" / dataset_subdir) if dataset_subdir else (paths.results / "rag" / "is-rgfm" / "runs")
+        prompt_file = prompt_dir / f"{iter_tag}.prompt.txt"
+        context_file = context_dir / f"{iter_tag}.context.txt"
+        xml_file = runs_dir / f"{iter_tag}.xml"
         ensure_dir(prompt_file.parent)
         ensure_dir(context_file.parent)
         ensure_dir(xml_file.parent)
@@ -235,11 +242,14 @@ def run_is_rgfm(cfg: ISRgfmConfig, *, llm: Optional[object] = None, retriever: O
             inter_iteration_sleep_seconds += sleep_s
             iteration_meta[-1]["inter_iteration_sleep_seconds"] = inter_iteration_sleep_seconds
 
-    final_xml_file = paths.is_fm / f"{run_id_base}.final.xml"
+    fm_dir = (paths.is_fm / dataset_subdir) if dataset_subdir else paths.is_fm
+    reports_dir = (paths.is_reports / dataset_subdir) if dataset_subdir else paths.is_reports
+    final_xml_file = fm_dir / f"{run_id_base}.final.xml"
     ensure_dir(final_xml_file.parent)
+    ensure_dir(reports_dir)
     final_xml_file.write_text(previous_xml, encoding="utf-8")
 
-    meta_file = paths.is_reports / f"{run_id_base}.meta.json"
+    meta_file = reports_dir / f"{run_id_base}.meta.json"
     meta = {
         "run_id": run_id_base,
         "root_feature": cfg.root_feature,

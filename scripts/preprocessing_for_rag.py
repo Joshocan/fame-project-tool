@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import argparse
 import os
 import sys
-import time
 from pathlib import Path
-from typing import Optional
 
 import requests
 
@@ -14,11 +13,44 @@ from fame.ingestion.pipeline import ingest_and_prepare
 from fame.vectorization.pipeline import index_all_chunks
 from fame.services.chroma_service import start_chroma
 from fame.services.ollama_service import _ollama_bin, start_ollama, verify_running, pull_models
+from fame.nonrag.cli_utils import normalize_dataset_name
 
 
-# ----------------------------
-# Health checks
-# ----------------------------
+DATASET_PROCESSED_SUBDIR = {
+    "federation": "federation",
+    "repair": "repair",
+}
+
+
+def _build_parser() -> argparse.ArgumentParser:
+    ap = argparse.ArgumentParser(description="Run dataset-aware preprocessing for RAG")
+    ap.add_argument("--dataset", choices=("federation", "repair", "fed", "federated", "model_repair"), default="", help="Dataset preset for raw/chunk directories and collection prefix")
+    ap.add_argument("--raw-dir", default="", help="Explicit input directory containing source PDFs")
+    ap.add_argument("--out-dir", default="", help="Explicit output directory for *.chunks.json")
+    ap.add_argument("--collection-prefix", default="", help="Explicit Chroma collection prefix")
+    ap.add_argument("--batch-size", type=int, default=int(os.getenv("VEC_BATCH_SIZE", "24")), help="Vectorization batch size")
+    return ap
+
+
+def _resolve_paths(paths, dataset: str | None, raw_dir: str | None, out_dir: str | None) -> tuple[Path, Path, str | None]:
+    dataset_name = normalize_dataset_name(dataset) if dataset else None
+    if raw_dir:
+        resolved_raw = Path(raw_dir).expanduser().resolve()
+    elif dataset_name:
+        resolved_raw = (paths.base_dir / "data" / "raw" / dataset_name).resolve()
+    else:
+        resolved_raw = paths.raw_data
+
+    if out_dir:
+        resolved_out = Path(out_dir).expanduser().resolve()
+    elif dataset_name:
+        subdir = DATASET_PROCESSED_SUBDIR.get(dataset_name, dataset_name)
+        resolved_out = (paths.base_dir / "data" / "processed" / subdir / "chunks").resolve()
+    else:
+        resolved_out = (paths.processed_data / "chunks").resolve()
+
+    return resolved_raw, resolved_out, dataset_name
+
 
 def chroma_healthy(host: str, port: int) -> bool:
     endpoints = [
@@ -39,10 +71,6 @@ def chroma_healthy(host: str, port: int) -> bool:
 
 
 def ensure_chroma_running(chroma_path: Path, host: str, port: int, timeout_s: int) -> int:
-    """
-    Ensure Chroma is reachable. If not, start it and wait.
-    Returns PID (0 if already running and we didn't start it).
-    """
     if chroma_healthy(host, port):
         print(f"SUCCESS: Chroma already running at http://{host}:{port}")
         return 0
@@ -53,34 +81,23 @@ def ensure_chroma_running(chroma_path: Path, host: str, port: int, timeout_s: in
         host=host,
         port=port,
         timeout_s=timeout_s,
-        force_restart=False,  # important: don't kill if user has it running elsewhere
+        force_restart=False,
     )
     return pid
 
 
 def ensure_ollama_running(log_dir: Path, timeout_s: int) -> int:
-    """
-    Ensure Ollama is reachable. If not, start it.
-    Returns PID (0 if already running).
-    """
     try:
         verify_running()
         print("SUCCESS: Ollama already running.")
         return 0
     except Exception:
         print("🔧 Ollama not reachable — attempting to start locally...")
-        # start_ollama needs local ollama binary
         pid = start_ollama(log_dir=str(log_dir), timeout_s=timeout_s, force_restart=False)
         return pid
 
 
 def ensure_ollama_embed_model(model: str, host: str) -> None:
-    """
-    Best-effort pull of embedding model.
-
-    If host is remote (not localhost/127.0.0.1), we avoid auto-pull because the
-    model catalog is controlled by that service. In that case we simply warn.
-    """
     host_lower = host.lower()
     is_local = any(h in host_lower for h in ["127.0.0.1", "localhost"])
 
@@ -104,15 +121,17 @@ def ensure_ollama_embed_model(model: str, host: str) -> None:
     pull_models([model])
 
 
-# ----------------------------
-# Main pipeline
-# ----------------------------
-
 def main() -> None:
+    args = _build_parser().parse_args()
     ws = workspace("vectorize", base_dir=os.getenv("FAME_BASE_DIR"))
     paths = ws.paths
+    raw_dir, chunks_out_dir, dataset_name = _resolve_paths(
+        paths,
+        dataset=args.dataset or None,
+        raw_dir=args.raw_dir or None,
+        out_dir=args.out_dir or None,
+    )
 
-    # ---- Config ----
     chroma_host = os.getenv("CHROMA_HOST", "127.0.0.1").strip()
     chroma_port = int(os.getenv("CHROMA_PORT", "8000"))
     chroma_timeout = int(os.getenv("CHROMA_STARTUP_TIMEOUT", "120"))
@@ -121,12 +140,14 @@ def main() -> None:
     ollama_timeout = int(os.getenv("OLLAMA_STARTUP_TIMEOUT", "60"))
     ollama_log_dir = Path(os.getenv("OLLAMA_LOG_DIR", str(paths.base_dir / "data" / "ollama"))).expanduser().resolve()
     embed_model = os.getenv("OLLAMA_EMBED_MODEL", "nomic-embed-text").strip()
+    collection_prefix = args.collection_prefix or (f"{dataset_name}_" if dataset_name else os.getenv("COLLECTION_PREFIX", ""))
 
-    # ---- Print ----
     print("\n==================== PREPROCESSING FOR RAG ====================")
     print(f"BASE_DIR           : {paths.base_dir}")
-    print(f"RAW_DIR            : {paths.raw_data}")
-    print(f"CHUNKS_OUT_DIR     : {paths.processed_data / 'chunks'}")
+    print(f"DATASET            : {dataset_name or '(default)'}")
+    print(f"RAW_DIR            : {raw_dir}")
+    print(f"CHUNKS_OUT_DIR     : {chunks_out_dir}")
+    print(f"COLLECTION_PREFIX  : {collection_prefix}")
     print(f"CHROMA_MODE        : {os.getenv('CHROMA_MODE', 'persistent')}")
     print(f"CHROMA_PATH        : {chroma_path}")
     print(f"CHROMA_HOST:PORT   : {chroma_host}:{chroma_port}")
@@ -134,26 +155,23 @@ def main() -> None:
     print(f"OLLAMA_EMBED_MODEL : {embed_model}")
     print("===============================================================\n")
 
-    # ---- Ensure services ----
     chroma_pid = ensure_chroma_running(chroma_path, chroma_host, chroma_port, chroma_timeout)
     ollama_pid = ensure_ollama_running(ollama_log_dir, ollama_timeout)
     ensure_ollama_embed_model(embed_model, os.getenv("OLLAMA_HOST", "http://127.0.0.1:11434"))
 
-    # ---- Ingestion ----
     print("\n🧩 Running ingestion pipeline...")
-    ingest_res = ingest_and_prepare(raw_dir=paths.raw_data, out_dir=paths.processed_data / "chunks")
+    ingest_res = ingest_and_prepare(raw_dir=raw_dir, out_dir=chunks_out_dir)
     print(f"SUCCESS: Ingestion done: processed={len(ingest_res['processed'])}, skipped={len(ingest_res['skipped'])}")
 
     if not ingest_res["processed"]:
-        print("WARN:  No chunks.json produced. Ensure there is at least one PDF in data/raw.")
+        print(f"WARN:  No chunks.json produced. Ensure there is at least one supported file in {raw_dir}.")
         sys.exit(2)
 
-    # ---- Vectorization ----
     print("\n🧠 Running vectorization (indexing) pipeline...")
     vec_res = index_all_chunks(
-        chunks_dir=paths.processed_data / "chunks",
-        batch_size=int(os.getenv("VEC_BATCH_SIZE", "24")),
-        collection_prefix=os.getenv("COLLECTION_PREFIX", ""),
+        chunks_dir=chunks_out_dir,
+        batch_size=args.batch_size,
+        collection_prefix=collection_prefix,
     )
     print("SUCCESS: Vectorization done.")
     print(vec_res)
