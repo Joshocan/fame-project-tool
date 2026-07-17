@@ -1,0 +1,11 @@
+{
+  "ok": false,
+  "errors": [
+    "Missing or misplaced XML declaration before content",
+    "Content found after closing </featureModel> tag",
+    "XML parse error: Start tag expected, '<' not found, line 1, column 1 (ss-rgfm_response_claude-opus-4-5_2026-02-08T12-36-48.xml, line 1)"
+  ],
+  "xml": "results/rag/ss-rgfm/fm/ss-rgfm_response_claude-opus-4-5_2026-02-08T12-36-48.xml",
+  "xsd": "prompts/specifications/feature_model_featureide.xsd",
+  "timestamp_utc": "2026-02-08T15-23-15Z"
+}

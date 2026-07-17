@@ -1,0 +1,7 @@
+{
+  "ok": true,
+  "errors": [],
+  "xml": "results/rag/ss-rgfm/fm/ss-rgfm_response_gpt-4.1_2026-02-08T12-19-44.xml",
+  "xsd": "prompts/specifications/feature_model_featureide.xsd",
+  "timestamp_utc": "2026-02-08T15-24-22Z"
+}

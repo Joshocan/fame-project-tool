@@ -1,0 +1,663 @@
+[
+  {
+    "file": "results/non_rag/is-nonrag/reports/is-nonrag_2026-02-06T12-55-44.meta.json",
+    "total_runtime": null,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": null,
+    "iteration_durations": {},
+    "llm_model": null
+  },
+  {
+    "file": "results/non_rag/is-nonrag/reports/is-nonrag_2026-02-06T13-13-47.meta.json",
+    "total_runtime": null,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": null,
+    "iteration_durations": {},
+    "llm_model": null
+  },
+  {
+    "file": "results/non_rag/is-nonrag/reports/is-nonrag_2026-02-06T14-11-51.meta.json",
+    "total_runtime": null,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": null,
+    "iteration_durations": {},
+    "llm_model": null
+  },
+  {
+    "file": "results/non_rag/is-nonrag/reports/is_nonrag_response_deepseek-v3.2-cloud_2026-02-10T07-34-42.meta.json",
+    "total_runtime": 3344.989188194275,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 3344.989188194275,
+    "iteration_durations": {
+      "1": 177.3486189842224,
+      "2": 149.54817509651184,
+      "3": 141.62177896499634,
+      "4": 159.68249082565308,
+      "5": 216.47521901130676,
+      "6": 194.221745967865,
+      "7": 262.318589925766,
+      "8": 322.513409614563,
+      "9": 251.35933876037598,
+      "10": 271.60544514656067,
+      "11": 302.6567931175232,
+      "12": 268.4341719150543,
+      "13": 288.1925759315491,
+      "14": 339.01083493232727
+    },
+    "llm_model": "deepseek-v3.2:cloud"
+  },
+  {
+    "file": "results/non_rag/is-nonrag/reports/is_nonrag_response_gemini-3-pro-preview_2026-02-09T09-57-59.meta.json",
+    "total_runtime": 1034.039868593216,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 1034.039868593216,
+    "iteration_durations": {
+      "1": 77.71766185760498,
+      "2": 72.35992097854614,
+      "3": 68.28359985351562,
+      "4": 73.88440585136414,
+      "5": 73.17450594902039,
+      "6": 75.86006093025208,
+      "7": 72.6286289691925,
+      "8": 73.17513608932495,
+      "9": 72.08576011657715,
+      "10": 74.99294781684875,
+      "11": 75.53927993774414,
+      "12": 75.43639802932739,
+      "13": 74.73669719696045,
+      "14": 74.16486501693726
+    },
+    "llm_model": "gemini-3-pro-preview"
+  },
+  {
+    "file": "results/non_rag/is-nonrag/reports/is_nonrag_response_gemini-3-pro-preview_2026-02-09T23-55-45.meta.json",
+    "total_runtime": 932.8269972801208,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 932.8269972801208,
+    "iteration_durations": {
+      "1": 53.33273100852966,
+      "2": 65.97596716880798,
+      "3": 66.58565521240234,
+      "4": 66.76612520217896,
+      "5": 69.08311605453491,
+      "6": 69.85214614868164,
+      "7": 68.8069281578064,
+      "8": 68.87021708488464,
+      "9": 68.99172401428223,
+      "10": 67.72369194030762,
+      "11": 71.36766719818115,
+      "12": 53.845662117004395,
+      "13": 71.26807498931885,
+      "14": 70.35729098320007
+    },
+    "llm_model": "gemini-3-pro-preview"
+  },
+  {
+    "file": "results/non_rag/is-nonrag/reports/is_nonrag_response_gemini-3-pro-preview_2026-02-10T07-31-51.meta.json",
+    "total_runtime": 312.29643845558167,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 312.29643845558167,
+    "iteration_durations": {
+      "1": 21.471101999282837,
+      "2": 25.614299297332764,
+      "3": 22.27645516395569,
+      "4": 22.32037878036499,
+      "5": 21.737015962600708,
+      "6": 23.95636296272278,
+      "7": 22.118369102478027,
+      "8": 21.46498394012451,
+      "9": 21.078639268875122,
+      "10": 21.147194147109985,
+      "11": 21.012959957122803,
+      "12": 24.6261990070343,
+      "13": 20.277015924453735,
+      "14": 23.195462942123413
+    },
+    "llm_model": "gemini-3-pro-preview"
+  },
+  {
+    "file": "results/non_rag/is-nonrag/reports/is_nonrag_response_glm-4.7-cloud_2026-02-06T14-49-48.meta.json",
+    "total_runtime": 1539.4083499908447,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 1539.4083499908447,
+    "iteration_durations": {
+      "1": 77.8322172164917,
+      "2": 99.2437059879303,
+      "3": 51.83661508560181,
+      "4": 107.25005197525024,
+      "5": 94.33126282691956,
+      "6": 76.78885006904602,
+      "7": 109.22773098945618,
+      "8": 233.4214608669281,
+      "9": 99.57088804244995,
+      "10": 108.14668583869934,
+      "11": 78.91011190414429,
+      "12": 178.67759203910828,
+      "13": 164.23022294044495,
+      "14": 59.94095420837402
+    },
+    "llm_model": null
+  },
+  {
+    "file": "results/non_rag/is-nonrag/reports/is_nonrag_response_gpt-oss-120b-cloud_2026-02-06T14-29-48.meta.json",
+    "total_runtime": 427.12790513038635,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 427.12790513038635,
+    "iteration_durations": {
+      "1": 16.336026906967163,
+      "2": 9.475966930389404,
+      "3": 14.17809510231018,
+      "4": 14.265794038772583,
+      "5": 20.301321268081665,
+      "6": 29.990659713745117,
+      "7": 27.75768280029297,
+      "8": 26.500284910202026,
+      "9": 30.639171838760376,
+      "10": 43.59271287918091,
+      "11": 38.93618392944336,
+      "12": 42.15302491188049,
+      "13": 41.92212390899658,
+      "14": 71.07885599136353
+    },
+    "llm_model": null
+  },
+  {
+    "file": "results/non_rag/is-nonrag/reports/is_nonrag_response_gpt-oss-120b-cloud_2026-02-07T08-49-38.meta.json",
+    "total_runtime": 776.1105222702026,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 776.1105222702026,
+    "iteration_durations": {
+      "1": 26.638509273529053,
+      "2": 24.317503929138184,
+      "3": 35.42689919471741,
+      "4": 48.333340883255005,
+      "5": 48.83350205421448,
+      "6": 64.4875168800354,
+      "7": 68.83472609519958,
+      "8": 67.85375118255615,
+      "9": 61.28225588798523,
+      "10": 79.88802218437195,
+      "11": 91.60755491256714,
+      "12": 85.35048985481262,
+      "13": 31.457820892333984,
+      "14": 41.79862904548645
+    },
+    "llm_model": null
+  },
+  {
+    "file": "results/non_rag/is-nonrag/reports/is_nonrag_response_gpt-oss-120b-cloud_2026-02-09T09-53-53.meta.json",
+    "total_runtime": 1036.9226441383362,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 1036.9226441383362,
+    "iteration_durations": {
+      "1": 23.07616901397705,
+      "2": 51.16774821281433,
+      "3": 42.3419291973114,
+      "4": 71.07667517662048,
+      "5": 74.64873313903809,
+      "6": 70.8712511062622,
+      "7": 66.98001194000244,
+      "8": 63.24522686004639,
+      "9": 93.94226503372192,
+      "10": 92.3129768371582,
+      "11": 73.4519190788269,
+      "12": 95.65943598747253,
+      "13": 100.81173968315125,
+      "14": 117.33656287193298
+    },
+    "llm_model": "gpt-oss:120b-cloud"
+  },
+  {
+    "file": "results/non_rag/is-nonrag/reports/is_nonrag_response_gpt-oss-120b-cloud_2026-02-09T23-52-36.meta.json",
+    "total_runtime": 740.1338396072388,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 740.1338396072388,
+    "iteration_durations": {
+      "1": 24.515579223632812,
+      "2": 29.33205819129944,
+      "3": 27.085418939590454,
+      "4": 38.01476192474365,
+      "5": 36.20499300956726,
+      "6": 58.555930852890015,
+      "7": 62.93155097961426,
+      "8": 49.812309980392456,
+      "9": 61.09269380569458,
+      "10": 61.531668186187744,
+      "11": 74.79807996749878,
+      "12": 58.092530965805054,
+      "13": 75.66754364967346,
+      "14": 82.4987199306488
+    },
+    "llm_model": "gpt-oss:120b-cloud"
+  },
+  {
+    "file": "results/non_rag/is-nonrag/reports/is_nonrag_response_gpt-oss-120b-cloud_2026-02-10T07-33-40.meta.json",
+    "total_runtime": 1306.1522870063782,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 1306.1522870063782,
+    "iteration_durations": {
+      "1": 46.47172284126282,
+      "2": 45.760156869888306,
+      "3": 45.356366872787476,
+      "4": 60.81039571762085,
+      "5": 72.94611096382141,
+      "6": 77.10501885414124,
+      "7": 83.44700288772583,
+      "8": 80.12975311279297,
+      "9": 83.33007884025574,
+      "10": 82.8193871974945,
+      "11": 293.429297208786,
+      "12": 100.20744895935059,
+      "13": 123.0676417350769,
+      "14": 111.27190494537354
+    },
+    "llm_model": "gpt-oss:120b-cloud"
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/is_rgfm_response_deepseek-v3-2-cloud_2026-02-09T07-38-59.meta.json",
+    "total_runtime": 1910.0699965953827,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 1910.0699965953827,
+    "iteration_durations": {
+      "1": 100.97667622566223,
+      "2": 64.83200693130493,
+      "3": 102.89899015426636,
+      "4": 93.50428295135498,
+      "5": 122.05537414550781,
+      "6": 120.50669407844543,
+      "7": 123.89865303039551,
+      "8": 128.5572338104248,
+      "9": 138.78039407730103,
+      "10": 179.99517607688904,
+      "11": 182.52202010154724,
+      "12": 198.23825407028198,
+      "13": 171.21370196342468,
+      "14": 182.09053897857666
+    },
+    "llm_model": "deepseek-v3.2:cloud"
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/is_rgfm_response_gemini-3-pro-preview_2026-02-08T13-06-06.meta.json",
+    "total_runtime": 940.9530086517334,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 940.9530086517334,
+    "iteration_durations": {
+      "1": 37.919443130493164,
+      "2": 57.96557593345642,
+      "3": 76.09612488746643,
+      "4": 73.98292207717896,
+      "5": 73.15909504890442,
+      "6": 71.60502886772156,
+      "7": 73.00482988357544,
+      "8": 51.0059700012207,
+      "9": 71.42093896865845,
+      "10": 64.8866617679596,
+      "11": 72.84509611129761,
+      "12": 75.33097171783447,
+      "13": 69.53297114372253,
+      "14": 72.19737911224365
+    },
+    "llm_model": "gemini-3-pro-preview"
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/is_rgfm_response_gemini-3-pro-preview_2026-02-09T09-39-13.meta.json",
+    "total_runtime": 986.6341288089752,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 986.6341288089752,
+    "iteration_durations": {
+      "1": 51.18976402282715,
+      "2": 51.70491600036621,
+      "3": 74.74962282180786,
+      "4": 73.80529832839966,
+      "5": 74.93029522895813,
+      "6": 73.48355507850647,
+      "7": 73.37859201431274,
+      "8": 77.05909609794617,
+      "9": 73.27458310127258,
+      "10": 63.67223620414734,
+      "11": 73.51467180252075,
+      "12": 73.767991065979,
+      "13": 75.10358095169067,
+      "14": 76.99992609024048
+    },
+    "llm_model": "gemini-3-pro-preview"
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/is_rgfm_response_gemini-3-pro-preview_2026-02-10T07-40-42.meta.json",
+    "total_runtime": 298.91083002090454,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 298.91083002090454,
+    "iteration_durations": {
+      "1": 19.178007125854492,
+      "2": 21.24390697479248,
+      "3": 21.430514812469482,
+      "4": 22.331849813461304,
+      "5": 19.79155683517456,
+      "6": 21.018113136291504,
+      "7": 21.31137204170227,
+      "8": 20.34237313270569,
+      "9": 24.624402046203613,
+      "10": 22.58996891975403,
+      "11": 20.903983116149902,
+      "12": 21.223047256469727,
+      "13": 20.975636959075928,
+      "14": 21.94609785079956
+    },
+    "llm_model": "gemini-3-pro-preview"
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/is_rgfm_response_glm-4-7-cloud_2026-02-09T09-51-23.meta.json",
+    "total_runtime": 3343.9228825569153,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 3343.9228825569153,
+    "iteration_durations": {
+      "1": 301.7564868927002,
+      "2": 195.12770986557007,
+      "3": 189.69425511360168,
+      "4": 120.61294794082642,
+      "5": 136.4534957408905,
+      "6": 151.15865397453308,
+      "7": 252.2915301322937,
+      "8": 319.2186529636383,
+      "9": 168.231507062912,
+      "10": 247.00030207633972,
+      "11": 297.9994640350342,
+      "12": 351.04364585876465,
+      "13": 308.4053809642792,
+      "14": 304.9288499355316
+    },
+    "llm_model": "glm-4.7:cloud"
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/is_rgfm_response_gpt-4-1_2026-02-10T07-31-10.meta.json",
+    "total_runtime": 420.87274384498596,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 420.87274384498596,
+    "iteration_durations": {
+      "1": 32.49229383468628,
+      "2": 36.98554182052612,
+      "3": 23.009554862976074,
+      "4": 77.95546984672546,
+      "5": 19.346537113189697,
+      "6": 19.09223699569702,
+      "7": 21.04660201072693,
+      "8": 35.39145612716675,
+      "9": 22.841183185577393,
+      "10": 33.368999004364014,
+      "11": 22.754836797714233,
+      "12": 18.68521499633789,
+      "13": 16.995598077774048,
+      "14": 40.90721917152405
+    },
+    "llm_model": "gpt-4.1"
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/is_rgfm_response_gpt-oss-120b-cloud_2026-02-08T13-00-21.meta.json",
+    "total_runtime": 570.4858438968658,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 570.4858438968658,
+    "iteration_durations": {
+      "1": 21.50191617012024,
+      "2": 25.18766212463379,
+      "3": 22.86719274520874,
+      "4": 28.238317012786865,
+      "5": 34.12885093688965,
+      "6": 27.591792821884155,
+      "7": 32.07918310165405,
+      "8": 39.787516832351685,
+      "9": 45.602948904037476,
+      "10": 69.76215505599976,
+      "11": 61.906981229782104,
+      "12": 55.57386302947998,
+      "13": 46.64423680305481,
+      "14": 59.613227128982544
+    },
+    "llm_model": "gpt-oss:120b-cloud"
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/is_rgfm_response_gpt-oss-120b-cloud_2026-02-09T07-58-54.meta.json",
+    "total_runtime": 768.3343162536621,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 768.3343162536621,
+    "iteration_durations": {
+      "1": 36.421342849731445,
+      "2": 29.425312042236328,
+      "3": 49.12282109260559,
+      "4": 46.17325520515442,
+      "5": 46.79353427886963,
+      "6": 63.86458897590637,
+      "7": 45.90141701698303,
+      "8": 44.511317014694214,
+      "9": 63.81454014778137,
+      "10": 58.82089591026306,
+      "11": 74.24544501304626,
+      "12": 67.9168918132782,
+      "13": 74.82722091674805,
+      "14": 66.49573397636414
+    },
+    "llm_model": "gpt-oss:120b-cloud"
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/is_rgfm_response_gpt-oss-120b-cloud_2026-02-10T11-08-44.meta.json",
+    "total_runtime": 1080.0138127803802,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 1080.0138127803802,
+    "iteration_durations": {
+      "1": 58.15174198150635,
+      "2": 27.114823818206787,
+      "3": 31.99652099609375,
+      "4": 36.04803919792175,
+      "5": 50.00000190734863,
+      "6": 56.970011949539185,
+      "7": 55.94406008720398,
+      "8": 55.34930920600891,
+      "9": 61.868857860565186,
+      "10": 76.88561415672302,
+      "11": 70.13801503181458,
+      "12": 76.22843074798584,
+      "13": 71.16248393058777,
+      "14": 352.1559019088745
+    },
+    "llm_model": "gpt-oss:120b-cloud"
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/ss-rgfm_response_claude-opus-4-5_2026-02-08T12-36-48.meta.json",
+    "total_runtime": 48.09052085876465,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 48.09052085876465,
+    "iteration_durations": {},
+    "llm_model": "claude-opus-4-5"
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/ss-rgfm_response_claude-opus-4-5_2026-02-09T09-34-07.meta.json",
+    "total_runtime": 58.37363409996033,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 58.37363409996033,
+    "iteration_durations": {},
+    "llm_model": "claude-opus-4-5"
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/ss-rgfm_response_claude-opus-4-6_2026-02-08T11-38-37.meta.json",
+    "total_runtime": 32.23912787437439,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 32.23912787437439,
+    "iteration_durations": {},
+    "llm_model": "claude-opus-4-6"
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/ss-rgfm_response_claude-opus-4-6_2026-02-08T11-44-33.meta.json",
+    "total_runtime": 31.69132399559021,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 31.69132399559021,
+    "iteration_durations": {},
+    "llm_model": "claude-opus-4-6"
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/ss-rgfm_response_deepseek-v3.2-cloud_2026-02-07T13-58-04.meta.json",
+    "total_runtime": 52.37317609786987,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 52.37317609786987,
+    "iteration_durations": {},
+    "llm_model": null
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/ss-rgfm_response_deepseek-v3.2-cloud_2026-02-08T08-23-51.meta.json",
+    "total_runtime": 61.789395809173584,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 61.789395809173584,
+    "iteration_durations": {},
+    "llm_model": null
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/ss-rgfm_response_deepseek-v3.2-cloud_2026-02-09T07-41-33.meta.json",
+    "total_runtime": 132.69328093528748,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 132.69328093528748,
+    "iteration_durations": {},
+    "llm_model": "deepseek-v3.2:cloud"
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/ss-rgfm_response_gemini-3-flash-preview_2026-02-08T09-43-22.meta.json",
+    "total_runtime": 12.835608959197998,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 12.835608959197998,
+    "iteration_durations": {},
+    "llm_model": "gemini-3-flash-preview"
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/ss-rgfm_response_gemini-3-flash-preview_2026-02-08T09-46-52.meta.json",
+    "total_runtime": 12.26041579246521,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 12.26041579246521,
+    "iteration_durations": {},
+    "llm_model": "gemini-3-flash-preview"
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/ss-rgfm_response_gemini-3-flash-preview_2026-02-08T10-22-45.meta.json",
+    "total_runtime": 13.253633975982666,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 13.253633975982666,
+    "iteration_durations": {},
+    "llm_model": "gemini-3-flash-preview"
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/ss-rgfm_response_gemini-3-pro-preview_2026-02-08T10-51-58.meta.json",
+    "total_runtime": 18.48526430130005,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 18.48526430130005,
+    "iteration_durations": {},
+    "llm_model": "gemini-3-pro-preview"
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/ss-rgfm_response_gemini-3-pro-preview_2026-02-08T12-49-18.meta.json",
+    "total_runtime": 56.60767602920532,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 56.60767602920532,
+    "iteration_durations": {},
+    "llm_model": "gemini-3-pro-preview"
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/ss-rgfm_response_gemini-3-pro-preview_2026-02-09T09-33-33.meta.json",
+    "total_runtime": 46.74042105674744,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 46.74042105674744,
+    "iteration_durations": {},
+    "llm_model": "gemini-3-pro-preview"
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/ss-rgfm_response_glm-4.7-cloud_2026-02-07T14-22-15.meta.json",
+    "total_runtime": 121.59975719451904,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 121.59975719451904,
+    "iteration_durations": {},
+    "llm_model": null
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/ss-rgfm_response_glm-4.7-cloud_2026-02-08T08-19-08.meta.json",
+    "total_runtime": 148.75717401504517,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 148.75717401504517,
+    "iteration_durations": {},
+    "llm_model": null
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/ss-rgfm_response_glm-4.7-cloud_2026-02-09T07-40-59.meta.json",
+    "total_runtime": 111.6948630809784,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 111.6948630809784,
+    "iteration_durations": {},
+    "llm_model": "glm-4.7:cloud"
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/ss-rgfm_response_gpt-4.1_2026-02-08T09-02-46.meta.json",
+    "total_runtime": 41.08675789833069,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 41.08675789833069,
+    "iteration_durations": {},
+    "llm_model": "gpt-4.1"
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/ss-rgfm_response_gpt-4.1_2026-02-08T11-57-42.meta.json",
+    "total_runtime": 29.320906162261963,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 29.320906162261963,
+    "iteration_durations": {},
+    "llm_model": "gpt-4.1"
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/ss-rgfm_response_gpt-4.1_2026-02-08T12-19-44.meta.json",
+    "total_runtime": 39.56973075866699,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 39.56973075866699,
+    "iteration_durations": {},
+    "llm_model": "gpt-4.1"
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/ss-rgfm_response_gpt-4.1_2026-02-09T09-32-56.meta.json",
+    "total_runtime": 47.9442880153656,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 47.9442880153656,
+    "iteration_durations": {},
+    "llm_model": "gpt-4.1"
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/ss-rgfm_response_gpt-oss-120b-cloud_2026-02-07T13-24-19.meta.json",
+    "total_runtime": 9.776925086975098,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 9.776925086975098,
+    "iteration_durations": {},
+    "llm_model": null
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/ss-rgfm_response_gpt-oss-120b-cloud_2026-02-07T13-52-41.meta.json",
+    "total_runtime": 7.373482942581177,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 7.373482942581177,
+    "iteration_durations": {},
+    "llm_model": null
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/ss-rgfm_response_gpt-oss-120b-cloud_2026-02-08T08-12-41.meta.json",
+    "total_runtime": 22.254230976104736,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 22.254230976104736,
+    "iteration_durations": {},
+    "llm_model": null
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/ss-rgfm_response_gpt-oss-120b-cloud_2026-02-08T15-01-51.meta.json",
+    "total_runtime": 36.17004632949829,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 36.17004632949829,
+    "iteration_durations": {},
+    "llm_model": "gpt-oss:120b-cloud"
+  },
+  {
+    "file": "results/rag/ss-rgfm/reports/ss-rgfm_response_gpt-oss-120b-cloud_2026-02-09T07-39-14.meta.json",
+    "total_runtime": 39.815484046936035,
+    "runtime_per_stage": {},
+    "total_llm_duration_seconds": 39.815484046936035,
+    "iteration_durations": {},
+    "llm_model": "gpt-oss:120b-cloud"
+  }
+]

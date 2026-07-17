@@ -1,0 +1,97 @@
+# Effective Experiment Configuration
+
+This table keeps only configuration values that are active in the four generic pipelines and evaluation workflow. It excludes unrelated or inactive defaults.
+
+| Category | Section | Variable | Value | Source |
+|---|---|---|---|---|
+| project | project | name | fame-project-tool | config/fame.yaml |
+| project | project | run_tag | dev | config/fame.yaml |
+| storage | chroma | mode | persistent | config/fame.yaml |
+| storage | chroma | path | /Users/joshuaocansey/Library/CloudStorage/OneDrive-HøgskulenpåVestlandet/Skrivebord/FAME_project/data/chroma_db | config/fame.yaml |
+| storage | data | raw_dir | /Users/joshuaocansey/Library/CloudStorage/OneDrive-HøgskulenpåVestlandet/Skrivebord/FAME_project/data/raw | config/fame.yaml |
+| storage | data | processed_dir | /Users/joshuaocansey/Library/CloudStorage/OneDrive-HøgskulenpåVestlandet/Skrivebord/FAME_project/data/processed/algorithm_1 | config/fame.yaml |
+| storage | data | chunks_dir | /Users/joshuaocansey/Library/CloudStorage/OneDrive-HøgskulenpåVestlandet/Skrivebord/FAME_project/data/processed/algorithm_1/chunks | config/fame.yaml |
+| document_processing | ingestion | enabled | True | config/fame.yaml |
+| document_processing | ingestion | allowed_extensions | .pdf, .docx, .txt, .md | config/fame.yaml |
+| document_processing | ingestion | skip_if_exists | True | config/fame.yaml |
+| document_processing | chunking | max_characters | 4000 | config/fame.yaml |
+| document_processing | chunking | new_after_n_chars | 3500 | config/fame.yaml |
+| document_processing | chunking | combine_under_n_chars | 500 | config/fame.yaml |
+| retrieval | vectorization | enabled | True | config/fame.yaml |
+| retrieval | vectorization | collection_mode | per_source | config/fame.yaml |
+| retrieval | vectorization | batch_size | 24 | config/fame.yaml |
+| retrieval | retrieval | default_query_template | ({{ROOT_FEATURE}} AND {{DOMAIN}})<br>AND (approach OR methodology OR method OR framework OR architecture OR implementation OR design OR pipeline OR workflow OR algorithm OR technique OR system OR tool OR platform OR infrastructure)<br>AND (propose OR present OR introduce OR describe OR implement OR develop OR build OR realize OR evaluate OR validate OR experiment OR case study OR study) | config/fame.yaml |
+| retrieval | retrieval | n_results_per_collection | 6 | config/fame.yaml |
+| retrieval | retrieval | max_total_results | 12 | config/fame.yaml |
+| retrieval | retrieval | max_total_chars | 18000 | config/fame.yaml |
+| retrieval | retrieval | max_chunk_chars | 2500 | config/fame.yaml |
+| retrieval | context | order | by_page_then_id | config/fame.yaml |
+| retrieval | context | include_headers | True | config/fame.yaml |
+| llm | judge | provider | openai | config/fame.yaml |
+| llm | judge | default_model | gpt-4.1 | config/fame.yaml |
+| llm | judge | temperature | 0.2 | config/fame.yaml |
+| llm | judge | max_tokens | 16000 | config/fame.yaml |
+| llm | judge | timeout_s | 120 | config/fame.yaml |
+| llm | judge_model_max_tokens | gpt-4.1 | 32000 | config/fame.yaml |
+| llm | judge_model_max_tokens | o3 | 32000 | config/fame.yaml |
+| llm | judge_model_max_tokens | gemini-3.1-pro-preview | 65536 | config/fame.yaml |
+| llm | judge_model_max_tokens | gemini-2.5-flash | 32000 | config/fame.yaml |
+| llm | judge_model_max_tokens | claude-opus-4-5 | 64000 | config/fame.yaml |
+| evaluation | coverage | model_name | all-mpnet-base-v2 | config/fame.yaml |
+| evaluation | coverage | similarity_threshold | 0.35 | config/fame.yaml |
+| evaluation | coverage | top_k | 3 | config/fame.yaml |
+| evaluation | coverage | feature_weight | 0.9 | config/fame.yaml |
+| evaluation | coverage | parent_weight | 0.1 | config/fame.yaml |
+| evaluation | validation | featureide_xsd | /Users/joshuaocansey/Library/CloudStorage/OneDrive-HøgskulenpåVestlandet/Skrivebord/FAME_project/prompts/specifications/feature_model_featureide.xsd | default project path |
+| evaluation | validation | duplicate_feature_check | True | top_fm / build_overall_pipeline_data |
+| evaluation | validation | sat_check_available | True | quality_sat.py (python-sat) |
+| evaluation | validation | sat_required_in_top_fm | optional via --require-sat | scripts/rank_top_fm.py |
+| evaluation | validation | sat_required_in_overall_builder | optional via --require-sat | scripts/build_overall_pipeline_data.py |
+| outputs | outputs | save_prompts | True | config/fame.yaml |
+| outputs | outputs | save_context | True | config/fame.yaml |
+| outputs | outputs | save_meta | True | config/fame.yaml |
+| outputs | outputs | write_latest_pointer | True | config/fame.yaml |
+| outputs | outputs | top_fm_default | 3 | config/fame.yaml |
+| pipeline | ss_rgfm | enabled | True | config/fame.yaml |
+| pipeline | ss_rgfm | prompt_path | /Users/joshuaocansey/Library/CloudStorage/OneDrive-HøgskulenpåVestlandet/Skrivebord/FAME_project/prompts/fm_extraction_prompt.txt | config/fame.yaml |
+| pipeline | ss_rgfm | temperature | 0.2 | scripts/run_ss_rag.py default |
+| pipeline | ss_rgfm | n_results_per_collection | 6 | scripts/run_ss_rag.py default |
+| pipeline | ss_rgfm | max_total_results | 12 | scripts/run_ss_rag.py default |
+| pipeline | ss_rgfm | max_total_chars | 18000 | scripts/run_ss_rag.py default |
+| pipeline | ss_rgfm | max_chunk_chars | 2500 | scripts/run_ss_rag.py default |
+| pipeline | ss_rgfm | collection_mode | per_source | scripts/run_ss_rag.py default |
+| pipeline | ss_rgfm | batch_size | 24 | scripts/run_ss_rag.py default |
+| pipeline | ss_rgfm | repeats_default | 1 | scripts/run_ss_rag.py default |
+| pipeline | ss_rgfm | max_retries_default | 1 | scripts/run_ss_rag.py default |
+| pipeline | is_rgfm | enabled | True | config/fame.yaml |
+| pipeline | is_rgfm | initial_prompt_path | /Users/joshuaocansey/Library/CloudStorage/OneDrive-HøgskulenpåVestlandet/Skrivebord/FAME_project/prompts/fm_extraction_prompt.txt | config/fame.yaml |
+| pipeline | is_rgfm | iter_prompt_path | /Users/joshuaocansey/Library/CloudStorage/OneDrive-HøgskulenpåVestlandet/Skrivebord/FAME_project/prompts/fm_iterated_prompt.txt | config/fame.yaml |
+| pipeline | is_rgfm | temperature | 0.2 | scripts/run_is_rag.py default |
+| pipeline | is_rgfm | n_results_per_collection | 6 | scripts/run_is_rag.py default |
+| pipeline | is_rgfm | max_total_results | 12 | scripts/run_is_rag.py default |
+| pipeline | is_rgfm | max_total_chars | 18000 | scripts/run_is_rag.py default |
+| pipeline | is_rgfm | max_chunk_chars | 2500 | scripts/run_is_rag.py default |
+| pipeline | is_rgfm | repeats_default | 1 | scripts/run_is_rag.py default |
+| pipeline | is_rgfm | max_retries_default | 1 | scripts/run_is_rag.py default |
+| pipeline | is_rgfm | retry_backoff_base_seconds | 2.0 | config/fame.yaml |
+| pipeline | is_rgfm | retry_backoff_cap_seconds | 60.0 | config/fame.yaml |
+| pipeline | is_rgfm | inter_iteration_sleep_seconds | 1.0 | config/fame.yaml |
+| pipeline | ss_nonrag | enabled | True | config/fame.yaml |
+| pipeline | ss_nonrag | max_total_chars | 140000 | config/fame.yaml |
+| pipeline | ss_nonrag | max_chunks | 120 | config/fame.yaml |
+| pipeline | ss_nonrag | max_chunk_chars | 6000 | config/fame.yaml |
+| pipeline | ss_nonrag | temperature | 0.2 | config/fame.yaml |
+| pipeline | ss_nonrag | repeats_default | 1 | scripts/run_ss_nonrag.py default |
+| pipeline | ss_nonrag | max_retries_default | 1 | scripts/run_ss_nonrag.py default |
+| pipeline | is_nonrag | enabled | True | config/fame.yaml |
+| pipeline | is_nonrag | initial_prompt_path | /Users/joshuaocansey/Library/CloudStorage/OneDrive-HøgskulenpåVestlandet/Skrivebord/FAME_project/prompts/fm_extraction_prompt.txt | config/fame.yaml |
+| pipeline | is_nonrag | iter_prompt_path | /Users/joshuaocansey/Library/CloudStorage/OneDrive-HøgskulenpåVestlandet/Skrivebord/FAME_project/prompts/fm_iterated_prompt.txt | config/fame.yaml |
+| pipeline | is_nonrag | max_delta_chars | 50000 | config/fame.yaml |
+| pipeline | is_nonrag | max_delta_chunks | 50 | config/fame.yaml |
+| pipeline | is_nonrag | max_delta_chunk_chars | 6000 | config/fame.yaml |
+| pipeline | is_nonrag | temperature | 0.2 | config/fame.yaml |
+| pipeline | is_nonrag | repeats_default | 1 | scripts/run_is_nonrag.py default |
+| pipeline | is_nonrag | max_retries_default | 1 | scripts/run_is_nonrag.py default |
+| pipeline | is_nonrag | retry_backoff_base_seconds | 2.0 | config/fame.yaml |
+| pipeline | is_nonrag | retry_backoff_cap_seconds | 60.0 | config/fame.yaml |
+| pipeline | is_nonrag | inter_iteration_sleep_seconds | 1.0 | config/fame.yaml |

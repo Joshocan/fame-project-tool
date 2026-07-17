@@ -1,0 +1,3 @@
+rag_group,semantic_f1_mean,coverage_score_mean,wellformed_rate,satisfiable_rate,llm_duration_seconds_mean,summary_rows
+RAG,0.6599,35.7655,0.905,,1051.2125,10
+Non-RAG,0.6268,33.6003,0.8,,1538.6617,10

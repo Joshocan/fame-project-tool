@@ -1,0 +1,109 @@
+# Experiment Configuration Table
+
+| Category | Section | Variable | Value | Source |
+|---|---|---|---|---|
+| project | project | name | fame-project-tool | config/fame.yaml |
+| project | project | base_dir |  | config/fame.yaml |
+| project | project | run_tag | dev | config/fame.yaml |
+| storage | chroma | mode | persistent | config/fame.yaml |
+| storage | chroma | path | /Users/joshuaocansey/Library/CloudStorage/OneDrive-HøgskulenpåVestlandet/Skrivebord/FAME_project/data/chroma_db | config/fame.yaml |
+| storage | chroma | host | 127.0.0.1 | config/fame.yaml |
+| storage | chroma | port | 8000 | config/fame.yaml |
+| storage | chroma | startup_timeout_s | 120 | config/fame.yaml |
+| storage | chroma | force_restart | False | config/fame.yaml |
+| llm_service | ollama | host | http://127.0.0.1:11434 | config/fame.yaml |
+| llm_service | ollama | bin |  | config/fame.yaml |
+| llm_service | ollama | startup_timeout_s | 60 | config/fame.yaml |
+| llm_service | ollama | force_restart | False | config/fame.yaml |
+| llm_service | ollama | embed_model | nomic-embed-text | config/fame.yaml |
+| llm_service | ollama | llm_model | gpt-oss:120b-cloud | config/fame.yaml |
+| llm_service | llm_judge | provider | openai | config/fame.yaml |
+| llm_service | llm_judge | model | gpt-4.1 | config/fame.yaml |
+| llm_service | llm_judge | base_url |  | config/fame.yaml |
+| llm_service | llm_judge | api_key_env | JUDGE_API_KEY | config/fame.yaml |
+| llm_service | llm_judge | api_key_dir | /Users/joshuaocansey/Library/CloudStorage/OneDrive-HøgskulenpåVestlandet/Skrivebord/FAME_project/api_keys | config/fame.yaml |
+| llm_service | llm_judge | temperature | 0.2 | config/fame.yaml |
+| llm_service | llm_judge | max_tokens | 16000 | config/fame.yaml |
+| llm_service | llm_judge | model_max_tokens | {"gpt-4.1": 32000, "o3": 32000, "gemini-3.1-pro-preview": 65536, "gemini-2.5-flash": 32000, "claude-opus-4-5": 64000} | config/fame.yaml |
+| llm_service | llm_judge | timeout_s | 120 | config/fame.yaml |
+| document_processing | data | raw_dir | /Users/joshuaocansey/Library/CloudStorage/OneDrive-HøgskulenpåVestlandet/Skrivebord/FAME_project/data/raw | config/fame.yaml |
+| document_processing | data | processed_dir | /Users/joshuaocansey/Library/CloudStorage/OneDrive-HøgskulenpåVestlandet/Skrivebord/FAME_project/data/processed/algorithm_1 | config/fame.yaml |
+| document_processing | data | chunks_dir | /Users/joshuaocansey/Library/CloudStorage/OneDrive-HøgskulenpåVestlandet/Skrivebord/FAME_project/data/processed/algorithm_1/chunks | config/fame.yaml |
+| document_processing | ingestion | enabled | True | config/fame.yaml |
+| document_processing | ingestion | allowed_extensions | [".pdf", ".docx", ".txt", ".md"] | config/fame.yaml |
+| document_processing | ingestion | skip_if_exists | True | config/fame.yaml |
+| document_processing | ingestion.chunking | max_characters | 4000 | config/fame.yaml |
+| document_processing | ingestion.chunking | new_after_n_chars | 3500 | config/fame.yaml |
+| document_processing | ingestion.chunking | combine_under_n_chars | 500 | config/fame.yaml |
+| document_processing | vectorization | enabled | True | config/fame.yaml |
+| document_processing | vectorization | collection_mode | per_source | config/fame.yaml |
+| document_processing | vectorization | one_collection_name | fame_all | config/fame.yaml |
+| document_processing | vectorization | prefix |  | config/fame.yaml |
+| document_processing | vectorization | batch_size | 24 | config/fame.yaml |
+| document_processing | retrieval | default_query_template | ({{ROOT_FEATURE}} AND {{DOMAIN}})<br>AND (approach OR methodology OR method OR framework OR architecture OR implementation OR design OR pipeline OR workflow OR algorithm OR technique OR system OR tool OR platform OR infrastructure)<br>AND (propose OR present OR introduce OR describe OR implement OR develop OR build OR realize OR evaluate OR validate OR experiment OR case study OR study) | config/fame.yaml |
+| document_processing | retrieval | n_results_per_collection | 6 | config/fame.yaml |
+| document_processing | retrieval | max_total_results | 12 | config/fame.yaml |
+| document_processing | retrieval.evidence_format | max_total_chars | 18000 | config/fame.yaml |
+| document_processing | retrieval.evidence_format | max_chunk_chars | 2500 | config/fame.yaml |
+| document_processing | context | order | by_page_then_id | config/fame.yaml |
+| document_processing | context | include_headers | True | config/fame.yaml |
+| pipeline | ss_rgfm | enabled | True | config/fame.yaml |
+| pipeline | ss_rgfm | prompt_path | /Users/joshuaocansey/Library/CloudStorage/OneDrive-HøgskulenpåVestlandet/Skrivebord/FAME_project/prompts/fm_extraction_prompt.txt | config/fame.yaml |
+| pipeline | ss_rgfm | runner_default_repeats | 1 | scripts/run_ss_rag.py |
+| pipeline | ss_rgfm | runner_default_max_retries | 1 | scripts/run_ss_rag.py |
+| pipeline | ms_rgfm | enabled | True | config/fame.yaml |
+| pipeline | is_rgfm | enabled | True | config/fame.yaml |
+| pipeline | is_rgfm | initial_prompt_path | /Users/joshuaocansey/Library/CloudStorage/OneDrive-HøgskulenpåVestlandet/Skrivebord/FAME_project/prompts/fm_extraction_prompt.txt | config/fame.yaml |
+| pipeline | is_rgfm | iter_prompt_path | /Users/joshuaocansey/Library/CloudStorage/OneDrive-HøgskulenpåVestlandet/Skrivebord/FAME_project/prompts/fm_iterated_prompt.txt | config/fame.yaml |
+| pipeline | is_rgfm | retry_backoff_base_seconds | 2.0 | config/fame.yaml |
+| pipeline | is_rgfm | retry_backoff_cap_seconds | 60.0 | config/fame.yaml |
+| pipeline | is_rgfm | inter_iteration_sleep_seconds | 1.0 | config/fame.yaml |
+| pipeline | is_rgfm | runner_default_repeats | 1 | scripts/run_is_rag.py |
+| pipeline | is_rgfm | runner_default_max_retries | 1 | scripts/run_is_rag.py |
+| pipeline | is_rgfm | runner_default_temperature | 0.2 | scripts/run_is_rag.py |
+| pipeline | is_rgfm | runner_default_n_results_per_collection | 6 | scripts/run_is_rag.py |
+| pipeline | is_rgfm | runner_default_max_total_results | 12 | scripts/run_is_rag.py |
+| pipeline | is_rgfm | runner_default_max_total_chars | 18000 | scripts/run_is_rag.py |
+| pipeline | is_rgfm | runner_default_max_chunk_chars | 2500 | scripts/run_is_rag.py |
+| pipeline | ss_nonrag | enabled | True | config/fame.yaml |
+| pipeline | ss_nonrag | prompt_path |  | config/fame.yaml |
+| pipeline | ss_nonrag.context_budget | max_total_chars | 140000 | config/fame.yaml |
+| pipeline | ss_nonrag.context_budget | max_chunks | 120 | config/fame.yaml |
+| pipeline | ss_nonrag.context_budget | max_chunk_chars | 6000 | config/fame.yaml |
+| pipeline | ss_nonrag | temperature | 0.2 | config/fame.yaml |
+| pipeline | ss_nonrag | runner_default_repeats | 1 | scripts/run_ss_nonrag.py |
+| pipeline | ss_nonrag | runner_default_max_retries | 1 | scripts/run_ss_nonrag.py |
+| pipeline | is_nonrag | enabled | True | config/fame.yaml |
+| pipeline | is_nonrag | prompt_path |  | config/fame.yaml |
+| pipeline | is_nonrag.prompt_paths | initial | /Users/joshuaocansey/Library/CloudStorage/OneDrive-HøgskulenpåVestlandet/Skrivebord/FAME_project/prompts/fm_extraction_prompt.txt | config/fame.yaml |
+| pipeline | is_nonrag.prompt_paths | iter | /Users/joshuaocansey/Library/CloudStorage/OneDrive-HøgskulenpåVestlandet/Skrivebord/FAME_project/prompts/fm_iterated_prompt.txt | config/fame.yaml |
+| pipeline | is_nonrag.delta_budget | max_delta_chars | 50000 | config/fame.yaml |
+| pipeline | is_nonrag.delta_budget | max_delta_chunks | 50 | config/fame.yaml |
+| pipeline | is_nonrag.delta_budget | max_delta_chunk_chars | 6000 | config/fame.yaml |
+| pipeline | is_nonrag | temperature | 0.2 | config/fame.yaml |
+| pipeline | is_nonrag | retry_backoff_base_seconds | 2.0 | config/fame.yaml |
+| pipeline | is_nonrag | retry_backoff_cap_seconds | 60.0 | config/fame.yaml |
+| pipeline | is_nonrag | inter_iteration_sleep_seconds | 1.0 | config/fame.yaml |
+| pipeline | is_nonrag | runner_default_repeats | 1 | scripts/run_is_nonrag.py |
+| pipeline | is_nonrag | runner_default_max_retries | 1 | scripts/run_is_nonrag.py |
+| pipeline | is_nonrag | runner_default_max_delta_chars | 50000 | scripts/run_is_nonrag.py |
+| pipeline | is_nonrag | runner_default_max_delta_chunks | 50 | scripts/run_is_nonrag.py |
+| evaluation_and_outputs | outputs | save_prompts | True | config/fame.yaml |
+| evaluation_and_outputs | outputs | save_context | True | config/fame.yaml |
+| evaluation_and_outputs | outputs | save_meta | True | config/fame.yaml |
+| evaluation_and_outputs | outputs | top_fm | 3 | config/fame.yaml |
+| evaluation_and_outputs | outputs | write_latest_pointer | True | config/fame.yaml |
+| evaluation_and_outputs | logging | level | INFO | config/fame.yaml |
+| evaluation_and_outputs | logging | to_file | True | config/fame.yaml |
+| evaluation_and_outputs | logging | json | True | config/fame.yaml |
+| evaluation_and_outputs | logging | console | True | config/fame.yaml |
+| evaluation_and_outputs | logging | console_level | WARNING | config/fame.yaml |
+| evaluation_and_outputs | logging | console_include_exc | False | config/fame.yaml |
+| evaluation_and_outputs | evaluation | ground_truth_xml |  | config/fame.yaml |
+| evaluation_and_outputs | evaluation.coverage | model_name | all-mpnet-base-v2 | config/fame.yaml |
+| evaluation_and_outputs | evaluation.coverage | similarity_threshold | 0.35 | config/fame.yaml |
+| evaluation_and_outputs | evaluation.coverage | top_k | 3 | config/fame.yaml |
+| evaluation_and_outputs | evaluation.coverage | feature_weight | 0.9 | config/fame.yaml |
+| evaluation_and_outputs | evaluation.coverage | parent_weight | 0.1 | config/fame.yaml |
+| evaluation_and_outputs | evaluation | builder_supports_sat | True | scripts/build_overall_pipeline_data.py |
+| evaluation_and_outputs | evaluation | top_fm_supports_sat_gate | True | fame/evaluation/top_fm.py |

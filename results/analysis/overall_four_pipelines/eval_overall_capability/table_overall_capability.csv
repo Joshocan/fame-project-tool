@@ -1,0 +1,5 @@
+pipeline,pipeline_label,semantic_f1_mean,coverage_score_mean,wellformed_rate,satisfiable_rate,llm_duration_seconds_mean,summary_rows
+ss_rag,SS-RAG,0.6055,29.113,0.81,,95.5494,5
+is_rag,IS-RAG,0.7144,42.4181,1.0,,2006.8756,5
+ss_nonrag,SS-NonRAG,0.5644,25.7355,0.6,,147.0402,5
+is_nonrag,IS-NonRAG,0.6892,41.4651,1.0,,2930.2832,5

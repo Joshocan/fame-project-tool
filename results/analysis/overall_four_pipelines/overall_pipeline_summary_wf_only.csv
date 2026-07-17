@@ -1,0 +1,25 @@
+pipeline,model,domain,root_feature,runs_total,runs_with_xml,wellformed_rate,satisfiable_rate,coverage_score_mean,semantic_precision_mean,semantic_recall_mean,semantic_f1_mean,llm_duration_seconds_mean,feature_count_mean,abstract_feature_count_mean,concrete_feature_count_mean,dead_features_count_mean,core_features_count_mean,edge_jaccard_to_gt_mean,parent_match_rate_mean
+is_nonrag,deepseek-v3.2:cloud,Model Driven Engineering,Model Federation,10,10,1.0,1.0,45.436,0.762,0.7069,0.7327,4476.7124,246.4,58.4,188.0,0.7,5.8,0.0083,0.71
+is_nonrag,gemini-3-flash-preview,Health_Equity_in_Education,Health-Equity-in-Education,1,1,1.0,1.0,16.95,0.622,0.3692,0.4634,205.3587,82.0,31.0,51.0,0.0,1.0,0.0,
+is_nonrag,gemini-3.1-pro-preview,Model Driven Engineering,Model Federation,5,5,1.0,1.0,49.214,0.733,0.78,0.7556,857.9941,205.0,49.4,155.6,0.0,1.0,0.0115,0.7
+is_nonrag,glm-4.7:cloud,Model Driven Engineering,Model Federation,10,10,1.0,1.0,57.694,0.7446,0.8392,0.7889,6464.0022,369.7,72.7,297.0,0.0,9.7,0.0071,0.5338
+is_nonrag,gpt-4.1,Model Driven Engineering,Model Federation,11,11,1.0,1.0,27.1855,0.8093,0.4692,0.5826,1288.5095,75.7273,16.8182,58.9091,0.0,1.0,0.0092,0.3818
+is_nonrag,gpt-4o,Health_Equity_in_Education,Health-Equity-in-Education,1,1,1.0,1.0,4.26,0.9583,0.1462,0.2536,51.92,24.0,9.0,15.0,0.0,1.0,0.0,
+is_nonrag,gpt-oss:120b-cloud,Health_Equity_in_Education,Health-Equity-in-Education,1,1,1.0,1.0,10.6,0.4559,0.2692,0.3385,152.0638,68.0,16.0,52.0,0.0,1.0,0.0,
+is_nonrag,gpt-oss:120b-cloud,Model Driven Engineering,Model Federation,19,19,1.0,1.0,27.7958,0.7949,0.4806,0.5861,1564.198,89.2105,27.0526,62.1579,0.0,1.0,0.0129,0.5598
+is_rag,deepseek-v3.2:cloud,Model Driven Engineering,Model Federation,22,22,1.0,1.0,40.0623,0.7638,0.6612,0.7081,3165.699,153.8636,39.1364,114.7273,0.0,5.4091,0.011,0.7205
+is_rag,gemini-3.1-pro-preview,Model Driven Engineering,Model Federation,5,5,1.0,1.0,42.728,0.7831,0.6831,0.7288,566.8306,133.4,20.8,112.6,0.0,5.4,0.0147,0.79
+is_rag,glm-4.7:cloud,Model Driven Engineering,Model Federation,20,20,1.0,1.0,47.3195,0.7758,0.7415,0.7577,3993.343,226.35,39.0,187.35,0.0,1.2,0.0098,0.7442
+is_rag,gpt-4.1,Model Driven Engineering,Model Federation,10,10,1.0,1.0,36.916,0.8107,0.5654,0.6658,770.919,126.9,26.8,100.1,0.0,1.0,0.0154,0.795
+is_rag,gpt-oss:120b-cloud,Model Driven Engineering,Model Federation,20,20,1.0,1.0,45.0645,0.7898,0.6577,0.7117,1537.5862,166.2,40.25,125.95,0.0,1.0,0.0162,0.5465
+ss_nonrag,deepseek-v3.2:cloud,Model Driven Engineering,Model Federation,32,32,1.0,1.0,29.7806,0.8215,0.4897,0.6105,305.4555,66.3125,18.25,48.0625,0.0,2.6562,0.0221,0.7322
+ss_nonrag,glm-4.7:cloud,Model Driven Engineering,Model Federation,14,14,1.0,1.0,22.4007,0.8361,0.3907,0.531,132.3728,40.9286,15.4286,25.5,0.0,7.8571,0.0189,0.6488
+ss_nonrag,gpt-4.1,Model Driven Engineering,Model Federation,18,18,1.0,1.0,25.805,0.804,0.4385,0.5665,43.4957,52.1667,10.5556,41.6111,0.0,1.0,0.0225,0.6741
+ss_nonrag,gpt-oss:120b-cloud,Model Driven Engineering,Model Federation,33,33,1.0,1.0,29.2333,0.8106,0.4566,0.5795,42.8126,51.5455,17.2121,34.3333,0.0,2.2424,0.0199,0.5059
+ss_rag,claude-opus-4-5,Model Driven Engineering,Model Federation,1,1,1.0,1.0,36.14,0.8625,0.5462,0.6688,58.3736,80.0,28.0,52.0,0.0,7.0,0.0145,0.75
+ss_rag,deepseek-v3.2:cloud,Model Driven Engineering,Model Federation,19,19,1.0,1.0,28.6326,0.8814,0.4567,0.6002,197.1927,39.1579,12.7368,26.4211,0.0,1.8947,0.0256,0.7343
+ss_rag,gemini-3.1-pro-preview,Model Driven Engineering,Model Federation,18,18,1.0,1.0,20.8517,0.8538,0.3598,0.5053,14.3942,24.7222,8.0,16.7222,0.0,1.5,0.0205,0.7241
+ss_rag,glm-4.7:cloud,Model Driven Engineering,Model Federation,24,24,1.0,1.0,26.7737,0.87,0.4683,0.6082,140.3285,48.25,15.4167,32.8333,0.0,2.0,0.0179,0.695
+ss_rag,gpt-4.1,Model Driven Engineering,Model Federation,21,21,1.0,1.0,33.5948,0.9253,0.5073,0.6549,33.0842,51.4286,12.0,39.4286,0.0,1.0,0.0212,0.7167
+ss_rag,gpt-oss:120b-cloud,Model Driven Engineering,Model Federation,34,34,1.0,1.0,38.4782,0.8679,0.5622,0.679,59.1079,61.5,19.4412,42.0588,0.0,2.6765,0.0288,0.7142
+ss_rag,unknown,Model Driven Engineering,Model Federation,2,2,1.0,1.0,27.005,0.9286,0.4308,0.5878,57.0813,42.0,13.0,29.0,0.0,3.5,0.0119,0.4

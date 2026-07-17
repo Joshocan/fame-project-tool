@@ -1,0 +1,11 @@
+{
+  "pipeline_root": "/Users/joshuaocansey/dev/FAME_project_local/results/paper2/proxy/repair/is-rag",
+  "summary_table": "/Users/joshuaocansey/dev/FAME_project_local/results/paper2/proxy/repair/is-rag/proxy_fm/top_3/proxy_scores.csv",
+  "top_proxy_table": "/Users/joshuaocansey/dev/FAME_project_local/results/paper2/proxy/repair/is-rag/proxy_fm/top_3/top_proxy/top_proxy.csv",
+  "total_candidates": 60,
+  "eligible_candidates": 60,
+  "top_n": 3,
+  "require_sat": false,
+  "use_evidence": true,
+  "use_consensus": true
+}

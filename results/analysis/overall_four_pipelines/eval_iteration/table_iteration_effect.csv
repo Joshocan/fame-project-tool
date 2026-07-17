@@ -1,0 +1,5 @@
+family_group,stage_group,semantic_f1_mean,coverage_score_mean,wellformed_rate,satisfiable_rate,llm_duration_seconds_mean,summary_rows
+Non-RAG family,Iterative,0.6892,41.4651,1.0,,2930.2832,5
+Non-RAG family,Single-stage,0.5644,25.7355,0.6,,147.0402,5
+RAG family,Iterative,0.7144,42.4181,1.0,,2006.8756,5
+RAG family,Single-stage,0.6055,29.113,0.81,,95.5494,5

@@ -1,0 +1,9 @@
+{
+  "pipeline_root": "/Users/joshuaocansey/dev/FAME_project_local/results/proxy/ss_nonrag",
+  "chunks_dir": "/Users/joshuaocansey/dev/FAME_project_local/data/processed/algorithm_1/chunks",
+  "top_n": 5,
+  "require_sat": true,
+  "summary_table": "/Users/joshuaocansey/dev/FAME_project_local/results/proxy/ss_nonrag/proxy_fm/top_5/proxy_scores.csv",
+  "top_proxy_table": "/Users/joshuaocansey/dev/FAME_project_local/results/proxy/ss_nonrag/proxy_fm/top_5/top_proxy/top_proxy.csv",
+  "ranking_rule": "eligible if parseable, duplicate-free, XSD-valid, constraints-valid and satisfiable; proxy_score = 0.7 * evidence_score + 0.3 * consensus_score"
+}

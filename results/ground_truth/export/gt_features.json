@@ -1,0 +1,1042 @@
+[
+  {
+    "feature_id": "f1",
+    "feature_name": "Model_Management",
+    "feature_type": "abstract",
+    "hierarchy_level": 0,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f2",
+    "feature_name": "Model_Federation",
+    "feature_type": "abstract",
+    "hierarchy_level": 1,
+    "description": "All models stay in their own world and do not directly\n\t\t\t\t\tinterfere with the language specification of the others (non-\n\t\t\t\t\tintrusiveness); each world is related to the others through\n\t\t\t\t\tmeaningful relations that explicit how and why models are\n\t\t\t\t\trelated to each other",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f3",
+    "feature_name": "Structural",
+    "feature_type": "abstract",
+    "hierarchy_level": 2,
+    "description": "The graph\u2019s constituents (the nature of vertices; and how edges are organised as\n\t\t\t\t\t\twell as what they represent), as well as the whole graph.",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f4",
+    "feature_name": "Artefacts",
+    "feature_type": "abstract",
+    "hierarchy_level": 3,
+    "description": "Vertices correspond to Artefacts, as well as the elements\n\t\t\t\t\t\t\tthey contain",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f5",
+    "feature_name": "Domain",
+    "feature_type": "abstract",
+    "hierarchy_level": 4,
+    "description": "The Domain(s) the Artefacts are intended to be used in. In [1],\n\t\t\t\t\t\t\t\ta feature model describing CPS Domains is available. We\n\t\t\t\t\t\t\t\textend it with domains outside of CPS.\n\t\t\t\t\t\t\t\t[1] : https://doi.org/10.1016/B978-0-12-819105-7.00008-8",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f6",
+    "feature_name": "X_Domain",
+    "feature_type": "concrete",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f7",
+    "feature_name": "CPS_Domain",
+    "feature_type": "abstract",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f8",
+    "feature_name": "CriticalInfrastructure",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f9",
+    "feature_name": "BuildingAutomation",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f10",
+    "feature_name": "SmartManufacturing",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f11",
+    "feature_name": "Transportation",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f12",
+    "feature_name": "Defense",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f13",
+    "feature_name": "Health",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f14",
+    "feature_name": "EmergencyResponse",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f15",
+    "feature_name": "ProcessControl",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f16",
+    "feature_name": "RoboticForService",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f17",
+    "feature_name": "TechSpace",
+    "feature_type": "abstract",
+    "hierarchy_level": 4,
+    "description": "The technological space (Tech_Space) as defined by [1] is the\n\t\t\t\t\t\t\t\tworking context with its set of associated concepts, tools, and\n\t\t\t\t\t\t\t\tpossibilities, in which the Artefacts are defined. In the context\n\t\t\t\t\t\t\t\tof MBSE, it crudely refers to the \u201cformat\u201d (eg., the MOF meta-\n\t\t\t\t\t\t\t\tmeta-model, RDF, textual grammars, etc.) that the \tArtefact(s)\n\t\t\t\t\t\t\t\tbelong to.\n\t\t\t\t\t\t\t\t[1] : Ivan Ivanov, Jean B\u00e9zivin, and Mehmet Aksit. 2002.\n\t\t\t\t\t\t\t\tTechnological spaces: An initial appraisal. In 4th International\n\t\t\t\t\t\t\t\tSymposium on Distributed Objects and Applications, DOA 2002.",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f18",
+    "feature_name": "EMOF",
+    "feature_type": "abstract",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f19",
+    "feature_name": "Ecore",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f20",
+    "feature_name": "Ad-hoc/Internal_TechSpace",
+    "feature_type": "concrete",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f21",
+    "feature_name": "Formalism",
+    "feature_type": "abstract",
+    "hierarchy_level": 4,
+    "description": "The Formalism(s) used to specify the Artefacts. [1] proposes\n\t\t\t\t\t\t\t\ta list of Formalisms commonly used for CPS Engineering that\n\t\t\t\t\t\t\t\twe use as a basis for our description.\n\t\t\t\t\t\t\t\t[1] : https://zenodo.org/record/2533455",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f22",
+    "feature_name": "AutomataBased",
+    "feature_type": "abstract",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f23",
+    "feature_name": "AbstractStateMachines",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f24",
+    "feature_name": "CellularAutomata",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f25",
+    "feature_name": "HybridAutomataBased",
+    "feature_type": "abstract",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f26",
+    "feature_name": "HybridAutomata",
+    "feature_type": "concrete",
+    "hierarchy_level": 7,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f27",
+    "feature_name": "IOHybridAutomata",
+    "feature_type": "concrete",
+    "hierarchy_level": 7,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f28",
+    "feature_name": "LinearHybridAutomata",
+    "feature_type": "concrete",
+    "hierarchy_level": 7,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f29",
+    "feature_name": "NonLinearHybridAutomata",
+    "feature_type": "concrete",
+    "hierarchy_level": 7,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f30",
+    "feature_name": "StochasticHybridAutomata",
+    "feature_type": "concrete",
+    "hierarchy_level": 7,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f31",
+    "feature_name": "TimedAutomata",
+    "feature_type": "abstract",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f32",
+    "feature_name": "ProbabilisticTimedAutomata",
+    "feature_type": "concrete",
+    "hierarchy_level": 7,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f33",
+    "feature_name": "StochasticTimedAutomata",
+    "feature_type": "concrete",
+    "hierarchy_level": 7,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f34",
+    "feature_name": "IOTimedAutomata",
+    "feature_type": "concrete",
+    "hierarchy_level": 7,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f35",
+    "feature_name": "PetriNetBased",
+    "feature_type": "abstract",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f36",
+    "feature_name": "HighLevelPetriNet",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f37",
+    "feature_name": "PetriNet",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f38",
+    "feature_name": "PriorityPetriNet",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f39",
+    "feature_name": "StochasticPetriNet",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f40",
+    "feature_name": "TimedPetriNet",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f41",
+    "feature_name": "LogicBased",
+    "feature_type": "abstract",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f42",
+    "feature_name": "FirstOrderLogic",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f43",
+    "feature_name": "TemporalLogic",
+    "feature_type": "abstract",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f44",
+    "feature_name": "LinearTemporalLogic",
+    "feature_type": "concrete",
+    "hierarchy_level": 7,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f45",
+    "feature_name": "ComputationTreeLogic",
+    "feature_type": "concrete",
+    "hierarchy_level": 7,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f46",
+    "feature_name": "Hennessy-MilnerLogic",
+    "feature_type": "concrete",
+    "hierarchy_level": 7,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f47",
+    "feature_name": "FlowBased",
+    "feature_type": "abstract",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f48",
+    "feature_name": "DataFlow",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f49",
+    "feature_name": "HybridFlow",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f50",
+    "feature_name": "NewFeature",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f51",
+    "feature_name": "ComplexNetworks",
+    "feature_type": "concrete",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f52",
+    "feature_name": "BayesianNetworks",
+    "feature_type": "concrete",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f53",
+    "feature_name": "BondGraphs",
+    "feature_type": "concrete",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f54",
+    "feature_name": "CausalBlockDiagram",
+    "feature_type": "concrete",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f55",
+    "feature_name": "Formalism_Agnostic",
+    "feature_type": "concrete",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f56",
+    "feature_name": "X_Formalism",
+    "feature_type": "concrete",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f57",
+    "feature_name": "DifferentialEquations",
+    "feature_type": "concrete",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f58",
+    "feature_name": "DiscontinuousSystems",
+    "feature_type": "concrete",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f59",
+    "feature_name": "DiscreteEvent",
+    "feature_type": "concrete",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f60",
+    "feature_name": "ElectricalLinearNetworks",
+    "feature_type": "concrete",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f61",
+    "feature_name": "EntityRelationship",
+    "feature_type": "concrete",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f62",
+    "feature_name": "FaultTrees",
+    "feature_type": "concrete",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f63",
+    "feature_name": "MarkovChains",
+    "feature_type": "concrete",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f64",
+    "feature_name": "ProcessAlgebras",
+    "feature_type": "concrete",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f65",
+    "feature_name": "TimedFailurePropagationGraph",
+    "feature_type": "concrete",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f66",
+    "feature_name": "ViennaDevelopmentMethod",
+    "feature_type": "concrete",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f67",
+    "feature_name": "Serialisation",
+    "feature_type": "abstract",
+    "hierarchy_level": 4,
+    "description": "The Serialisation format(s) used for persisting the Artefacts",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f68",
+    "feature_name": "Serialisation_Agnostic",
+    "feature_type": "concrete",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f69",
+    "feature_name": "DomainSpecific",
+    "feature_type": "concrete",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f70",
+    "feature_name": "General",
+    "feature_type": "abstract",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f71",
+    "feature_name": "XMI/XML",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f72",
+    "feature_name": "RDF",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f73",
+    "feature_name": "JSON",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f74",
+    "feature_name": "Links",
+    "feature_type": "abstract",
+    "hierarchy_level": 3,
+    "description": "Edges correspond to Links",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f75",
+    "feature_name": "Arity",
+    "feature_type": "abstract",
+    "hierarchy_level": 4,
+    "description": "Refers to the number of artefacts defining, and participating in a Link",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f76",
+    "feature_name": "Binary",
+    "feature_type": "concrete",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f77",
+    "feature_name": "n-ary",
+    "feature_type": "concrete",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f78",
+    "feature_name": "Granularity",
+    "feature_type": "abstract",
+    "hierarchy_level": 4,
+    "description": "It refers to the specific \u2018level\u2019 of decomposition of the linked Artefacts",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f79",
+    "feature_name": "Element",
+    "feature_type": "abstract",
+    "hierarchy_level": 5,
+    "description": "A link exists at the Element level, meaning that structural prop-\n\t\t\t\t\t\t\t\t\terties (or model-elements) of the Artefacts are actually linked.",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f80",
+    "feature_name": "Reference",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "The Link simply References the involved Elements, e.g. to indicate that\n\t\t\t\t\t\t\t\t\t\tthey may be impacted by a change.",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f81",
+    "feature_name": "Content",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "The Link may gives access to the Element\u2019s\n\t\t\t\t\t\t\t\t\t\tContent (i.e. the type, in case of a meta-model; or the value, in\n\t\t\t\t\t\t\t\t\t\tcase of a model), which may be useful for e.g. to propagate\n\t\t\t\t\t\t\t\t\t\tvalues changes throughout interconnected models",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f82",
+    "feature_name": "Model",
+    "feature_type": "concrete",
+    "hierarchy_level": 5,
+    "description": "A Link exists at the Model-level, meaning that its\n\t\t\t\t\t\t\t\t\ttarget Artefacts are whole models",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f83",
+    "feature_name": "Specification",
+    "feature_type": "abstract",
+    "hierarchy_level": 4,
+    "description": "The Specification feature describes the way Links are defined. This\n\t\t\t\t\t\t\t\tcan be fully manual, by linking individual Artefacts for example,\n\t\t\t\t\t\t\t\tor follow a more complex process in which correspondences are\n\t\t\t\t\t\t\t\tdefined Manual-ly at the meta-level and then concrete links are\n\t\t\t\t\t\t\t\tSemi-Automatic-ally generated through a matching process. This\n\t\t\t\t\t\t\t\tcase indeed relates to the Decomposable-ity of the Link Semantics.",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f84",
+    "feature_name": "Manual_Specification",
+    "feature_type": "concrete",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f85",
+    "feature_name": "Semi-automated_Specification",
+    "feature_type": "concrete",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f86",
+    "feature_name": "Persistence",
+    "feature_type": "concrete",
+    "hierarchy_level": 4,
+    "description": "The Links\u2019 Persistence feature characterises MF contributions\n\t\t\t\t\t\t\t\twhere Links are persisted, meaning that it is possible to retrieve\n\t\t\t\t\t\t\t\tthe Links independently of a modelling session, or after it has\n\t\t\t\t\t\t\t\tended",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f87",
+    "feature_name": "Semantics",
+    "feature_type": "abstract",
+    "hierarchy_level": 4,
+    "description": "The Semantics associated with the Links.\n\t\t\t\t\t\t\t\tThis feature describes the \u2018meaning\u2019 of the Links, i.e.\n\t\t\t\t\t\t\t\twhy, and for which purpose, the Artefacts are related\n\t\t\t\t\t\t\t\tby the Links.",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f88",
+    "feature_name": "Decomposable",
+    "feature_type": "concrete",
+    "hierarchy_level": 5,
+    "description": "It is possible to define Links at a given Granularity, and\n\t\t\t\t\t\t\t\t\t(semi-)automatically compute and create Links at another\n\t\t\t\t\t\t\t\t\tlevel of Granularity.",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f89",
+    "feature_name": "Links_Typology",
+    "feature_type": "abstract",
+    "hierarchy_level": 5,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f90",
+    "feature_name": "ConformsTo",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f91",
+    "feature_name": "DecomposedIn",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f92",
+    "feature_name": "TracedTo",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f93",
+    "feature_name": "ElementOf",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f94",
+    "feature_name": "RepresentationOf",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f95",
+    "feature_name": "TransformedIn",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f96",
+    "feature_name": "X_Type",
+    "feature_type": "concrete",
+    "hierarchy_level": 6,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f97",
+    "feature_name": "Meta-model",
+    "feature_type": "concrete",
+    "hierarchy_level": 5,
+    "description": "The Semantics of Links are explicitly Meta-modelled:\n\t\t\t\t\t\t\t\t\tthis allows Links\u2019 types and relations to be freely and\n\t\t\t\t\t\t\t\t\tconsistently created.",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f98",
+    "feature_name": "MixedLevel",
+    "feature_type": "concrete",
+    "hierarchy_level": 4,
+    "description": "It is possible to agnostically define Links between Artefacts\n\t\t\t\t\t\t\t\tfrom any meta-modelling-level (linking together models,\n\t\t\t\t\t\t\t\tmeta-models, or models with meta-models).",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f99",
+    "feature_name": "Federation",
+    "feature_type": "abstract",
+    "hierarchy_level": 3,
+    "description": "The structural features of the whole MF graph as a singular\n\t\t\t\t\t\t\tentity are captured by the Federation feature",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f100",
+    "feature_name": "Process",
+    "feature_type": "concrete",
+    "hierarchy_level": 4,
+    "description": "Creation and manipulation of the MF should follow a\n\t\t\t\t\t\t\t\tpredefined workflow",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f101",
+    "feature_name": "Reified",
+    "feature_type": "abstract",
+    "hierarchy_level": 4,
+    "description": "The whole MF is manipulable (Artefacts and Links, together).",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f102",
+    "feature_name": "Explicit",
+    "feature_type": "concrete",
+    "hierarchy_level": 5,
+    "description": "There exists another single Artefact that explicitly encodes\n\t\t\t\t\t\t\t\t\tthe entire MF,",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f103",
+    "feature_name": "Implicit",
+    "feature_type": "concrete",
+    "hierarchy_level": 5,
+    "description": "Modellers need to retrieve pieces\n\t\t\t\t\t\t\t\t\tof Artefacts they need, by themselves",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f104",
+    "feature_name": "Operational",
+    "feature_type": "abstract",
+    "hierarchy_level": 2,
+    "description": "The processes and operations that are possible, explicitly or implicitly defined,\n\t\t\t\t\t\tand how they compare with each other.",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f105",
+    "feature_name": "Location",
+    "feature_type": "abstract",
+    "hierarchy_level": 3,
+    "description": "The Location feature describes where the operations\n\t\t\t\t\t\t\ttake place: they can be attached to the Links, to the Federation, or be\n\t\t\t\t\t\t\tcompletely External to the MF.",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f106",
+    "feature_name": "External",
+    "feature_type": "concrete",
+    "hierarchy_level": 4,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f107",
+    "feature_name": "OnLinks",
+    "feature_type": "concrete",
+    "hierarchy_level": 4,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f108",
+    "feature_name": "InFederation",
+    "feature_type": "concrete",
+    "hierarchy_level": 4,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f109",
+    "feature_name": "Operations_Typology",
+    "feature_type": "abstract",
+    "hierarchy_level": 3,
+    "description": "The Operation feature describes which Operations\n\t\t\t\t\t\t\tare executed on the MF. Our classification lists some common Op-\n\t\t\t\t\t\t\terations. Representing, Querying, and Constraining Operations on MFs\n\t\t\t\t\t\t\tare used to visually display and retrieve models on and from the\n\t\t\t\t\t\t\tMF. Syncing an MF aims at resolving inconsistencies between Arte-\n\t\t\t\t\t\t\tfacts. V&Ving generically designates operations for validating and\n\t\t\t\t\t\t\tverifying properties over the MF. Note that this list of operations is\n\t\t\t\t\t\t\tgeneralised and not exhaustive.",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f110",
+    "feature_name": "Query",
+    "feature_type": "concrete",
+    "hierarchy_level": 4,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f111",
+    "feature_name": "Represent",
+    "feature_type": "concrete",
+    "hierarchy_level": 4,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f112",
+    "feature_name": "Constrain",
+    "feature_type": "concrete",
+    "hierarchy_level": 4,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f113",
+    "feature_name": "V&V",
+    "feature_type": "concrete",
+    "hierarchy_level": 4,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f114",
+    "feature_name": "Synchronise",
+    "feature_type": "concrete",
+    "hierarchy_level": 4,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f115",
+    "feature_name": "X_Operation",
+    "feature_type": "concrete",
+    "hierarchy_level": 4,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f116",
+    "feature_name": "Trigger",
+    "feature_type": "abstract",
+    "hierarchy_level": 3,
+    "description": "The Trigger is important as it specifies when an Opera-\n\t\t\t\t\t\t\ttions shall be executed. An Operation may be triggered Manual-ly and\n\t\t\t\t\t\t\ton-demand, or may triggered Reactive-ly to specific events on some\n\t\t\t\t\t\t\tparameters from the concerned Artefacts or the MF itself (typically,\n\t\t\t\t\t\t\tmodifications in the MF)",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f117",
+    "feature_name": "Manual_Trigger",
+    "feature_type": "concrete",
+    "hierarchy_level": 4,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f118",
+    "feature_name": "Reactive_Trigger",
+    "feature_type": "concrete",
+    "hierarchy_level": 4,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f119",
+    "feature_name": "ExecutionMode",
+    "feature_type": "abstract",
+    "hierarchy_level": 3,
+    "description": "Execution Mode. (a.k.a Exec_Mode) specifies how the Oper-\n\t\t\t\t\t\t\tation works. It may work in an Incremental fashion, meaning that\n\t\t\t\t\t\t\twhenever it is executed, only the new changes (typically, Links)\n\t\t\t\t\t\t\tare computed and/or updated, as opposed to a full Rebuild where\n\t\t\t\t\t\t\teverything is recomputed from scratch at each operation invoca-\n\t\t\t\t\t\t\ttion.",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f120",
+    "feature_name": "FullRebuild",
+    "feature_type": "concrete",
+    "hierarchy_level": 4,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f121",
+    "feature_name": "Incremental",
+    "feature_type": "concrete",
+    "hierarchy_level": 4,
+    "description": "",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f122",
+    "feature_name": "Intentional",
+    "feature_type": "abstract",
+    "hierarchy_level": 2,
+    "description": "Goals or purposes of creating the MF",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f123",
+    "feature_name": "CrossDomainAnalysis",
+    "feature_type": "concrete",
+    "hierarchy_level": 3,
+    "description": "Cross-domain analysis involves examining and integrating\n\t\t\t\t\t\t\tconcepts, methodologies, or technologies from multiple\n\t\t\t\t\t\t\tdomains to resolve or optimise cross-functional concerns,\n\t\t\t\t\t\t\tsuch as cyber-security, usability, process metrics optimisation,\n\t\t\t\t\t\t\tscenario testing, etc.",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f124",
+    "feature_name": "ModelComposition",
+    "feature_type": "concrete",
+    "hierarchy_level": 3,
+    "description": "Model composition is a useful modelling activity. For example,\n\t\t\t\t\t\t\tin MBSE, where the aim is to build a model of a system by\n\t\t\t\t\t\t\tcombining existing sub-system models even when the\n\t\t\t\t\t\t\tsub-system models are well-developed within their\n\t\t\t\t\t\t\theterogeneous modelling domain(s) or paradigm(s).",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f125",
+    "feature_name": "Traceability",
+    "feature_type": "concrete",
+    "hierarchy_level": 3,
+    "description": "Traceability refers to the ability to track and link various\n\t\t\t\t\t\t\tstages of the software or system development life-cycle. It\n\t\t\t\t\t\t\tincludes various activities, such as requirement assignment\n\t\t\t\t\t\t\tand verification, impact analysis, compliance and auditing,\n\t\t\t\t\t\t\tand project management.",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f126",
+    "feature_name": "ModelConsistencyChecking/Repair",
+    "feature_type": "concrete",
+    "hierarchy_level": 3,
+    "description": "Model consistency checking and repair are essential practices\n\t\t\t\t\t\tin MBSE. Model consistency checking involves verifying that\n\t\t\t\t\t\tdifferent models do not contradict each other and adhere to\n\t\t\t\t\t\tpredefined rules and constraints, while model repair focuses\n\t\t\t\t\t\ton automatically or semi-automatically modifying\n\t\t\t\t\t\tinconsistent model to restore overall consistency.",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f127",
+    "feature_name": "UnifiedTransformationManagement",
+    "feature_type": "concrete",
+    "hierarchy_level": 3,
+    "description": "Unified transformation management refers to all tool chains\n\t\t\t\t\t\tused in software or system production (code generation,\n\t\t\t\t\t\treverse engineering, model-to-model transformations). The\n\t\t\t\t\t\tpersistence of transformations enables fine-tuned, incremental\n\t\t\t\t\t\tmanagement and production traceability of artefacts in a\n\t\t\t\t\t\tproduction pipeline.",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f128",
+    "feature_name": "ArtefactCodesign",
+    "feature_type": "concrete",
+    "hierarchy_level": 3,
+    "description": "Artefact co-design corresponds to the co-construction of\n\t\t\t\t\t\tone or more models and their associated meta-model(s),\n\t\t\t\t\t\twhere the model-to-meta-model conformance relationship\n\t\t\t\t\t\tis not hard-coded in a tool but meta-modelled itself.",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f129",
+    "feature_name": "ReverseEngineering",
+    "feature_type": "concrete",
+    "hierarchy_level": 3,
+    "description": "Conceptual elicitation / reverse engineering activities also\n\t\t\t\t\t\tinvolve several models, where the aim is to build a\n\t\t\t\t\t\tconceptual model from various technical artefacts.",
+    "evidence_refs": []
+  },
+  {
+    "feature_id": "f130",
+    "feature_name": "X_Intention",
+    "feature_type": "concrete",
+    "hierarchy_level": 3,
+    "description": "",
+    "evidence_refs": []
+  }
+]

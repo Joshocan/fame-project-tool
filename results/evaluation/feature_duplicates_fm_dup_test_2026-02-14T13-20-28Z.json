@@ -1,0 +1,100 @@
+{
+  "xml": "/private/tmp/fm_dup_test.xml",
+  "timestamp_utc": "2026-02-14T13-20-28Z",
+  "normalization": "basic",
+  "total_named_nodes": 6,
+  "unique_exact_names": 5,
+  "exact_duplicate_groups": 1,
+  "exact_duplicate_nodes": 1,
+  "normalized_duplicate_groups": 2,
+  "normalized_duplicate_nodes": 3,
+  "duplicates_exact": [
+    {
+      "group_key": "A",
+      "count": 2,
+      "unique_raw_names": [
+        "A"
+      ],
+      "occurrences": [
+        {
+          "name": "A",
+          "tag": "feature",
+          "line": 5,
+          "depth": 1,
+          "parent_name": "Root",
+          "path": "/featureModel/struct/feature[1]/feature[1]"
+        },
+        {
+          "name": "A",
+          "tag": "feature",
+          "line": 6,
+          "depth": 1,
+          "parent_name": "Root",
+          "path": "/featureModel/struct/feature[1]/feature[2]"
+        }
+      ]
+    }
+  ],
+  "duplicates_normalized": [
+    {
+      "group_key": "a",
+      "count": 3,
+      "unique_raw_names": [
+        "A",
+        "a"
+      ],
+      "occurrences": [
+        {
+          "name": "A",
+          "tag": "feature",
+          "line": 5,
+          "depth": 1,
+          "parent_name": "Root",
+          "path": "/featureModel/struct/feature[1]/feature[1]"
+        },
+        {
+          "name": "A",
+          "tag": "feature",
+          "line": 6,
+          "depth": 1,
+          "parent_name": "Root",
+          "path": "/featureModel/struct/feature[1]/feature[2]"
+        },
+        {
+          "name": "a",
+          "tag": "feature",
+          "line": 7,
+          "depth": 1,
+          "parent_name": "Root",
+          "path": "/featureModel/struct/feature[1]/feature[3]"
+        }
+      ]
+    },
+    {
+      "group_key": "a_feature",
+      "count": 2,
+      "unique_raw_names": [
+        "A-Feature",
+        "A_Feature"
+      ],
+      "occurrences": [
+        {
+          "name": "A-Feature",
+          "tag": "feature",
+          "line": 8,
+          "depth": 1,
+          "parent_name": "Root",
+          "path": "/featureModel/struct/feature[1]/feature[4]"
+        },
+        {
+          "name": "A_Feature",
+          "tag": "feature",
+          "line": 9,
+          "depth": 1,
+          "parent_name": "Root",
+          "path": "/featureModel/struct/feature[1]/feature[5]"
+        }
+      ]
+    }
+  ]
+}

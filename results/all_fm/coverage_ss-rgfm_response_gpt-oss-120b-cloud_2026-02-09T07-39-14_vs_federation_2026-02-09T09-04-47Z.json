@@ -1,0 +1,14 @@
+{
+  "metric": "coverage_recall",
+  "score": 31.44,
+  "ground_truth": "/Users/joshuaocansey/Library/CloudStorage/OneDrive-H\u00f8gskulenpa\u030aVestlandet/Skrivebord/FAME_project/data/ground_truth/federation.xml",
+  "prediction": "/Users/joshuaocansey/Library/CloudStorage/OneDrive-H\u00f8gskulenpa\u030aVestlandet/Skrivebord/FAME_project/results/all_fm/ss_rag/ss-rgfm_response_gpt-oss-120b-cloud_2026-02-09T07-39-14.xml",
+  "config": {
+    "model": "all-mpnet-base-v2",
+    "similarity_threshold": 0.35,
+    "top_k": 3,
+    "feature_weight": 0.9,
+    "parent_weight": 0.1
+  },
+  "timestamp_utc": "2026-02-09T09-04-47Z"
+}

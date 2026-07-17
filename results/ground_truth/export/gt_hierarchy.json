@@ -1,0 +1,652 @@
+[
+  {
+    "parent": null,
+    "child": "Model_Management",
+    "depth": 0
+  },
+  {
+    "parent": "Model_Management",
+    "child": "Model_Federation",
+    "depth": 1
+  },
+  {
+    "parent": "Model_Federation",
+    "child": "Structural",
+    "depth": 2
+  },
+  {
+    "parent": "Structural",
+    "child": "Artefacts",
+    "depth": 3
+  },
+  {
+    "parent": "Artefacts",
+    "child": "Domain",
+    "depth": 4
+  },
+  {
+    "parent": "Domain",
+    "child": "X_Domain",
+    "depth": 5
+  },
+  {
+    "parent": "Domain",
+    "child": "CPS_Domain",
+    "depth": 5
+  },
+  {
+    "parent": "CPS_Domain",
+    "child": "CriticalInfrastructure",
+    "depth": 6
+  },
+  {
+    "parent": "CPS_Domain",
+    "child": "BuildingAutomation",
+    "depth": 6
+  },
+  {
+    "parent": "CPS_Domain",
+    "child": "SmartManufacturing",
+    "depth": 6
+  },
+  {
+    "parent": "CPS_Domain",
+    "child": "Transportation",
+    "depth": 6
+  },
+  {
+    "parent": "CPS_Domain",
+    "child": "Defense",
+    "depth": 6
+  },
+  {
+    "parent": "CPS_Domain",
+    "child": "Health",
+    "depth": 6
+  },
+  {
+    "parent": "CPS_Domain",
+    "child": "EmergencyResponse",
+    "depth": 6
+  },
+  {
+    "parent": "CPS_Domain",
+    "child": "ProcessControl",
+    "depth": 6
+  },
+  {
+    "parent": "CPS_Domain",
+    "child": "RoboticForService",
+    "depth": 6
+  },
+  {
+    "parent": "Artefacts",
+    "child": "TechSpace",
+    "depth": 4
+  },
+  {
+    "parent": "TechSpace",
+    "child": "EMOF",
+    "depth": 5
+  },
+  {
+    "parent": "EMOF",
+    "child": "Ecore",
+    "depth": 6
+  },
+  {
+    "parent": "TechSpace",
+    "child": "Ad-hoc/Internal_TechSpace",
+    "depth": 5
+  },
+  {
+    "parent": "Artefacts",
+    "child": "Formalism",
+    "depth": 4
+  },
+  {
+    "parent": "Formalism",
+    "child": "AutomataBased",
+    "depth": 5
+  },
+  {
+    "parent": "AutomataBased",
+    "child": "AbstractStateMachines",
+    "depth": 6
+  },
+  {
+    "parent": "AutomataBased",
+    "child": "CellularAutomata",
+    "depth": 6
+  },
+  {
+    "parent": "AutomataBased",
+    "child": "HybridAutomataBased",
+    "depth": 6
+  },
+  {
+    "parent": "HybridAutomataBased",
+    "child": "HybridAutomata",
+    "depth": 7
+  },
+  {
+    "parent": "HybridAutomataBased",
+    "child": "IOHybridAutomata",
+    "depth": 7
+  },
+  {
+    "parent": "HybridAutomataBased",
+    "child": "LinearHybridAutomata",
+    "depth": 7
+  },
+  {
+    "parent": "HybridAutomataBased",
+    "child": "NonLinearHybridAutomata",
+    "depth": 7
+  },
+  {
+    "parent": "HybridAutomataBased",
+    "child": "StochasticHybridAutomata",
+    "depth": 7
+  },
+  {
+    "parent": "AutomataBased",
+    "child": "TimedAutomata",
+    "depth": 6
+  },
+  {
+    "parent": "TimedAutomata",
+    "child": "ProbabilisticTimedAutomata",
+    "depth": 7
+  },
+  {
+    "parent": "TimedAutomata",
+    "child": "StochasticTimedAutomata",
+    "depth": 7
+  },
+  {
+    "parent": "TimedAutomata",
+    "child": "IOTimedAutomata",
+    "depth": 7
+  },
+  {
+    "parent": "Formalism",
+    "child": "PetriNetBased",
+    "depth": 5
+  },
+  {
+    "parent": "PetriNetBased",
+    "child": "HighLevelPetriNet",
+    "depth": 6
+  },
+  {
+    "parent": "PetriNetBased",
+    "child": "PetriNet",
+    "depth": 6
+  },
+  {
+    "parent": "PetriNetBased",
+    "child": "PriorityPetriNet",
+    "depth": 6
+  },
+  {
+    "parent": "PetriNetBased",
+    "child": "StochasticPetriNet",
+    "depth": 6
+  },
+  {
+    "parent": "PetriNetBased",
+    "child": "TimedPetriNet",
+    "depth": 6
+  },
+  {
+    "parent": "Formalism",
+    "child": "LogicBased",
+    "depth": 5
+  },
+  {
+    "parent": "LogicBased",
+    "child": "FirstOrderLogic",
+    "depth": 6
+  },
+  {
+    "parent": "LogicBased",
+    "child": "TemporalLogic",
+    "depth": 6
+  },
+  {
+    "parent": "TemporalLogic",
+    "child": "LinearTemporalLogic",
+    "depth": 7
+  },
+  {
+    "parent": "TemporalLogic",
+    "child": "ComputationTreeLogic",
+    "depth": 7
+  },
+  {
+    "parent": "TemporalLogic",
+    "child": "Hennessy-MilnerLogic",
+    "depth": 7
+  },
+  {
+    "parent": "Formalism",
+    "child": "FlowBased",
+    "depth": 5
+  },
+  {
+    "parent": "FlowBased",
+    "child": "DataFlow",
+    "depth": 6
+  },
+  {
+    "parent": "FlowBased",
+    "child": "HybridFlow",
+    "depth": 6
+  },
+  {
+    "parent": "FlowBased",
+    "child": "NewFeature",
+    "depth": 6
+  },
+  {
+    "parent": "Formalism",
+    "child": "ComplexNetworks",
+    "depth": 5
+  },
+  {
+    "parent": "Formalism",
+    "child": "BayesianNetworks",
+    "depth": 5
+  },
+  {
+    "parent": "Formalism",
+    "child": "BondGraphs",
+    "depth": 5
+  },
+  {
+    "parent": "Formalism",
+    "child": "CausalBlockDiagram",
+    "depth": 5
+  },
+  {
+    "parent": "Formalism",
+    "child": "Formalism_Agnostic",
+    "depth": 5
+  },
+  {
+    "parent": "Formalism",
+    "child": "X_Formalism",
+    "depth": 5
+  },
+  {
+    "parent": "Formalism",
+    "child": "DifferentialEquations",
+    "depth": 5
+  },
+  {
+    "parent": "Formalism",
+    "child": "DiscontinuousSystems",
+    "depth": 5
+  },
+  {
+    "parent": "Formalism",
+    "child": "DiscreteEvent",
+    "depth": 5
+  },
+  {
+    "parent": "Formalism",
+    "child": "ElectricalLinearNetworks",
+    "depth": 5
+  },
+  {
+    "parent": "Formalism",
+    "child": "EntityRelationship",
+    "depth": 5
+  },
+  {
+    "parent": "Formalism",
+    "child": "FaultTrees",
+    "depth": 5
+  },
+  {
+    "parent": "Formalism",
+    "child": "MarkovChains",
+    "depth": 5
+  },
+  {
+    "parent": "Formalism",
+    "child": "ProcessAlgebras",
+    "depth": 5
+  },
+  {
+    "parent": "Formalism",
+    "child": "TimedFailurePropagationGraph",
+    "depth": 5
+  },
+  {
+    "parent": "Formalism",
+    "child": "ViennaDevelopmentMethod",
+    "depth": 5
+  },
+  {
+    "parent": "Artefacts",
+    "child": "Serialisation",
+    "depth": 4
+  },
+  {
+    "parent": "Serialisation",
+    "child": "Serialisation_Agnostic",
+    "depth": 5
+  },
+  {
+    "parent": "Serialisation",
+    "child": "DomainSpecific",
+    "depth": 5
+  },
+  {
+    "parent": "Serialisation",
+    "child": "General",
+    "depth": 5
+  },
+  {
+    "parent": "General",
+    "child": "XMI/XML",
+    "depth": 6
+  },
+  {
+    "parent": "General",
+    "child": "RDF",
+    "depth": 6
+  },
+  {
+    "parent": "General",
+    "child": "JSON",
+    "depth": 6
+  },
+  {
+    "parent": "Structural",
+    "child": "Links",
+    "depth": 3
+  },
+  {
+    "parent": "Links",
+    "child": "Arity",
+    "depth": 4
+  },
+  {
+    "parent": "Arity",
+    "child": "Binary",
+    "depth": 5
+  },
+  {
+    "parent": "Arity",
+    "child": "n-ary",
+    "depth": 5
+  },
+  {
+    "parent": "Links",
+    "child": "Granularity",
+    "depth": 4
+  },
+  {
+    "parent": "Granularity",
+    "child": "Element",
+    "depth": 5
+  },
+  {
+    "parent": "Element",
+    "child": "Reference",
+    "depth": 6
+  },
+  {
+    "parent": "Element",
+    "child": "Content",
+    "depth": 6
+  },
+  {
+    "parent": "Granularity",
+    "child": "Model",
+    "depth": 5
+  },
+  {
+    "parent": "Links",
+    "child": "Specification",
+    "depth": 4
+  },
+  {
+    "parent": "Specification",
+    "child": "Manual_Specification",
+    "depth": 5
+  },
+  {
+    "parent": "Specification",
+    "child": "Semi-automated_Specification",
+    "depth": 5
+  },
+  {
+    "parent": "Links",
+    "child": "Persistence",
+    "depth": 4
+  },
+  {
+    "parent": "Links",
+    "child": "Semantics",
+    "depth": 4
+  },
+  {
+    "parent": "Semantics",
+    "child": "Decomposable",
+    "depth": 5
+  },
+  {
+    "parent": "Semantics",
+    "child": "Links_Typology",
+    "depth": 5
+  },
+  {
+    "parent": "Links_Typology",
+    "child": "ConformsTo",
+    "depth": 6
+  },
+  {
+    "parent": "Links_Typology",
+    "child": "DecomposedIn",
+    "depth": 6
+  },
+  {
+    "parent": "Links_Typology",
+    "child": "TracedTo",
+    "depth": 6
+  },
+  {
+    "parent": "Links_Typology",
+    "child": "ElementOf",
+    "depth": 6
+  },
+  {
+    "parent": "Links_Typology",
+    "child": "RepresentationOf",
+    "depth": 6
+  },
+  {
+    "parent": "Links_Typology",
+    "child": "TransformedIn",
+    "depth": 6
+  },
+  {
+    "parent": "Links_Typology",
+    "child": "X_Type",
+    "depth": 6
+  },
+  {
+    "parent": "Semantics",
+    "child": "Meta-model",
+    "depth": 5
+  },
+  {
+    "parent": "Links",
+    "child": "MixedLevel",
+    "depth": 4
+  },
+  {
+    "parent": "Structural",
+    "child": "Federation",
+    "depth": 3
+  },
+  {
+    "parent": "Federation",
+    "child": "Process",
+    "depth": 4
+  },
+  {
+    "parent": "Federation",
+    "child": "Reified",
+    "depth": 4
+  },
+  {
+    "parent": "Reified",
+    "child": "Explicit",
+    "depth": 5
+  },
+  {
+    "parent": "Reified",
+    "child": "Implicit",
+    "depth": 5
+  },
+  {
+    "parent": "Model_Federation",
+    "child": "Operational",
+    "depth": 2
+  },
+  {
+    "parent": "Operational",
+    "child": "Location",
+    "depth": 3
+  },
+  {
+    "parent": "Location",
+    "child": "External",
+    "depth": 4
+  },
+  {
+    "parent": "Location",
+    "child": "OnLinks",
+    "depth": 4
+  },
+  {
+    "parent": "Location",
+    "child": "InFederation",
+    "depth": 4
+  },
+  {
+    "parent": "Operational",
+    "child": "Operations_Typology",
+    "depth": 3
+  },
+  {
+    "parent": "Operations_Typology",
+    "child": "Query",
+    "depth": 4
+  },
+  {
+    "parent": "Operations_Typology",
+    "child": "Represent",
+    "depth": 4
+  },
+  {
+    "parent": "Operations_Typology",
+    "child": "Constrain",
+    "depth": 4
+  },
+  {
+    "parent": "Operations_Typology",
+    "child": "V&V",
+    "depth": 4
+  },
+  {
+    "parent": "Operations_Typology",
+    "child": "Synchronise",
+    "depth": 4
+  },
+  {
+    "parent": "Operations_Typology",
+    "child": "X_Operation",
+    "depth": 4
+  },
+  {
+    "parent": "Operational",
+    "child": "Trigger",
+    "depth": 3
+  },
+  {
+    "parent": "Trigger",
+    "child": "Manual_Trigger",
+    "depth": 4
+  },
+  {
+    "parent": "Trigger",
+    "child": "Reactive_Trigger",
+    "depth": 4
+  },
+  {
+    "parent": "Operational",
+    "child": "ExecutionMode",
+    "depth": 3
+  },
+  {
+    "parent": "ExecutionMode",
+    "child": "FullRebuild",
+    "depth": 4
+  },
+  {
+    "parent": "ExecutionMode",
+    "child": "Incremental",
+    "depth": 4
+  },
+  {
+    "parent": "Model_Federation",
+    "child": "Intentional",
+    "depth": 2
+  },
+  {
+    "parent": "Intentional",
+    "child": "CrossDomainAnalysis",
+    "depth": 3
+  },
+  {
+    "parent": "Intentional",
+    "child": "ModelComposition",
+    "depth": 3
+  },
+  {
+    "parent": "Intentional",
+    "child": "Traceability",
+    "depth": 3
+  },
+  {
+    "parent": "Intentional",
+    "child": "ModelConsistencyChecking/Repair",
+    "depth": 3
+  },
+  {
+    "parent": "Intentional",
+    "child": "UnifiedTransformationManagement",
+    "depth": 3
+  },
+  {
+    "parent": "Intentional",
+    "child": "ArtefactCodesign",
+    "depth": 3
+  },
+  {
+    "parent": "Intentional",
+    "child": "ReverseEngineering",
+    "depth": 3
+  },
+  {
+    "parent": "Intentional",
+    "child": "X_Intention",
+    "depth": 3
+  }
+]
