@@ -1,0 +1,221 @@
+-- ============================================================================
+-- FAME well-formedness conditions as OCL invariants
+-- Condition IDs match the paper (Sections 4.5 and 6) and the specification.
+-- Semi-formal conditions (D3, E5-resolution, G2, T2-dynamics) are documented
+-- as comments where OCL invariants cannot express them.
+-- Threshold: tau (high-confidence) is fixed here at 0.8.
+-- ============================================================================
+
+import 'fame.ecore'
+
+package fame::core
+
+-- Helper: all ModelElements in the containment tree of a SystemModel,
+-- including the root itself.
+context SystemModel
+def: allElements() : Set(ModelElement) =
+  self->asSet()->closure(e |
+  	 e.oclContents()->selectByKind(ModelElement))->including(self)
+  
+ --    e.eContents()->selectByKind(ModelElement))->including(self)
+
+-- ---------------------------------------------------------------------------
+-- A. Structural conditions (schema-conformance)
+-- ---------------------------------------------------------------------------
+
+context SystemModel
+-- A1: unique identifiers across the full containment tree
+inv A1_UniqueIds:
+  self.allElements()->isUnique(e | e.id)
+
+context ModelElement
+-- A2: non-empty names
+inv A2_NonEmptyName:
+  self.name <> null and self.name.size() > 0
+
+context SystemModel
+-- A3: relationship endpoints are local to the containing model
+inv A3_LocalEndpoints:
+  self.relationships->forAll(r |
+    self.allElements()->includes(r.source) and
+    self.allElements()->includes(r.target))
+
+-- A4: acyclic containment is guaranteed by EMF containment semantics
+-- (an object has at most one container and cannot contain itself
+-- transitively); recorded here for completeness.
+
+context Attribute
+-- A5: attributes are owned by exactly one DataConcept
+inv A5_OwnedAttribute:
+	self.oclContainer().oclIsKindOf(DataConcept)
+ --  self.eContainer().oclIsKindOf(DataConcept)
+
+context Relationship
+-- A6: specialization is type-consistent
+inv A6_TypeConsistentSpecialization:
+  self.kind = RelationKind::specialization implies
+  	self.source.oclType() = self.target.oclType()
+ --   self.source.eClass() = self.target.eClass()
+
+-- ---------------------------------------------------------------------------
+-- B. Provenance conditions (provenance-traceability)
+-- ---------------------------------------------------------------------------
+
+context ModelElement
+-- B1: every element, including the SystemModel root, cites evidence
+inv B1_EverythingJustified:
+  self.justifiedBy->size() >= 1
+
+context ModelElement
+-- B2: confidence is a probability
+inv B2_BoundedConfidence:
+  self.confidence >= 0.0 and self.confidence <= 1.0
+
+context ModelElement
+-- B3: at least one primary source
+inv B3_PrimaryEvidence:
+  self.justifiedBy->exists(p | p.role = ProvenanceRole::primary)
+
+-- ---------------------------------------------------------------------------
+-- C. Corroboration conditions (multi-source corroboration)
+-- ---------------------------------------------------------------------------
+
+context ModelElement
+-- C1: corroboration count is non-negative and never below the number of
+--     distinct supporting artefacts (primary + corroborating)
+inv C1_ConsistentCounting:
+  self.corroborationCount >= 0 and
+  self.corroborationCount >=
+    self.justifiedBy
+      ->select(p | p.role <> ProvenanceRole::contradicting)
+      ->collect(p | p.evidence)->asSet()->size()
+
+context ModelElement
+-- C2: contradiction caps confidence
+inv C2_ContradictionCapsConfidence:
+  self.justifiedBy->exists(p | p.role = ProvenanceRole::contradicting)
+    implies self.confidence < 1.0
+
+context ModelElement
+-- C3: high confidence requires corroboration (tau = 0.8)
+inv C3_HighConfidenceNeedsCorroboration:
+  self.confidence >= 0.8 implies self.corroborationCount >= 2
+
+-- ---------------------------------------------------------------------------
+-- T. Trust-lifecycle conditions
+-- ---------------------------------------------------------------------------
+
+context ModelElement
+-- T1: trusted means evidenced (B and C conditions embedded)
+inv T1_TrustedMeansEvidenced:
+  self.status = TrustStatus::trusted implies
+    (self.justifiedBy->size() >= 1 and
+     self.justifiedBy->exists(p | p.role = ProvenanceRole::primary) and
+     self.confidence >= 0.0 and self.confidence <= 1.0 and
+     self.corroborationCount >= 0)
+
+-- T2 [OPERATION-LEVEL, not an invariant]: status changes only along
+--   candidate -> validated -> trusted, or to rejected, and only by the
+--   validation/selection process. This is a condition on model UPDATES,
+--   enforced by the FAME prototype's update operations and treated formally
+--   in the paper's Section 7. A static invariant cannot express it.
+
+-- ---------------------------------------------------------------------------
+-- D. Logical conditions (deeper schema-conformance)
+-- ---------------------------------------------------------------------------
+
+context ConstraintRule
+-- D1: formal constraints have expressions
+inv D1_FormalHasExpression:
+  self.formal implies (self.expression <> null and self.expression.size() > 0)
+
+context ConstraintRule
+-- D2: constraints target elements inside some SystemModel
+inv D2_TargetsExist:
+  self.constrains->forAll(e |
+  	e.oclContainer() <> null or e.oclIsKindOf(SystemModel))
+  
+--    e.eContainer() <> null or e.oclIsKindOf(SystemModel))
+
+-- D3 [SEMI-FORMAL]: the conjunction of a model's formal ConstraintRules is
+--   satisfiable. Delegated to a SAT/SMT solver by the FAME prototype; OCL
+--   records only the necessary typing condition (D1).
+
+endpackage
+
+package fame::correspondence
+
+-- ---------------------------------------------------------------------------
+-- E. Correspondence well-formedness (schema-conformance)
+-- ---------------------------------------------------------------------------
+
+context CorrespondenceModel
+-- E1: relates at least two distinct system models
+inv E1_RelatesTwoModels:
+  self.relates->size() >= 2 and self.relates->isUnique(p | p.ref)
+
+context Correspondence
+-- E2: n-ary, at least two ends
+inv E2_AtLeastTwoEnds:
+  self.ends->size() >= 2
+
+context Correspondence
+-- E3: ends span at least two distinct participating models
+inv E3_CrossesModels:
+  self.ends->collect(e | e.inModel)->asSet()->size() >= 2
+
+context Correspondence
+-- E4: no element appears twice among the ends
+inv E4_DistinctEndpoints:
+  self.ends->isUnique(e | Tuple{m = e.inModel.ref, el = e.elementRef})
+
+-- E5 [SEMI-FORMAL]: each end's elementRef resolves to an element of the
+--   SystemModel named by its inModel.ref. Requires loading the referenced
+--   system-model resources; checked by the FAME prototype's resolver, not
+--   by intra-resource OCL.
+
+context Correspondence
+-- E6: direction matches kind
+inv E6_DirectionMatchesKind:
+  (Set{CorrespondenceKind::refinement, CorrespondenceKind::generalization,
+       CorrespondenceKind::dependency}
+     ->includes(self.kind)) = self.directed
+
+context Correspondence
+-- E7: roles exactly on directed correspondences
+inv E7_RolesIffDirected:
+  self.directed implies self.ends->forAll(e | e.role <> null)
+
+context Correspondence
+inv E7b_NoRolesIfUndirected:
+  (not self.directed) implies self.ends->forAll(e | e.role = null)
+
+-- ---------------------------------------------------------------------------
+-- F. Correspondence provenance (provenance-traceability)
+-- ---------------------------------------------------------------------------
+
+-- F1: Correspondences inherit B1-B3 and C1-C3 from core::ModelElement;
+--     no additional invariant is needed. Restated in the paper for emphasis.
+
+-- ---------------------------------------------------------------------------
+-- G. Correspondence-preservation
+-- ---------------------------------------------------------------------------
+
+context CorrespondenceModel
+-- G1: internal consistency; the same endpoint set carries no contradictory kinds
+inv G1_InternalConsistency:
+  self.correspondences->forAll(c1, c2 |
+    (c1 <> c2 and
+     c1.ends->collect(e | Tuple{m = e.inModel.ref, el = e.elementRef})->asSet()
+       = c2.ends->collect(e | Tuple{m = e.inModel.ref, el = e.elementRef})->asSet())
+    implies
+      not (Set{c1.kind, c2.kind}
+             = Set{CorrespondenceKind::equivalence, CorrespondenceKind::mismatch}))
+
+-- G2 [OPERATION-LEVEL, not an invariant]: preservation under transformation
+--   is a postcondition of update operations: the proportion of trusted
+--   correspondences remaining valid after an update meets the preservation
+--   threshold. This is the measurable basis of the correspondence-
+--   preservation criterion and the subject of the paper's Section 7.
+
+endpackage

@@ -1,0 +1,202 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xmi:XMI xmlns:famecore="http://fame/core/1.0" xmlns:famecorr="http://fame/correspondence/1.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:version="2.0" xsi:schemaLocation="http://fame/core/1.0 ../metamodels/fame.ecore#//core http://fame/correspondence/1.0 ../metamodels/fame.ecore#//correspondence">
+
+  
+  
+  
+  <famecore:SystemModel id="M1" name="GPSystemModel" scope="chronic-disease management" confidence="0.9" corroborationCount="5" status="trusted">
+    <justifiedBy role="primary" evidence="A1_gp_apidoc" />
+    <justifiedBy role="primary" evidence="A2_gp_userform" />
+    <justifiedBy role="corroborating" evidence="A3_gp_reqnotes" />
+    <artefacts id="A1_gp_apidoc" uri="../artefacts/gp/api-documentation-v3.md" kind="apiDoc" />
+    <artefacts id="A2_gp_userform" uri="../artefacts/gp/lab-order-form.md" kind="manual" />
+    <artefacts id="A3_gp_reqnotes" uri="../artefacts/gp/requirement-notes-2019.md" kind="requirement" />
+
+    <components id="M1.GPSystem" name="GPSystem" kind="system" confidence="0.95" corroborationCount="3" status="trusted">
+      <justifiedBy role="primary" evidence="A1_gp_apidoc" />
+      <justifiedBy role="corroborating" evidence="A2_gp_userform" />
+      <justifiedBy role="corroborating" evidence="A3_gp_reqnotes" />
+      <exposes id="M1.GPRest" name="gp-rest-api" kind="rest" confidence="0.95" corroborationCount="2" status="trusted" exchanges="M1.LabRequest M1.Patient">
+        <justifiedBy role="primary" evidence="A1_gp_apidoc" />
+        <justifiedBy role="corroborating" evidence="A2_gp_userform" />
+      </exposes>
+      <provides id="M1.AuthorizeLabRequest" name="authorize-lab-request" kind="create" confidence="0.88" corroborationCount="2" status="trusted">
+        <justifiedBy role="primary" evidence="A2_gp_userform" />
+        <justifiedBy role="corroborating" evidence="A3_gp_reqnotes" />
+        <decomposesInto id="M1.CreateRequest" name="createRequest" verb="create" confidence="0.85" corroborationCount="2" status="validated" readsOrWrites="M1.LabRequest">
+          <justifiedBy role="primary" evidence="A2_gp_userform" />
+          <justifiedBy role="corroborating" evidence="A1_gp_apidoc" />
+        </decomposesInto>
+      </provides>
+    </components>
+
+    <concepts id="M1.LabRequest" name="LabRequest" kind="document" confidence="0.92" corroborationCount="3" status="trusted">
+      <justifiedBy role="primary" evidence="A1_gp_apidoc" />
+      <justifiedBy role="corroborating" evidence="A2_gp_userform" />
+      <justifiedBy role="corroborating" evidence="A3_gp_reqnotes" />
+      <attributes id="M1.LabRequest.orderId" name="orderId" datatype="String" optional="false" confidence="0.9" corroborationCount="2" status="trusted">
+        <justifiedBy role="primary" evidence="A1_gp_apidoc" />
+        <justifiedBy role="corroborating" evidence="A3_gp_reqnotes" />
+      </attributes>
+    </concepts>
+    <concepts id="M1.Patient" name="Patient" kind="entity" confidence="0.97" corroborationCount="3" status="trusted">
+      <justifiedBy role="primary" evidence="A1_gp_apidoc" />
+      <justifiedBy role="corroborating" evidence="A2_gp_userform" />
+      <justifiedBy role="corroborating" evidence="A3_gp_reqnotes" />
+    </concepts>
+    <concepts id="M1.Practitioner" name="Practitioner" kind="entity" description="the physician authorising a lab request" confidence="0.88" corroborationCount="2" status="trusted">
+      <justifiedBy role="primary" evidence="A1_gp_apidoc" />
+      <justifiedBy role="corroborating" evidence="A3_gp_reqnotes" />
+    </concepts>
+    <concepts id="M1.RequestedTest" name="RequestedTest" kind="valueObject" confidence="0.86" corroborationCount="2" status="trusted">
+      <justifiedBy role="primary" evidence="A1_gp_apidoc" />
+      <justifiedBy role="corroborating" evidence="A2_gp_userform" />
+    </concepts>
+
+    <relationships id="M1.isFor" name="isFor" kind="association" source="M1.LabRequest" target="M1.Patient" confidence="0.9" corroborationCount="2" status="trusted">
+      <justifiedBy role="primary" evidence="A1_gp_apidoc" />
+      <justifiedBy role="corroborating" evidence="A2_gp_userform" />
+    </relationships>
+    <relationships id="M1.authorisedBy" name="authorisedBy" kind="association" source="M1.LabRequest" target="M1.Practitioner" confidence="0.87" corroborationCount="2" status="trusted">
+      <justifiedBy role="primary" evidence="A1_gp_apidoc" />
+      <justifiedBy role="corroborating" evidence="A3_gp_reqnotes" />
+    </relationships>
+    <relationships id="M1.servedBy" name="servedBy" kind="specialization" source="M1.LabRequest" target="M1.GPSystem" confidence="0.8" corroborationCount="2" status="validated">
+      <justifiedBy role="primary" evidence="A1_gp_apidoc" />
+      <justifiedBy role="corroborating" evidence="A2_gp_userform" />
+    </relationships>
+
+    <constraintRules id="M1.OnePatient" name="request-concerns-one-patient" kind="cardinality" expression="every LabRequest isFor exactly 1 Patient" formal="true" constrains="M1.LabRequest M1.Patient" confidence="0.9" corroborationCount="2" status="trusted">
+      <justifiedBy role="primary" evidence="A2_gp_userform" />
+      <justifiedBy role="corroborating" evidence="A1_gp_apidoc" />
+    </constraintRules>
+  </famecore:SystemModel>
+
+  
+  
+  
+  <famecore:SystemModel id="M2" name="LabSystemModel" scope="specimen processing" confidence="0.85" corroborationCount="4" status="trusted">
+    <justifiedBy role="primary" evidence="A4_lis_hl7" />
+    <justifiedBy role="corroborating" evidence="A5_lis_manual" />
+    <artefacts id="A4_lis_hl7" uri="../artefacts/lis/hl7-interface-spec.md" kind="schema" />
+    <artefacts id="A5_lis_manual" uri="../artefacts/lis/procedure-manual.md" kind="manual" excerpt="A validated test is released to the ordering system as final." />
+
+    <concepts id="M2.TestOrder" name="TestOrder" kind="document" confidence="0.9" corroborationCount="2" status="trusted">
+      <justifiedBy role="primary" evidence="A4_lis_hl7" />
+      <justifiedBy role="corroborating" evidence="A5_lis_manual" />
+    </concepts>
+    <concepts id="M2.Specimen" name="Specimen" kind="entity" confidence="0.9" corroborationCount="2" status="trusted">
+      <justifiedBy role="primary" evidence="A4_lis_hl7" />
+      <justifiedBy role="corroborating" evidence="A5_lis_manual" />
+    </concepts>
+    
+    <concepts id="M2.ValidatedTest" name="ValidatedTest" kind="document" confidence="0.86" corroborationCount="2" status="trusted">
+      <justifiedBy role="primary" evidence="A4_lis_hl7" />
+      <justifiedBy role="contradicting" evidence="A5_lis_manual" />
+    </concepts>
+    <concepts id="M2.LaboratoryTest" name="LaboratoryTest" kind="valueObject" confidence="0.88" corroborationCount="2" status="trusted">
+      <justifiedBy role="primary" evidence="A4_lis_hl7" />
+      <justifiedBy role="corroborating" evidence="A5_lis_manual" />
+    </concepts>
+    <concepts id="M2.SubjectOfCare" name="SubjectOfCare" kind="entity" confidence="0.9" corroborationCount="2" status="trusted">
+      <justifiedBy role="primary" evidence="A4_lis_hl7" />
+      <justifiedBy role="corroborating" evidence="A5_lis_manual" />
+    </concepts>
+
+    <relationships id="M2.fulfils" name="fulfils" kind="association" source="M2.Specimen" target="M2.TestOrder" confidence="0.83" corroborationCount="2" status="trusted">
+      <justifiedBy role="primary" evidence="A4_lis_hl7" />
+      <justifiedBy role="corroborating" evidence="A5_lis_manual" />
+    </relationships>
+  </famecore:SystemModel>
+
+  
+  
+  
+  <famecore:SystemModel id="M3" name="EHRSystemModel" scope="encounter aggregation" confidence="0.9" corroborationCount="4" status="trusted">
+    <justifiedBy role="primary" evidence="A6_ehr_fhir" />
+    <justifiedBy role="corroborating" evidence="A7_ehr_intg" />
+    <artefacts id="A6_ehr_fhir" uri="../artefacts/ehr/fhir-profile-observation.md" kind="profile" />
+    <artefacts id="A7_ehr_intg" uri="../artefacts/ehr/integration-guide.md" kind="integrationGuide" />
+
+    <concepts id="M3.Observation" name="Observation" kind="document" confidence="0.93" corroborationCount="2" status="trusted">
+      <justifiedBy role="primary" evidence="A6_ehr_fhir" />
+      <justifiedBy role="corroborating" evidence="A7_ehr_intg" />
+    </concepts>
+    <concepts id="M3.DiagnosticReport" name="DiagnosticReport" kind="document" confidence="0.93" corroborationCount="2" status="trusted">
+      <justifiedBy role="primary" evidence="A6_ehr_fhir" />
+      <justifiedBy role="corroborating" evidence="A7_ehr_intg" />
+    </concepts>
+    <concepts id="M3.Clinician" name="Clinician" kind="entity" description="any professional recorded on an encounter" confidence="0.84" corroborationCount="2" status="trusted">
+      <justifiedBy role="primary" evidence="A6_ehr_fhir" />
+      <justifiedBy role="corroborating" evidence="A7_ehr_intg" />
+    </concepts>
+    <concepts id="M3.PatientRecord" name="PatientRecord" kind="entity" confidence="0.92" corroborationCount="2" status="trusted">
+      <justifiedBy role="primary" evidence="A6_ehr_fhir" />
+      <justifiedBy role="corroborating" evidence="A7_ehr_intg" />
+    </concepts>
+
+    <relationships id="M3.contains" name="contains" kind="composition" source="M3.DiagnosticReport" target="M3.Observation" confidence="0.91" corroborationCount="2" status="trusted">
+      <justifiedBy role="primary" evidence="A6_ehr_fhir" />
+      <justifiedBy role="corroborating" evidence="A7_ehr_intg" />
+    </relationships>
+  </famecore:SystemModel>
+
+  
+  
+  
+  <famecorr:CorrespondenceModel scope="healthcare-integration">
+    <relates ref="M1" alias="gp" />
+    <relates ref="M2" alias="lab" />
+    <relates ref="M3" alias="ehr" />
+    <artefacts id="A8_hl7_mapping" uri="../artefacts/integration/hl7-mapping-notes.md" kind="integrationGuide" />
+    <artefacts id="A9_role_analysis" uri="../artefacts/integration/role-analysis.md" kind="requirement" />
+    <artefacts id="A10_patient_id_note" uri="../artefacts/integration/patient-identity-note.md" kind="requirement" />
+
+    
+    <correspondences id="C1" name="practitioner-mismatches-clinician" kind="mismatch" directed="false" confidence="0.82" corroborationCount="2" status="trusted">
+      <justifiedBy role="primary" evidence="A9_role_analysis" />
+      <justifiedBy role="corroborating" evidence="A8_hl7_mapping" />
+      <ends elementRef="M1.Practitioner" inModel="/3/@relates.0" />
+      <ends elementRef="M3.Clinician" inModel="/3/@relates.2" />
+      <conditionedBy expression="actor roles must be reconciled before any actor-level exchange" formal="false" mustHold="true" />
+    </correspondences>
+
+    
+    <correspondences id="C2" name="labrequest-refines-into-order-and-specimen" kind="refinement" directed="true" confidence="0.84" corroborationCount="2" status="validated">
+      <justifiedBy role="primary" evidence="A8_hl7_mapping" />
+      <justifiedBy role="corroborating" evidence="A9_role_analysis" />
+      <ends elementRef="M1.LabRequest" role="abstracted" inModel="/3/@relates.0" />
+      <ends elementRef="M2.TestOrder" role="refined" inModel="/3/@relates.1" />
+      <ends elementRef="M2.Specimen" role="refined" inModel="/3/@relates.1" />
+      <conditionedBy expression="specimen identity must be preserved across the split" formal="false" mustHold="true" />
+    </correspondences>
+
+    
+    <correspondences id="C3" name="requestedtest-equivalent-laboratorytest" kind="equivalence" directed="false" confidence="0.91" corroborationCount="2" status="trusted">
+      <justifiedBy role="primary" evidence="A8_hl7_mapping" />
+      <justifiedBy role="corroborating" evidence="A9_role_analysis" />
+      <ends elementRef="M1.RequestedTest" inModel="/3/@relates.0" />
+      <ends elementRef="M2.LaboratoryTest" inModel="/3/@relates.1" />
+    </correspondences>
+
+    
+    <correspondences id="C4" name="patient-identity-anchor" kind="equivalence" directed="false" confidence="0.95" corroborationCount="3" status="trusted">
+      <justifiedBy role="primary" evidence="A10_patient_id_note" />
+      <justifiedBy role="corroborating" evidence="A8_hl7_mapping" />
+      <justifiedBy role="corroborating" evidence="A9_role_analysis" />
+      <ends elementRef="M1.Patient" inModel="/3/@relates.0" />
+      <ends elementRef="M2.SubjectOfCare" inModel="/3/@relates.1" />
+      <ends elementRef="M3.PatientRecord" inModel="/3/@relates.2" />
+      <conditionedBy expression="national identifier present on all three records" formal="true" mustHold="true" />
+    </correspondences>
+
+    
+    <correspondences id="C5" name="validatedtest-equivalent-observation" kind="equivalence" directed="false" confidence="0.87" corroborationCount="2" status="trusted">
+      <justifiedBy role="primary" evidence="A8_hl7_mapping" />
+      <justifiedBy role="corroborating" evidence="A9_role_analysis" />
+      <ends elementRef="M2.ValidatedTest" inModel="/3/@relates.1" />
+      <ends elementRef="M3.Observation" inModel="/3/@relates.2" />
+      <conditionedBy expression="Observation must be contained in a DiagnosticReport" formal="true" mustHold="true" />
+    </correspondences>
+  </famecorr:CorrespondenceModel>
+</xmi:XMI>

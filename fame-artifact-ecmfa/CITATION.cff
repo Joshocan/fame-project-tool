@@ -1,0 +1,39 @@
+cff-version: 1.2.0
+message: "If you use this artifact, please cite both the artifact and the paper."
+title: "FAME artifact: metamodels, constraints, scenario and seeded-violation test set"
+abstract: >-
+  Companion artifact for "Construction Before Alignment: Trustworthy Models
+  and Correspondences for Semantic Interoperability". Contains the FAME core
+  and correspondence metamodels (Ecore), the well-formedness conditions
+  (Complete OCL), the healthcare running scenario, a synthetic artefact
+  corpus, a 22-instance seeded-violation test set, and tooling for the typed
+  correspondence notation.
+type: software
+version: "1.0.0"
+date-released: "2026-07-28"
+license: [CC-BY-4.0, Apache-2.0]
+repository-code: "https://github.com/Joshocan/fame-project-tool"
+authors:
+  - family-names: "Ocansey"
+    given-names: "Joshua Tetteh"
+    affiliation: "Western Norway University of Applied Sciences"
+  - family-names: "Lamo"
+    given-names: "Yngve"
+    affiliation: "Western Norway University of Applied Sciences"
+  - family-names: "Rutle"
+    given-names: "Adrian"
+    affiliation: "Western Norway University of Applied Sciences"
+  - family-names: "Rabbi"
+    given-names: "Fazle"
+    affiliation: "University of Bergen"
+keywords:
+  - model-driven engineering
+  - semantic interoperability
+  - metamodelling
+  - OCL
+  - correspondence models
+  - trustworthiness
+# TODO before release: add the Zenodo DOI here and in identifiers below.
+# identifiers:
+#   - type: doi
+#     value: 10.5281/zenodo.XXXXXXX
